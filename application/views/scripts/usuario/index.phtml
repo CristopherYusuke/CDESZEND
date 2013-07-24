@@ -1,0 +1,48 @@
+<div class="row ">
+    <div class="small-12 small-centered large-8 columns">
+        <div class="row collapse">
+            <div class="small-12  large-10 columns">
+                <input id="input_nome" type="text" placeholder="Buscar" >
+            </div>
+            <div class="small-12 large-2 columns">
+                <a href="#" class="button prefix">Buscar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 small-centered large-8 columns">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Login</th>
+                    <th>Tipo</th>
+                    <th>Editar</th>
+                    <th>Excluir</th>
+                </tr>
+            </thead>
+              <?php foreach ($this->usuarios as $key => $value) {
+                    ?>
+            <tr>
+              
+                    <td><?php echo $this->usuarios[$key]['idUsuario']; ?></td>
+                    <td><?php echo $this->usuarios[$key]['nome']; ?></td>
+                    <td><?php echo $this->usuarios[$key]['login']; ?></td>
+                    <td><?php echo $this->usuarios[$key]['tp_acesso']; ?></td>
+                    <td width="50px"><a class="tiny button secondary">Editar</a></td>
+                    <td width="50px"><a class="tiny button alert " >Excluir</a></td>
+               
+            </tr>
+             <?php } ?>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 small-centered large-8 columns">
+        <a id="btn_Cadastrar_usuario" href="/usuario/create" class="button">Novo</a>
+    </div>
+</div>
+
+

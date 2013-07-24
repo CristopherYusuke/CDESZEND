@@ -1,0 +1,18 @@
+/* 
+    Document   : style
+    Created on : 10/07/2013, 23:22:26
+    Author     : Cristopher
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+ dt#button-label , dt#submit-label {
+    margin-bottom: 0em;
+    font-weight: bold;
+    display: none;
+}
+
+#button{
+    top:-4.6875em ;
+}
