@@ -32,9 +32,11 @@ class Application_Form_Usuario extends Zend_Form {
             'placeholder' => 'digite a senha')
         );
         
-        $select = new Zend_Form_Element_Select('TpUsuario');
+        $select = new Zend_Form_Element_Select('tp_acesso');
         $select->addMultiOption('A', 'Administrador');
         $select->addMultiOption('V', 'Vendedor');
+        $select->setLabel("Tipo de acesso");
+                
         $this->addElement($select);
 
         $this->addElement('submit', 'submit', array(

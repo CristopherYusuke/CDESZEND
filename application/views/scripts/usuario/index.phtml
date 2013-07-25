@@ -12,31 +12,33 @@
 </div>
 <div class="row">
     <div class="small-12 small-centered large-8 columns">
-        <table width="100%">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Login</th>
-                    <th>Tipo</th>
-                    <th>Editar</th>
-                    <th>Excluir</th>
-                </tr>
-            </thead>
-              <?php foreach ($this->usuarios as $key => $value) {
+        <div class="scroll">
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Login</th>
+                        <th>Tipo</th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+                <?php foreach ($this->usuarios as $key => $value) {
                     ?>
-            <tr>
-              
-                    <td><?php echo $this->usuarios[$key]['idUsuario']; ?></td>
-                    <td><?php echo $this->usuarios[$key]['nome']; ?></td>
-                    <td><?php echo $this->usuarios[$key]['login']; ?></td>
-                    <td><?php echo $this->usuarios[$key]['tp_acesso']; ?></td>
-                    <td width="50px"><a class="tiny button secondary">Editar</a></td>
-                    <td width="50px"><a class="tiny button alert " >Excluir</a></td>
-               
-            </tr>
-             <?php } ?>
-        </table>
+                    <tr>
+
+                        <td><?php echo $this->usuarios[$key]['idUsuario']; ?></td>
+                        <td><?php echo $this->usuarios[$key]['nome']; ?></td>
+                        <td><?php echo $this->usuarios[$key]['login']; ?></td>
+                        <td><?php echo $this->usuarios[$key]['tp_acesso']; ?></td>
+                        <td width="50px"><a class="tiny button secondary">Editar</a></td>
+                        <td width="50px"><a class="tiny button alert " >Excluir</a></td>
+
+                    </tr>
+                <?php } ?>
+            </table>
+        </div>
     </div>
 </div>
 <div class="row">
