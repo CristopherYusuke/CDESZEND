@@ -15,6 +15,7 @@ class UsuarioController extends Zend_Controller_Action {
         $erro = true;
         $form = new Application_Form_Usuario();
         $this->view->form = $form;
+
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
@@ -22,12 +23,12 @@ class UsuarioController extends Zend_Controller_Action {
                 unset($data['submit']);
                 $where = $model->select()->where('login = ?', $data['LOGIN']);
                 $ExisteUsuario = $model->fetchRow($where);
-                if (!isset($ExisteUsuario)){
+                if (!isset($ExisteUsuario)) {
                     $model->insert($data);
                     $mensagens = "Usuário criado com sucesso.";
                     $erro = false;
                 } else {
-                    $mensagens = "O login ' ".$data['LOGIN'] ." ' já existe.";
+                    $mensagens = "O login ' " . $data['LOGIN'] . " ' já existe.";
                     $erro = true;
                 }
             } else {
@@ -41,6 +42,30 @@ class UsuarioController extends Zend_Controller_Action {
         } else {
             $this->view->formulario = $form;
         }
+    }
+
+    public function updateAction() {
+        $form = new Application_Form_Usuario();
+      
+        $form->submit->setLabel('Alterar');
+        $posts = new Application_Model_Usuario();
+
+        if ($this->_request->isPost()) {
+
+            if ($form->isValid($this->_request->getPost())) {
+                $values = $form->getValues();
+                $posts->update($values, 'idUsuario = ' . $values['idUsuario']);
+            }
+            else { 
+                $form->populate($form->getValues());
+            }
+        } else { 
+            $id = $this->_getParam('idUsuario');
+            
+            $post = $posts->fetchRow("idUsuario = $id")->toArray();
+            $form->populate($post);
+        }
+        $this->view->form = $form;
     }
 
 }
