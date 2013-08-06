@@ -13,34 +13,33 @@ class UsuarioController extends Zend_Controller_Action {
 
     public function createAction() {
         $erro = true;
-        $form2 = new Application_Form_Usuario();
-        $this->view->form = $form2;
-
+        $form = new Application_Form_Usuario();
+        $this->view->form = $form;
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
-            if ($form2->isValid($data)) {
+            unset($data['submit']);
+            if ($form->isValid($data)) {
                 $model = new Application_Model_Usuario();
-                unset($data['submit']);
-                $where = $model->select()->where('login = ?', $data['LOGIN']);
+                $where = $model->select()->where('login = ?',$data['login']);
                 $ExisteUsuario = $model->fetchRow($where);
                 if (!isset($ExisteUsuario)) {
                     $model->insert($data);
                     $mensagens = "Usuário criado com sucesso.";
                     $erro = false;
                 } else {
-                    $mensagens = "O login ' " . $data['LOGIN'] . " ' já existe.";
+                    $mensagens = "O login ' " . $data['login'] . " ' já existe.";
                     $erro = true;
                 }
             } else {
                 $mensagens = "Não foi possível criar usuário.";
                 $erro = true;
-                $form2->populate($data);
-                $this->view->formulario = $form2;
+                $form->populate($data);
+                $this->view->formulario = $form;
             }
             $this->view->erro = $erro;
             $this->view->mensagens = $mensagens;
         } else {
-            $this->view->formulario = $form2;
+            $this->view->formulario = $form;
         }
     }
 
@@ -50,23 +49,42 @@ class UsuarioController extends Zend_Controller_Action {
         $form2->submit->setLabel('Alterar');
         $usuario = new Application_Model_Usuario();
         if ($this->_request->isPost()) {
-            if ($form2->isValid($this->_request->getPost())) {
+            $data = $this->_request->getPost();
+            if ($form2->isValid($data)) {
                 $values = $form2->getValues();
-                $usuario->update($values, 'idUsuario = ' . $values['idUsuario']);
-                $this->_redirect('usuario/index');
+                unset($data['submit']);
+                $where = $usuario->select()->where('login = ?', $data['login']);
+                $ExisteUsuario = $usuario->fetchRow($where);
+                if (!isset($ExisteUsuario)) {
+                    $usuario->update($values, 'idUsuario = ' . $values['idUsuario']);
+                    $mensagens = "Usuário alterado com sucesso.";
+                    $erro = false;
+                } else {
+                    $mensagens = "O login ' " . $data['login'] . " ' já existe.";
+                    $erro = true;
+                }
             } else {
                 $form2->populate($form2->getValues());
+                $mensagens = "Não foi possível criar usuário.";
+                $erro = true;
+                $this->view->formulario = $form;
             }
+            $this->view->erro = $erro;
+            $this->view->mensagens = $mensagens;
         } else {
             $id = $this->_getParam('idUsuario');
             $usu = $usuario->fetchRow("idUsuario =" . $id)->toArray();
-//            var_dump($usu);exit();
             $form2->populate($usu);
         }
         $this->view->form = $form2;
     }
 
-    
+    public function deleteAction() {
+        $usuario = new Application_Model_Usuario();
+        $id = $this->_getParam('idUsuario');
+        $usuario->delete("idUsuario = $id");
+        $this->_redirect('usuario/index');
+    }
 
 }
 

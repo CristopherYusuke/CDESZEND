@@ -13,9 +13,7 @@ dt#button-label , dt#submit-label {
     display: none;
 }
 
-#button{
-    top:-4.6875em ;
-}
+
 .scroll{
     height: 200px;
     overflow-x: hidden;       

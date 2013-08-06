@@ -27,13 +27,12 @@
                 <?php foreach ($this->usuarios as $key => $value) {
                     ?>
                     <tr>
-
                         <td><?php echo $this->usuarios[$key]['idUsuario']; ?></td>
                         <td><?php echo $this->usuarios[$key]['nome']; ?></td>
                         <td><?php echo $this->usuarios[$key]['login']; ?></td>
                         <td><?php echo $this->usuarios[$key]['tp_acesso']; ?></td>
                         <td width="50px"><a href="/usuario/update/idUsuario/<?php echo $this->usuarios[$key]['idUsuario'];?>" class="tiny button secondary">Editar</a></td>
-                        <td width="50px"><a class="tiny button alert">Excluir</a></td>
+                        <td width="50px"><a data-id="<?php echo $this->usuarios[$key]['idUsuario'];?>" class="tiny button alert" id="btn_usuario_excluir" >Excluir</a></td>
                     </tr>
                 <?php } ?>
             </table>
