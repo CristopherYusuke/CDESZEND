@@ -11,37 +11,49 @@
     </div>
 </div>
 <div class="row">
-    <div class="small-12 small-centered large-8 columns">
+    <div class="small-12 columns">
         <div class="scroll">
             <table width="100%">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Nome</th>
-                        <th>Login</th>
                         <th>Tipo</th>
-                        <th>Editar</th>
-                        <th>Excluir</th>
+                        <th>CPF</th>
+                        <th>CNPJ</th>
+                        <th>Telefone</th>
+                        <th>Celular</th>
+                        <th>Data Nascimento</th>
+                        <th>Endereco</th>
+                        <th>Bairro</th>
+                        <th>CEP</th>
+                        <th>numero</th>
+                        <th>cidade</th>
+                        <th>UF</th>
                     </tr>
                 </thead>
-                <?php foreach ($this->usuarios as $key => $value) {
+                
+                
+                <?php /*
+                 *   foreach ($this->usuarios as $key => $value) {
+                 
                     ?>
                     <tr>
                         <td><?php echo $this->usuarios[$key]['idUsuario']; ?></td>
                         <td><?php echo $this->usuarios[$key]['nome']; ?></td>
                         <td><?php echo $this->usuarios[$key]['login']; ?></td>
                         <td><?php echo $this->usuarios[$key]['tp_acesso']; ?></td>
-                        <td width="50px"><a href="/usuario/update/idUsuario/<?php echo $this->usuarios[$key]['idUsuario'];?>" class="small button secondary">Editar</a></td>
-                        <td width="50px"><a data-id="<?php echo $this->usuarios[$key]['idUsuario'];?>" class="small button alert" id="btn_usuario_excluir" >Excluir</a></td>
+                        <td width="50px"><a href="/usuario/update/idUsuario/<?php echo $this->usuarios[$key]['idUsuario'];?>" class="tiny button secondary">Editar</a></td>
+                        <td width="50px"><a data-id="<?php echo $this->usuarios[$key]['idUsuario'];?>" class="tiny button alert" id="btn_usuario_excluir" >Excluir</a></td>
                     </tr>
-                <?php } ?>
+                <?php } */?>
             </table>
         </div>
     </div>
 </div>
 <div class="row">
     <div class="small-12 small-centered large-8 columns">
-        <a id="btn_Cadastrar_usuario" href="/usuario/create" class="button">Novo</a>
+        <a id="btn_Cadastrar_usuario" href="/cliente/create" class="button">Novo</a>
     </div>
 </div>
 

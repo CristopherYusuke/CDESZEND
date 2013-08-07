@@ -7,12 +7,13 @@
 */
 
 
-dt#button-label , dt#submit-label {
-    margin-bottom: 0em;
-    font-weight: bold;
-    display: none;
+table tbody td .button{
+    width: 100%;
+    margin: 0;
 }
-
+table tr th, table tr td {
+padding: 0 0.625em;
+}
 
 .scroll{
     height: 200px;
