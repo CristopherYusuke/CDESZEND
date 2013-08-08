@@ -32,7 +32,7 @@
                         <td><?php echo $this->usuarios[$key]['login']; ?></td>
                         <td><?php echo $this->usuarios[$key]['tp_acesso']; ?></td>
                         <td width="50px"><a href="/usuario/update/idUsuario/<?php echo $this->usuarios[$key]['idUsuario'];?>" class="small button secondary">Editar</a></td>
-                        <td width="50px"><a data-id="<?php echo $this->usuarios[$key]['idUsuario'];?>" class="small button alert" id="btn_usuario_excluir" >Excluir</a></td>
+                        <td width="50px"><a href="/usuario/delete/idUsuario/<?php echo $this->usuarios[$key]['idUsuario'];?>" onclick="return confirm('Confirma a exclução do login : <?php echo $this->usuarios[$key]['login'];?> ?');" class="small button alert" id="btn_usuario_excluir" >Excluir</a></td>
                     </tr>
                 <?php } ?>
             </table>

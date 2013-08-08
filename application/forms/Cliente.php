@@ -18,8 +18,8 @@ class Application_Form_Cliente extends Zend_Form {
             'label' => 'Tipo Cliente',
             'required' => true,
             'multiOptions' => array(
-                'val1' => 'Text 1',
-                'val2' => 'Text 2',
+                'F' => 'Fisico',
+                'J' => 'Juridico',
             ))
         ));
         $radioTipo
@@ -111,6 +111,7 @@ class Application_Form_Cliente extends Zend_Form {
                     'id' => array('callback' => array(get_class($inputCelular), 'resolveElementId'))
                 ))
         ;
+
         $this->addElement($inputDataNasc = new Zend_Form_Element_Text('dataNasc', array(
             'label' => 'Data de Nascimento',
             'placeholder' => 'Data de Nascimento',
@@ -127,30 +128,126 @@ class Application_Form_Cliente extends Zend_Form {
                     'id' => array('callback' => array(get_class($inputDataNasc), 'resolveElementId'))
                 ))
         ;
+        $this->addElement($inputEndereco = new Zend_Form_Element_Text('endereco', array(
+            'label' => 'Endereco',
+            'maxLength' => 49,
+            'placeholder' => 'Endereco',
+            'disableLoadDefaultDecorators' => TRUE,
+        )));
+        $inputEndereco
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('Label', array())
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-12 columns',
+                    'id' => array('callback' => array(get_class($inputEndereco), 'resolveElementId'))
+                ))
+        ;
 
+        $this->addElement($inputNumero = new Zend_Form_Element_Text('numero', array(
+            'label' => 'Numero',
+            'placeholder' => 'Numero',
+            'disableLoadDefaultDecorators' => TRUE,
+        )));
+        $inputNumero
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('Label', array())
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-12 columns',
+                    'id' => array('callback' => array(get_class($inputNumero), 'resolveElementId'))
+                ))
+        ;
 
-
-
-        $this->addElement($select = new Zend_Form_Element_Select('tp_acesso', array(
-            'label' => 'Tipo de acesso',
+        $this->addElement($inputBairro = new Zend_Form_Element_Text('bairro', array(
+            'label' => 'Bairro',
+            'placeholder' => 'Bairro',
+            'disableLoadDefaultDecorators' => TRUE,
+        )));
+        $inputBairro
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('Label', array())
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-12 columns',
+                    'id' => array('callback' => array(get_class($inputBairro), 'resolveElementId'))
+                ))
+        ;
+        $this->addElement($inputCEP = new Zend_Form_Element_Text('CEP', array(
+            'label' => 'CEP',
+            'placeholder' => 'CEP',
+            'disableLoadDefaultDecorators' => TRUE,
+        )));
+        $inputCEP
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('Label', array())
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-12 columns',
+                    'id' => array('callback' => array(get_class($inputCEP), 'resolveElementId'))
+                ))
+        ;
+      
+        $this->addElement($selectUF = new Zend_Form_Element_Select('UF', array(
+            'label' => 'UF',
             'required' => true,
             'maxLength' => 49,
             'disableLoadDefaultDecorators' => TRUE,
             'class' => 'styled-select'
         )));
-        $select
-                ->addMultiOption('A', 'Administrador')
-                ->addMultiOption('V', 'Vendedor')
+        $selectUF
+                ->addMultiOption('', 'Selecione')
+                ->addMultiOption('AL', 'Alagoas')
+                ->addMultiOption('AM', 'Amazonas')
+                ->addMultiOption('AP', 'Amapá')
+                ->addMultiOption('BA', 'Bahia')
+                ->addMultiOption('CE', 'Ceará')
+                ->addMultiOption('DF', 'Distrito Federal')
+                ->addMultiOption('ES', 'Espírito Santo')
+                ->addMultiOption('GO', 'Goiás')
+                ->addMultiOption('MA', 'Maranhão')
+                ->addMultiOption('MG', 'Minas Gerais')
+                ->addMultiOption('MS', 'Mato Grosso do Sul')
+                ->addMultiOption('MT', 'Mato Grosso')
+                ->addMultiOption('PA', 'Pará')
+                ->addMultiOption('PB', 'Paraíba')
+                ->addMultiOption('PE', 'Pernambuco')
+                ->addMultiOption('PI', 'Piauí')
+                ->addMultiOption('PR', 'Paraná')
+                ->addMultiOption('RJ', 'Rio de Janeiro')
+                ->addMultiOption('RN', 'Rio Grande do Norte')
+                ->addMultiOption('SC', 'Santa Catarina')
+                ->addMultiOption('SP', 'São Paulo')
+                ->addMultiOption('TO', 'Tocantins')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
                     'class' => 'small-12  columns',
-                    'id' => array('callback' => array(get_class($select), 'resolveElementId'))
+                    'id' => array('callback' => array(get_class($selectUF), 'resolveElementId'))
                 ))
         ;
-
+         $this->addElement($selectCID = new Zend_Form_Element_Select('cidade', array(
+            'label' => 'Cidade',
+            'maxLength' => 49,
+            'disableLoadDefaultDecorators' => TRUE,
+            'class' => 'styled-select'
+        )));
+        $selectCID
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('Label', array())
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-12  columns',
+                    'id' => array('callback' => array(get_class($selectCID), 'resolveElementId'))
+                ))
+        ;
         $this->addElement($submit = new Zend_Form_Element_Submit('submit', array(
             'label' => 'Salvar',
             'disableLoadDefaultDecorators' => TRUE,
