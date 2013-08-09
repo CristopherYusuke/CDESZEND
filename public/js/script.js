@@ -1,23 +1,22 @@
 $(document).ready(function() {// on Load
 
 
-/*
- * 
- 
-    $("#btn_usuario_excluir").click(function(event) {
-        event.preventDefault();
-        if (window.confirm("Deseja excluir este usuario ?")) {
-            $.ajax({
-                type: 'POST',
-                url: '/usuario/delete/idUsuario/' + $("#btn_usuario_excluir").attr("data-id"),
-                dataType: 'text',
-                success: function(data) {
-                    location.reload();
-                    alert("O usuario foi deletado");
-                }
-            });
-        }
-    });*/
+    /*
+     * 
+     $("#btn_usuario_excluir").click(function(event) {
+     event.preventDefault();
+     if (window.confirm("Deseja excluir este usuario ?")) {
+     $.ajax({
+     type: 'POST',
+     url: '/usuario/delete/idUsuario/' + $("#btn_usuario_excluir").attr("data-id"),
+     dataType: 'text',
+     success: function(data) {
+     location.reload();
+     alert("O usuario foi deletado");
+     }
+     });
+     }
+     });*/
 
     $(".datepicker").datepicker({
         dateFormat: 'dd/mm/yy',
@@ -32,8 +31,8 @@ $(document).ready(function() {// on Load
         nextText: 'Próximo',
         prevText: 'Anterior'
     });
-    
-    
+
+
     $("select#UF").change(function() {
         var uf = $("select#UF option:selected").val();
         $.ajax({
@@ -41,12 +40,13 @@ $(document).ready(function() {// on Load
             url: '/cidade/cidadeuf/uf/' + uf,
             dataType: 'json',
             success: function(data) {
-                var cidades = JSON.parse(data);
-                $("select#cidade").html("");
-                for (var i in cidades) {
-                    $("select#cidade").find().append("<option>" + cidades[i] + "</option>");
+                var html = "";
+                for (var i in data) {
+                    html += "<option>" + data[i].nome + "</option>";
                 }
+                $("#cidade").html(html);
             }
+
         });
 
     });

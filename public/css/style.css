@@ -12,9 +12,14 @@ table tbody td .button{
     margin: 0;
 }
 table tr th, table tr td {
-padding: 0 0.625em;
+    padding: 0 0.625em;
 }
-
+.bordaLabelRadio{
+    border: 1px solid #999999;
+    background:#75abff ;
+    border-radius: 10px;
+    
+}
 .scroll{
     height: 200px;
     overflow-x: hidden;       

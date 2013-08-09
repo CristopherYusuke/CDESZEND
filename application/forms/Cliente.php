@@ -28,9 +28,10 @@ class Application_Form_Cliente extends Zend_Form {
                     'class' => 'small-3 columns'))
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-9 columns',
+                    'class' => 'small-8 columns bordaLabelRadio',
                     'id' => array('callback' => array(get_class($radioTipo), 'resolveElementId'))
                 ))
+                ->setValue("F");
         ;
 
         $this->addElement($inputNome = new Zend_Form_Element_Text('nome', array('label' => 'Nome',
@@ -48,7 +49,7 @@ class Application_Form_Cliente extends Zend_Form {
                     'id' => array('callback' => array(get_class($inputNome), 'resolveElementId'))
                 ))
         ;
-        $this->addElement($inputCPF = new Zend_Form_Element_Text('CPF', array('label' => 'CPF',
+        $this->addElement($inputCPF = new Zend_Form_Element_Text('CPF_CNPJ', array('label' => 'CPF',
             'maxLength' => 49,
             'placeholder' => 'CPF',
             'disableLoadDefaultDecorators' => TRUE,
@@ -56,6 +57,7 @@ class Application_Form_Cliente extends Zend_Form {
         $inputCPF
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
+                
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
@@ -111,23 +113,25 @@ class Application_Form_Cliente extends Zend_Form {
                     'id' => array('callback' => array(get_class($inputCelular), 'resolveElementId'))
                 ))
         ;
+        /*
+          $this->addElement($inputDataNasc = new Zend_Form_Element_Text('dataNasc', array(
+          'label' => 'Data de Nascimento',
+          'placeholder' => 'Data de Nascimento',
+          'class' => 'datepicker',
+          'disableLoadDefaultDecorators' => TRUE,
+          )));
+          $inputDataNasc
+          ->addDecorator('ViewHelper')
+          ->addDecorator('Errors')
+          ->addDecorator('Label', array())
+          ->addDecorator('HtmlTag', array(
+          'tag' => 'div',
+          'class' => 'small-12 columns',
+          'id' => array('callback' => array(get_class($inputDataNasc), 'resolveElementId'))
+          ))
+          ;
+         */
 
-        $this->addElement($inputDataNasc = new Zend_Form_Element_Text('dataNasc', array(
-            'label' => 'Data de Nascimento',
-            'placeholder' => 'Data de Nascimento',
-            'class' => 'datepicker',
-            'disableLoadDefaultDecorators' => TRUE,
-        )));
-        $inputDataNasc
-                ->addDecorator('ViewHelper')
-                ->addDecorator('Errors')
-                ->addDecorator('Label', array())
-                ->addDecorator('HtmlTag', array(
-                    'tag' => 'div',
-                    'class' => 'small-12 columns',
-                    'id' => array('callback' => array(get_class($inputDataNasc), 'resolveElementId'))
-                ))
-        ;
         $this->addElement($inputEndereco = new Zend_Form_Element_Text('endereco', array(
             'label' => 'Endereco',
             'maxLength' => 49,
@@ -191,7 +195,7 @@ class Application_Form_Cliente extends Zend_Form {
                     'id' => array('callback' => array(get_class($inputCEP), 'resolveElementId'))
                 ))
         ;
-      
+
         $this->addElement($selectUF = new Zend_Form_Element_Select('UF', array(
             'label' => 'UF',
             'required' => true,
@@ -232,7 +236,7 @@ class Application_Form_Cliente extends Zend_Form {
                     'id' => array('callback' => array(get_class($selectUF), 'resolveElementId'))
                 ))
         ;
-         $this->addElement($selectCID = new Zend_Form_Element_Select('cidade', array(
+        $this->addElement($selectCID = new Zend_Form_Element_Select('cidade', array(
             'label' => 'Cidade',
             'maxLength' => 49,
             'disableLoadDefaultDecorators' => TRUE,
