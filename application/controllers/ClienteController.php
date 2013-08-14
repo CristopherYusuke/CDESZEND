@@ -15,23 +15,25 @@ class ClienteController extends Zend_Controller_Action {
         $erro = true;
         $form = new Application_Form_Cliente();
         $this->view->form = $form;
+        
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             unset($data['submit']);
             if ($form->isValid($data)) {
-                $model = new Application_Model_Usuario();
-                $where = $model->select()->where('login = ?',$data['login']);
-                $ExisteUsuario = $model->fetchRow($where);
-                if (!isset($ExisteUsuario)) {
+                $model = new Application_Model_Cliente();
+                $ExisteCPF_CNPJ = $model->fetchRow('CPF_CNPJ = "'.$data['CPF_CNPJ'].'"');
+                if (!isset($ExisteCPF_CNPJ)) {
+                    $data["status"] = TRUE;
                     $model->insert($data);
-                    $mensagens = "Usuário criado com sucesso.";
+                    $mensagens = "Cliente criado com sucesso.";
                     $erro = false;
+                    
                 } else {
-                    $mensagens = "O login ' " . $data['login'] . " ' já existe.";
+                    $mensagens = "O cliente com o ' " . $data['CPF_CNPJ'] . " ' já existe.";
                     $erro = true;
                 }
             } else {
-                $mensagens = "Não foi possível criar usuário.";
+                $mensagens = "Não foi possível criar cliente.";
                 $erro = true;
                 $form->populate($data);
                 $this->view->formulario = $form;

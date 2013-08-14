@@ -42,12 +42,26 @@ $(document).ready(function() {// on Load
             success: function(data) {
                 var html = "";
                 for (var i in data) {
-                    html += "<option>" + data[i].nome + "</option>";
+                    html += "<option value="+ data[i].nome+" >" + data[i].nome + "</option>";
                 }
                 $("#cidade").html(html);
             }
 
         });
-
+    });
+    verificaTipoCliente();
+    $('input:radio[name=tipo]').click(function() {
+        verificaTipoCliente();
     });
 });
+
+function verificaTipoCliente() {
+    var tipo = $('input:radio[name=tipo]:checked').val();
+    if (tipo == "F") {
+        $('#CPF_CNPJ').attr("placeholder", "CPF");
+        $("label[for=CPF_CNPJ]").text("CPF");
+    } else if (tipo == "J") {
+        $('#CPF_CNPJ').attr("placeholder", "CNPJ");
+        $("label[for=CPF_CNPJ]").text("CNPJ");
+    }
+}

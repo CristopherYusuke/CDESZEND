@@ -6,6 +6,8 @@
 
 class Application_Form_Cliente extends Zend_Form {
 
+    
+
     public function init() {
 
         $this->setAction("/cliente/create");
@@ -14,7 +16,7 @@ class Application_Form_Cliente extends Zend_Form {
         $this->addElement($id = new Zend_Form_Element_Hidden('idCliente'));
         $id->removeDecorator('label');
 
-        $this->addElement($radioTipo = new Zend_Form_Element_Radio('Tipo', array(
+        $this->addElement($radioTipo = new Zend_Form_Element_Radio('tipo', array(
             'label' => 'Tipo Cliente',
             'required' => true,
             'multiOptions' => array(
@@ -49,37 +51,22 @@ class Application_Form_Cliente extends Zend_Form {
                     'id' => array('callback' => array(get_class($inputNome), 'resolveElementId'))
                 ))
         ;
-        $this->addElement($inputCPF = new Zend_Form_Element_Text('CPF_CNPJ', array('label' => 'CPF',
+        $this->addElement($inputCPF_CNPJ = new Zend_Form_Element_Text('CPF_CNPJ', array('label' => 'CPF_CNPJ',
             'maxLength' => 49,
-            'placeholder' => 'CPF',
+            'placeholder' => 'CPF_CNPJ',
             'disableLoadDefaultDecorators' => TRUE,
         )));
-        $inputCPF
-                ->addDecorator('ViewHelper')
-                ->addDecorator('Errors')
-                
-                ->addDecorator('Label', array())
-                ->addDecorator('HtmlTag', array(
-                    'tag' => 'div',
-                    'class' => 'small-12 columns',
-                    'id' => array('callback' => array(get_class($inputCPF), 'resolveElementId'))
-                ))
-        ;
-        $this->addElement($inputCNPJ = new Zend_Form_Element_Text('CNPJ', array('label' => 'CNPJ',
-            'maxLength' => 49,
-            'placeholder' => 'CNPJ',
-            'disableLoadDefaultDecorators' => TRUE,
-        )));
-        $inputCNPJ
+        $inputCPF_CNPJ
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
                     'class' => 'small-12 columns',
-                    'id' => array('callback' => array(get_class($inputCNPJ), 'resolveElementId'))
+                    'id' => array('callback' => array(get_class($inputCPF_CNPJ), 'resolveElementId'))
                 ))
         ;
+
 
         $this->addElement($inputTelefone = new Zend_Form_Element_Text('telefone', array(
             'label' => 'Telefone',
@@ -97,22 +84,8 @@ class Application_Form_Cliente extends Zend_Form {
                     'id' => array('callback' => array(get_class($inputTelefone), 'resolveElementId'))
                 ))
         ;
-        $this->addElement($inputCelular = new Zend_Form_Element_Text('celular', array(
-            'label' => 'Celular',
-            'maxLength' => 49,
-            'placeholder' => 'Celular',
-            'disableLoadDefaultDecorators' => TRUE,
-        )));
-        $inputCelular
-                ->addDecorator('ViewHelper')
-                ->addDecorator('Errors')
-                ->addDecorator('Label', array())
-                ->addDecorator('HtmlTag', array(
-                    'tag' => 'div',
-                    'class' => 'small-12 columns',
-                    'id' => array('callback' => array(get_class($inputCelular), 'resolveElementId'))
-                ))
-        ;
+
+
         /*
           $this->addElement($inputDataNasc = new Zend_Form_Element_Text('dataNasc', array(
           'label' => 'Data de Nascimento',
@@ -180,22 +153,6 @@ class Application_Form_Cliente extends Zend_Form {
                     'id' => array('callback' => array(get_class($inputBairro), 'resolveElementId'))
                 ))
         ;
-        $this->addElement($inputCEP = new Zend_Form_Element_Text('CEP', array(
-            'label' => 'CEP',
-            'placeholder' => 'CEP',
-            'disableLoadDefaultDecorators' => TRUE,
-        )));
-        $inputCEP
-                ->addDecorator('ViewHelper')
-                ->addDecorator('Errors')
-                ->addDecorator('Label', array())
-                ->addDecorator('HtmlTag', array(
-                    'tag' => 'div',
-                    'class' => 'small-12 columns',
-                    'id' => array('callback' => array(get_class($inputCEP), 'resolveElementId'))
-                ))
-        ;
-
         $this->addElement($selectUF = new Zend_Form_Element_Select('UF', array(
             'label' => 'UF',
             'required' => true,

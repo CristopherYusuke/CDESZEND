@@ -20,8 +20,7 @@ class UsuarioController extends Zend_Controller_Action {
             unset($data['submit']);
             if ($form->isValid($data)) {
                 $model = new Application_Model_Usuario();
-                $where = $model->select()->where('login = ?',$data['login']);
-                $ExisteUsuario = $model->fetchRow($where);
+                $ExisteUsuario = $model->fetchRow('login = "'.$data['login'].'"');
                 if (!isset($ExisteUsuario)) {
                     $model->insert($data);
                     $mensagens = "Usuário criado com sucesso.";
@@ -67,7 +66,7 @@ class UsuarioController extends Zend_Controller_Action {
                 $form2->populate($form2->getValues());
                 $mensagens = "Não foi possível criar usuário.";
                 $erro = true;
-                $this->view->formulario = $form;
+                $this->view->formulario = $form2;
             }
             $this->view->erro = $erro;
             $this->view->mensagens = $mensagens;
