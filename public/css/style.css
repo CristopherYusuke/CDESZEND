@@ -22,7 +22,7 @@ table tr th, table tr td {
 }
 .scroll{
     height: 200px;
-    overflow-x: hidden;       
+    overflow:scroll;       
 }
 select{
     background-color:rgba(255, 255, 255, 0.5);

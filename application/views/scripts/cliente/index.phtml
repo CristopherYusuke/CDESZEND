@@ -10,44 +10,69 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="small-12 columns">
-        <div class="scroll">
-            <table width="100%">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Tipo</th>
-                        <th>CPF_CNPJ</th>
-                        <th>Telefone</th>
-                        <th>Celular</th>
-                        <th>Endereco</th>
-                        <th>Numero</th>
-                        <th>Bairro</th>
-                        <th>Cidade</th>
-                        <th>UF</th>
-                    </tr>
-                </thead>
-                <?php /*
-                 *   foreach ($this->usuarios as $key => $value) {
-
-                  ?>
-                  <tr>
-                  <td><?php echo $this->usuarios[$key]['idUsuario']; ?></td>
-                  <td><?php echo $this->usuarios[$key]['nome']; ?></td>
-                  <td><?php echo $this->usuarios[$key]['login']; ?></td>
-                  <td><?php echo $this->usuarios[$key]['tp_acesso']; ?></td>
-                  <td width="50px"><a href="/usuario/update/idUsuario/<?php echo $this->usuarios[$key]['idUsuario'];?>" class="tiny button secondary">Editar</a></td>
-                  <td width="50px"><a data-id="<?php echo $this->usuarios[$key]['idUsuario'];?>" class="tiny button alert" id="btn_usuario_excluir" >Excluir</a></td>
-                  </tr>
-                  <?php } */ ?>
-            </table>
-        </div>
+<div class="small-12 columns">
+    <div class="scroll">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>CPF_CNPJ</th>
+                    <th>Telefone</th>
+                    <th>Endereco</th>
+                    <th>Numero</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>UF</th>
+                    <th>status</th>
+                    <th>Editar</th>
+                    <th>Ativar/Inativar</th>
+                </tr>
+            </thead>
+            <?php
+            foreach ($this->clientes as $key => $value) {
+                /*
+                  print_r($this->clientes); exit;
+                 */
+                ?>
+                <tr>
+                    <td><?php echo $this->clientes[$key]['idCliente']; ?> </td>
+                    <td><?php echo $this->clientes[$key]['nome']; ?></td>
+                    <td><?php echo $this->clientes[$key]['tipo']; ?></td>
+                    <td><?php echo $this->clientes[$key]['CPF_CNPJ']; ?></td>
+                    <td><?php echo $this->clientes[$key]['telefone']; ?></td>
+                    <td><?php echo $this->clientes[$key]['endereco']; ?></td>
+                    <td><?php echo $this->clientes[$key]['numero']; ?></td>
+                    <td><?php echo $this->clientes[$key]['bairro']; ?></td>
+                    <td><?php echo $this->clientes[$key]['cidade']; ?></td>
+                    <td><?php echo $this->clientes[$key]['UF']; ?></td>
+                    <td><?php echo $this->clientes[$key]['status']; ?></td>
+                    <td >
+                        <a href="/cliente/update/idCliente/<?php
+                        echo $this->clientes[$key]['idCliente'];
+                        ?>" class="small button secondary">Editar
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/cliente/delete/idUsuario/<?php
+                        echo $this->clientes[$key]['idCliente'];
+                        ?>" 
+                           onclick="return confirm('Confirma a exclução do login :\n\
+                           <?php echo $this->clientes[$key]['nome'];
+                           ?> ?');" 
+                           class="small button alert" 
+                           id="btn_usuario_excluir" >Excluir
+                        </a>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
     </div>
 </div>
+
 <div class="row">
-    <div class="small-12 small-centered large-8 columns">
+    <div class="small-12 columns">
         <a id="btn_Cadastrar_usuario" href="/cliente/create" class="button">Novo</a>
     </div>
 </div>

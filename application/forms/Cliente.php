@@ -195,7 +195,7 @@ class Application_Form_Cliente extends Zend_Form {
         ;
         $this->addElement($selectCID = new Zend_Form_Element_Select('cidade', array(
             'label' => 'Cidade',
-            'maxLength' => 49,
+            'maxLength' => 50,
             'disableLoadDefaultDecorators' => TRUE,
             'class' => 'styled-select'
         )));
@@ -203,6 +203,7 @@ class Application_Form_Cliente extends Zend_Form {
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
+                ->setRegisterInArrayValidator(false)
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
                     'class' => 'small-12  columns',
