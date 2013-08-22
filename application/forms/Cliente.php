@@ -6,8 +6,6 @@
 
 class Application_Form_Cliente extends Zend_Form {
 
-    
-
     public function init() {
 
         $this->setAction("/cliente/create");
@@ -30,10 +28,28 @@ class Application_Form_Cliente extends Zend_Form {
                     'class' => 'small-3 columns'))
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-8 columns bordaLabelRadio',
+                    'class' => 'small-5 columns bordaLabelRadio',
                     'id' => array('callback' => array(get_class($radioTipo), 'resolveElementId'))
                 ))
                 ->setValue("F");
+        ;
+        
+         $this->addElement($Status = new Zend_Form_Element_Checkbox('status', array(
+            'label' => 'Status')
+        ));
+        
+          $Status
+                ->addDecorator('Label', array(
+                    'tag' => 'div',
+                    'class' => 'small-2 columns'))
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-1 columns bordaLabelRadio',
+                    'id' => array('callback' => array(get_class($Status), 'resolveElementId'))
+                ))
+                  
+                  
+                
         ;
 
         $this->addElement($inputNome = new Zend_Form_Element_Text('nome', array('label' => 'Nome',
@@ -210,6 +226,8 @@ class Application_Form_Cliente extends Zend_Form {
                     'id' => array('callback' => array(get_class($selectCID), 'resolveElementId'))
                 ))
         ;
+        
+        
         $this->addElement($submit = new Zend_Form_Element_Submit('submit', array(
             'label' => 'Salvar',
             'disableLoadDefaultDecorators' => TRUE,
@@ -240,8 +258,9 @@ class Application_Form_Cliente extends Zend_Form {
                     'class' => 'small-12 large-6 columns',
                     'id' => array('callback' => array(get_class($button), 'resolveElementId'))
                 ))
-
         ;
+
+       
     }
 
 }

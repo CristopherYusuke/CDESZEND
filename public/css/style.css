@@ -10,6 +10,7 @@
 table tbody td .button{
     width: 100%;
     margin: 0;
+    font-size: 1em!important ;
 }
 table tr th, table tr td {
     padding: 0 0.625em;

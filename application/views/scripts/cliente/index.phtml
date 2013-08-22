@@ -30,12 +30,7 @@
                     <th>Ativar/Inativar</th>
                 </tr>
             </thead>
-            <?php
-            foreach ($this->clientes as $key => $value) {
-                /*
-                  print_r($this->clientes); exit;
-                 */
-                ?>
+            <?php foreach ($this->clientes as $key => $value) { ?>
                 <tr>
                     <td><?php echo $this->clientes[$key]['idCliente']; ?> </td>
                     <td><?php echo $this->clientes[$key]['nome']; ?></td>
@@ -47,26 +42,30 @@
                     <td><?php echo $this->clientes[$key]['bairro']; ?></td>
                     <td><?php echo $this->clientes[$key]['cidade']; ?></td>
                     <td><?php echo $this->clientes[$key]['UF']; ?></td>
-                    <td><?php echo $this->clientes[$key]['status']; ?></td>
-                    <td >
-                        <a href="/cliente/update/idCliente/<?php
-                        echo $this->clientes[$key]['idCliente'];
-                        ?>" class="small button secondary">Editar
-                        </a>
+                    <td><?php
+                        if ($this->clientes[$key]['status']) {
+                            echo "Ativo";
+                        } else {
+                            echo "Inativo";
+                        }
+                        ?>
                     </td>
-                    <td>
-                        <a href="/cliente/delete/idUsuario/<?php
-                        echo $this->clientes[$key]['idCliente'];
-                        ?>" 
-                           onclick="return confirm('Confirma a exclução do login :\n\
-                           <?php echo $this->clientes[$key]['nome'];
-                           ?> ?');" 
-                           class="small button alert" 
-                           id="btn_usuario_excluir" >Excluir
-                        </a>
+                    <td >
+                        <a href="/cliente/update/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
+                           class="small button secondary">EDITAR</a>
+                    </td>
+                    <td> 
+                        <?php if ($this->clientes[$key]['status']) { ?>  
+                            <a href="/cliente/inactive/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
+                               class="small button alert" id="btn_usuario_excluir" >INATIVAR </a>
+                           <?php } else { ?>
+                            <a href="/cliente/active/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
+                               class="small button success " id="btn_usuario_excluir" >ATIVAR </a>
+
+                        <?php } ?> <!-- End if -->
                     </td>
                 </tr>
-            <?php } ?>
+            <?php } ?> <!-- End foreach -->
         </table>
     </div>
 </div>

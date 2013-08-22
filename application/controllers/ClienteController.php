@@ -22,7 +22,6 @@ class ClienteController extends Zend_Controller_Action {
                 $model = new Application_Model_Cliente();
                 $ExisteCPF_CNPJ = $model->fetchRow('CPF_CNPJ = "' . $data['CPF_CNPJ'] . '"');
                 if (!isset($ExisteCPF_CNPJ)) {
-                    $data["status"] = A;
                     $model->insert($data);
                     $mensagens = "Cliente criado com sucesso.";
                     $erro = false;
@@ -79,6 +78,7 @@ class ClienteController extends Zend_Controller_Action {
             $cliente = $model->fetchRow("idCliente =".$id)->toArray();
             
             $form->populate($cliente);
+            $form->getElement('cidade')->addMultiOption('', $cliente['cidade']);
         }
         $this->view->formulario = $form;
     }
