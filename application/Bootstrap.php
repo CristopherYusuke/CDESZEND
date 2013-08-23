@@ -7,6 +7,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         Zend_Registry::set('config', $config);
     }
 
+    
+    
     public function _initSession() {
         $session = new Zend_Session_Namespace('CDES');
         Zend_Registry::set('session', $session);

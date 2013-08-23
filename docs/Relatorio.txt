@@ -1,0 +1,13 @@
+comiti projeto CDES com ZendFramework - 23/07/2013
+Comit para add SSL do Xamp
+Insert , e menssagens do cadastro feito - 24/07/2013
+Update n�o esta populando no formulario - 30/07/2013
+Algumas altera��es no style - 02/08/2013
+crud usuario completo - 06/08/2013
+Criando o Form do cliente 06/08/2013
+form cliente quase concluido , Delete do usuario alterado , verificar� 07/08/2013
+AJAX , comcluido , json 08/08/2013
+Commit para arrumar o o bug injetado no banco 13/08
+update Cliente e alguns ajustes 05/08
+CreateModels e Filtros de telefone 20/08/2013
+Criando o Relatorio.TXT e cadastro cliente completo exceto valida��o 01:02 22/08/2013

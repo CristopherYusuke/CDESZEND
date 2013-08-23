@@ -25,7 +25,7 @@ class Application_Form_Cliente extends Zend_Form {
         $radioTipo
                 ->addDecorator('Label', array(
                     'tag' => 'div',
-                    'class' => 'small-3 columns'))
+                    'class' => 'small-4 columns'))
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
                     'class' => 'small-5 columns bordaLabelRadio',
