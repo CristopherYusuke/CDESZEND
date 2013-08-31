@@ -1,0 +1,53 @@
+<div class="row ">
+    <div class="small-12 small-centered large-8 columns">
+        <h1> Lista de Produtos</h1>
+
+        <div class="row collapse">
+            <div class="small-12  large-10 columns">
+                <input id="input_nome" type="text" placeholder="Buscar" >
+            </div>
+            <div class="small-12 large-2 columns">
+                <a href="#" class="button prefix">Buscar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 small-centered large-8 columns">
+        <div class="scroll">
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Descricao</th>
+                        <th>precoCusto</th>
+                        <th>estoque</th>
+                        <th>status</th>
+                        <th>Tipo</th>
+                        <th>Editar</th>
+                        <th>Ativar/Inativar</th>
+                       
+                    </tr>
+                </thead>
+                <?php foreach ($this->produtos as $key => $value) {
+                    ?>
+                    <tr>
+                        <td><?php echo $this->usuarios[$key]['idUsuario']; ?></td>
+                        <td><?php echo $this->usuarios[$key]['nome']; ?></td>
+                        <td><?php echo $this->usuarios[$key]['login']; ?></td>
+                        <td><?php echo $this->usuarios[$key]['tp_acesso']; ?></td>
+                        <td width="50px"><a href="/usuario/update/idUsuario/<?php echo $this->usuarios[$key]['idUsuario']; ?>" class="small button secondary">Editar</a></td>
+                        <td width="50px"><a href="/usuario/delete/idUsuario/<?php echo $this->usuarios[$key]['idUsuario']; ?>" onclick="return confirm('Confirma a exclução do login : <?php echo $this->usuarios[$key]['login']; ?> ?');" class="small button alert" id="btn_usuario_excluir" >Excluir</a></td>
+                    </tr>
+                <?php } ?>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="small-12 small-centered large-8 columns">
+        <a id="btn_Cadastrar_usuario" href="/usuario/create" class="button">Novo</a>
+    </div>
+</div>
+
+

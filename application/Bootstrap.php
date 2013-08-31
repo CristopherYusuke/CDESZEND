@@ -6,9 +6,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $config = new Zend_Config($this->getApplication()->getOptions(), true);
         Zend_Registry::set('config', $config);
     }
+    public function _initNavigation(){
+        $this->bootstrap('layout');
+        $xml = APPLICATION_PATH. '/configs/navigation.xml';
+        $config = new Zend_Config_Xml($xml,'nav');
+        $container = new Zend_Navigation($config);
+        $layout = $this->getResource('layout');
+        $view = $layout->getView();
+        $view->navigation($container);
+    }
 
-    
-    
     public function _initSession() {
         $session = new Zend_Session_Namespace('CDES');
         Zend_Registry::set('session', $session);

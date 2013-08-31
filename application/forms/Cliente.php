@@ -22,34 +22,34 @@ class Application_Form_Cliente extends Zend_Form {
                 'J' => 'Juridico',
             ))
         ));
+      
+        
         $radioTipo
                 ->addDecorator('Label', array(
                     'tag' => 'div',
-                    'class' => 'small-4 columns'))
+                    'class' => 'small-3 columns text-right '))
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-5 columns bordaLabelRadio',
+                    'class' => ' small-3 columns panel ',
                     'id' => array('callback' => array(get_class($radioTipo), 'resolveElementId'))
                 ))
                 ->setValue("F");
         ;
         
          $this->addElement($Status = new Zend_Form_Element_Checkbox('status', array(
-            'label' => 'Status')
+            'label' => 'Ativo')
         ));
         
           $Status
                 ->addDecorator('Label', array(
                     'tag' => 'div',
-                    'class' => 'small-2 columns'))
+                    'class' => ' small-3 columns text-right '))
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-1 columns bordaLabelRadio',
+                    'class' => 'small-1 columns panel',
                     'id' => array('callback' => array(get_class($Status), 'resolveElementId'))
                 ))
                   
-                  
-                
         ;
 
         $this->addElement($inputNome = new Zend_Form_Element_Text('nome', array('label' => 'Nome',

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <nav>
+        <usuario>
+            <label>Usuário</label>
+            <controller>usuario</controller>
+            <action>index</action>
+            <pages>
+                 <usuarioCreate>
+                    <label>Cadastrar Usuário</label>
+                    <controller>usuario</controller>
+                    <action>create</action>
+                </usuarioCreate>
+                 <usuarioUpdate>
+                    <label>Atualizar Usuário</label>
+                    <controller>usuario</controller>
+                    <action>update</action>
+                </usuarioUpdate>
+            </pages>
+        </usuario>
+        <cliente>
+            <label>Cliente</label>
+            <controller>cliente</controller>
+            <action>index</action>
+            <pages>
+                <clienteCreate>
+                    <label>Cadastrar Cliente</label>
+                    <controller>cliente</controller>
+                    <action>create</action>
+                </clienteCreate>
+                <clienteUpdate>
+                    <label>Atualizar Cliente</label>
+                    <controller>cliente</controller>
+                    <action>update</action>
+                </clienteUpdate>
+            </pages>
+        </cliente>
+    </nav>
+</config>
+    
+

@@ -11,7 +11,6 @@ class CidadeController extends Zend_Controller_Action {
         $uf = $this->_getParam('uf');
         echo json_encode ($cidadeModel->fetchAll('UF = "'.$uf.'"')->toArray());      
         exit();
-        
     }
 
 }

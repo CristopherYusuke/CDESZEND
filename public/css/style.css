@@ -19,11 +19,11 @@ table tr th, table tr td {
     border: 1px solid #999999;
     background:#75abff ;
     border-radius: 10px;
-    
+
 }
 .scroll{
     height: 200px;
-    overflow:scroll;       
+    overflow-y:scroll;       
 }
 select{
     background-color:rgba(255, 255, 255, 0.5);
@@ -43,6 +43,15 @@ select{
     -moz-transition: -moz-box-shadow 0.45s, border-color 0.45s ease-in-out;
     transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
 }
+
+.panel{
+    border-width:initial;
+    margin-bottom: 0;
+    padding: 0;
+    padding-left: 0.9375em;
+    padding-right: 0.9375em;
+}
+
 
 select:focus{
     -webkit-box-shadow: 0 0 5px #999999;
