@@ -1,4 +1,4 @@
 <?php
-class Model_DbTable_Usuario extends Model_DbTable_Base_Usuario {
+class Application_Model_DbTable_Usuario extends Application_Model_DbTable_Base_Usuario {
 
 }

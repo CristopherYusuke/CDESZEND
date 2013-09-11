@@ -1,4 +1,4 @@
 <?php
-class Model_DbTable_Contasreceber extends Model_DbTable_Base_Contasreceber {
+class Application_Model_DbTable_Contasreceber extends Application_Model_DbTable_Base_Contasreceber {
 
 }

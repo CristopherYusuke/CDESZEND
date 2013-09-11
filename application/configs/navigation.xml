@@ -35,6 +35,23 @@
                 </clienteUpdate>
             </pages>
         </cliente>
+        <produto>
+            <label>Produto</label>
+            <controller>produto</controller>
+            <action>index</action>
+            <pages>
+                 <produtoCreate>
+                    <label>Cadastrar Produto</label>
+                    <controller>produto</controller>
+                    <action>create</action>
+                </produtoCreate>
+                 <produtoUpdate>
+                    <label>Atualizar Produto</label>
+                    <controller>produto</controller>
+                    <action>update</action>
+                </produtoUpdate>
+            </pages>
+        </produto>
     </nav>
 </config>
     

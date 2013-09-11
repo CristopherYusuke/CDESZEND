@@ -7,19 +7,21 @@ class ClienteController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-        $Model = new Application_Model_Cliente();
+        
+        $Model = new Application_Model_DbTable_Cliente();
+        
         $this->view->clientes = $Model->fetchAll()->toArray();
     }
 
     public function createAction() {
         $erro = true;
-        $form = new Application_Form_Cliente();
+        $form = new Application_Form_Cliente_Cliente();
         $this->view->form = $form;
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             unset($data['submit']);
             if ($form->isValid($data)) {
-                $model = new Application_Model_Cliente();
+                $model = new Application_Model_DbTable_Cliente();
                 $ExisteCPF_CNPJ = $model->fetchRow('CPF_CNPJ = "' . $data['CPF_CNPJ'] . '"');
                 if (!isset($ExisteCPF_CNPJ)) {
                     $model->insert($data);
@@ -44,12 +46,12 @@ class ClienteController extends Zend_Controller_Action {
 
     public function updateAction() {/* do cliente */
         $erro = true;
-        $form = new Application_Form_Cliente();
+        $form = new Application_Form_Cliente_Cliente();
         $form->setAction('/cliente/update');
         $form->submit->setLabel('Alterar');
 //        $form->getElement('tipo')->getValue();
         $this->view->form = $form;
-        $model = new Application_Model_Cliente();
+        $model = new Application_Model_DbTable_Cliente();
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             unset($data['submit']);

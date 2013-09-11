@@ -1,4 +1,4 @@
 <?php
-class Model_DbTable_Contaspagar extends Model_DbTable_Base_Contaspagar {
+class Application_Model_DbTable_Contaspagar extends Application_Model_DbTable_Base_Contaspagar {
 
 }

@@ -1,4 +1,4 @@
 <?php
-class Model_DbTable_Venda extends Model_DbTable_Base_Venda {
+class Application_Model_DbTable_Venda extends Application_Model_DbTable_Base_Venda {
 
 }

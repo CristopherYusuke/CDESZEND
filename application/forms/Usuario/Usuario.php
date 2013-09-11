@@ -1,12 +1,21 @@
 <?php
 
+/*
+ * 'placement' => Zend_Form_Decorator_Abstract::APPEND
+ */
 
+class Application_Form_Usuario_Usuario extends Zend_Form {
+    /*
+      public function __construct($options = null) {
 
-class Application_Form_Produto extends Zend_Form {
-    
+      parent::__construct($options);
+
+      //        $this->addDecorator('HtmlTag', array('tag' => 'div', 'class' => 'zend_form row '));
+      //        $this->addDecorator(array('DivTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'row'));
+      } */
 
     public function init() {
-
+        
         $this->setAction("/usuario/create");
         $this->setMethod("POST");
 

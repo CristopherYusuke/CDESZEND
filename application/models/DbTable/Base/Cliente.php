@@ -1,5 +1,5 @@
 <?php
-abstract class Model_DbTable_Base_Cliente extends ZFKiller_Db_Table {
+abstract class Application_Model_DbTable_Base_Cliente extends Zend_Db_Table_Abstract {
 	protected $_name = 'cliente';
 
 }

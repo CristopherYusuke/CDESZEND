@@ -1,4 +1,4 @@
 <?php
-class Model_DbTable_Fornecedor extends Model_DbTable_Base_Fornecedor {
+class Application_Model_DbTable_Fornecedor extends Application_Model_DbTable_Base_Fornecedor {
 
 }

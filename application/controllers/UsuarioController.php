@@ -7,19 +7,19 @@ class UsuarioController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-        $usuarioModel = new Application_Model_Usuario();
+        $usuarioModel = new Application_Model_DbTable_Usuario();
         $this->view->usuarios = $usuarioModel->fetchAll()->toArray();
     }
 
     public function createAction() {
         $erro = true;
-        $form = new Application_Form_Usuario();
+        $form = new Application_Form_Usuario_Usuario();
         $this->view->form = $form;
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             unset($data['submit']);
             if ($form->isValid($data)) {
-                $model = new Application_Model_Usuario();
+                $model = new Application_Model_DbTable_Usuario();
                 $ExisteUsuario = $model->fetchRow('login = "'.$data['login'].'"');
                 if (!isset($ExisteUsuario)) {
                     $model->insert($data);
@@ -43,10 +43,10 @@ class UsuarioController extends Zend_Controller_Action {
     }
 
     public function updateAction() {
-        $form2 = new Application_Form_Usuario();
+        $form2 = new Application_Form_Usuario_Usuario();
         $form2->setAction('/usuario/update');
         $form2->submit->setLabel('Alterar');
-        $usuario = new Application_Model_Usuario();
+        $usuario = new Application_Model_DbTable_Usuario();
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form2->isValid($data)) {
@@ -79,7 +79,7 @@ class UsuarioController extends Zend_Controller_Action {
     }
 
     public function deleteAction() {
-        $usuario = new Application_Model_Usuario();
+        $usuario = new Application_Model_DbTable_Usuario();
         $id = $this->_getParam('idUsuario');
         $usuario->delete("idUsuario = $id");
         $this->_redirect('usuario/index');

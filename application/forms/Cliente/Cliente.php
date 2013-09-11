@@ -4,7 +4,7 @@
  * 'placement' => Zend_Form_Decorator_Abstract::APPEND
  */
 
-class Application_Form_Cliente extends Zend_Form {
+class Application_Form_Cliente_Cliente extends Zend_Form {
 
     public function init() {
 
@@ -22,8 +22,7 @@ class Application_Form_Cliente extends Zend_Form {
                 'J' => 'Juridico',
             ))
         ));
-      
-        
+             
         $radioTipo
                 ->addDecorator('Label', array(
                     'tag' => 'div',
@@ -170,7 +169,7 @@ class Application_Form_Cliente extends Zend_Form {
                 ))
         ;
         $this->addElement($selectUF = new Zend_Form_Element_Select('UF', array(
-            'label' => 'UF',
+            'label' => 'Estado',
             'required' => true,
             'maxLength' => 49,
             'disableLoadDefaultDecorators' => TRUE,
@@ -205,7 +204,7 @@ class Application_Form_Cliente extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12  columns',
+                    'class' => 'small-6  columns',
                     'id' => array('callback' => array(get_class($selectUF), 'resolveElementId'))
                 ))
         ;
@@ -222,7 +221,7 @@ class Application_Form_Cliente extends Zend_Form {
                 ->setRegisterInArrayValidator(false)
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12  columns',
+                    'class' => 'small-6  columns',
                     'id' => array('callback' => array(get_class($selectCID), 'resolveElementId'))
                 ))
         ;
