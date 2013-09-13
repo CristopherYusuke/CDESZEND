@@ -14,3 +14,4 @@ Criando o Relatorio.TXT e cadastro cliente completo exceto validacao 01:02 22/08
 Pequeno problema com o git , reenviando o projeto 00:23 23/08/2013
 Atualizando projeto, criando breadCrumbs, tela de produto parcial , mudanças no style 10:34 31/08/2013
 model criado corretamente 01:16 11/09/2013
+https e http contigurado para rodar em varias maquinas 17:41 13/09/2013
