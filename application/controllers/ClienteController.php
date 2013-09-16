@@ -10,7 +10,8 @@ class ClienteController extends Zend_Controller_Action {
         
         $Model = new Application_Model_DbTable_Cliente();
         
-        $this->view->clientes = $Model->fetchAll()->toArray();
+        $this->view->clientes = $Model->fetchAll("status = 1")->toArray();
+        
     }
 
     public function createAction() {
@@ -21,6 +22,13 @@ class ClienteController extends Zend_Controller_Action {
             $data = $this->_request->getPost();
             unset($data['submit']);
             if ($form->isValid($data)) {
+                
+                if($data['tipo'] =="F"){
+                    $validaCPF_CNPJ = new Zend_Validate_Cpf();
+                }else{
+                     $validaCPF_CNPJ = new Zend_Validate_Cpf();
+                };
+                
                 $model = new Application_Model_DbTable_Cliente();
                 $ExisteCPF_CNPJ = $model->fetchRow('CPF_CNPJ = "' . $data['CPF_CNPJ'] . '"');
                 if (!isset($ExisteCPF_CNPJ)) {
@@ -31,6 +39,8 @@ class ClienteController extends Zend_Controller_Action {
                     $mensagens = "O cliente com o ' " . $data['CPF_CNPJ'] . " ' já existe.";
                     $erro = true;
                 }
+                
+                
             } else {
                 $mensagens = "Não foi possível criar cliente.";
                 $erro = true;

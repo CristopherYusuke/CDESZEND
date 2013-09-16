@@ -22,7 +22,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 'J' => 'Juridico',
             ))
         ));
-             
+
         $radioTipo
                 ->addDecorator('Label', array(
                     'tag' => 'div',
@@ -34,12 +34,12 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ))
                 ->setValue("F");
         ;
-        
-         $this->addElement($Status = new Zend_Form_Element_Checkbox('status', array(
+
+        $this->addElement($Status = new Zend_Form_Element_Checkbox('status', array(
             'label' => 'Ativo')
         ));
-        
-          $Status
+
+        $Status
                 ->addDecorator('Label', array(
                     'tag' => 'div',
                     'class' => ' small-3 columns text-right '))
@@ -48,7 +48,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                     'class' => 'small-1 columns panel',
                     'id' => array('callback' => array(get_class($Status), 'resolveElementId'))
                 ))
-                  
+
         ;
 
         $this->addElement($inputNome = new Zend_Form_Element_Text('nome', array('label' => 'Nome',
@@ -57,6 +57,11 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputNome
+                ->setRequired(true)
+                ->addValidator('NotEmpty')
+                ->addFilter('StripTags')
+                ->addFilter('StringTrim')
+                ->addErrorMessage('Informe o seu nome')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -72,6 +77,11 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputCPF_CNPJ
+                ->setRequired(true)
+                ->addValidator('NotEmpty')
+                ->addFilter('StripTags')
+                ->addFilter('StringTrim')
+                ->addErrorMessage('Informe o seu CPF')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -90,6 +100,11 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputTelefone
+                ->setRequired(true)
+                ->addValidator('NotEmpty')
+                ->addFilter('StripTags')
+                ->addFilter('StringTrim')
+                ->addErrorMessage('Informe o seu Telefone')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -127,6 +142,11 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputEndereco
+                ->setRequired(true)
+                ->addValidator('NotEmpty')
+                ->addFilter('StripTags')
+                ->addFilter('StringTrim')
+                ->addErrorMessage('Informe o seu Endereço')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -143,6 +163,11 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputNumero
+                ->setRequired(true)
+                ->addValidator('NotEmpty')
+                ->addFilter('StripTags')
+                ->addFilter('StringTrim')
+                ->addErrorMessage('Informe o Numero de sua residencia')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -170,7 +195,6 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         ;
         $this->addElement($selectUF = new Zend_Form_Element_Select('UF', array(
             'label' => 'Estado',
-            'required' => true,
             'maxLength' => 49,
             'disableLoadDefaultDecorators' => TRUE,
             'class' => 'styled-select'
@@ -225,8 +249,8 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                     'id' => array('callback' => array(get_class($selectCID), 'resolveElementId'))
                 ))
         ;
-        
-        
+
+
         $this->addElement($submit = new Zend_Form_Element_Submit('submit', array(
             'label' => 'Salvar',
             'disableLoadDefaultDecorators' => TRUE,
@@ -258,8 +282,6 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                     'id' => array('callback' => array(get_class($button), 'resolveElementId'))
                 ))
         ;
-
-       
     }
 
 }
