@@ -1,7 +1,7 @@
 <div class="row ">
     <div class="small-12 small-centered large-8 columns">
         <h2 class="text-center" > Listar Cliente </h2>
-        
+
         <div class="row collapse">
             <div class="small-12  large-10 columns">
                 <input id="input_nome" type="text" placeholder="Buscar" >
@@ -43,15 +43,15 @@
                     <td><?php echo $this->clientes[$key]['numero']; ?></td>
                     <td><?php echo $this->clientes[$key]['bairro']; ?></td>
                     <td><?php echo $this->clientes[$key]['cidade']; ?></td>
-                    <td><?php echo $this->clientes[$key]['UF']; ?></td>
-                    <td><?php
-                        if ($this->clientes[$key]['status']) {
-                            echo "Ativo";
-                        } else {
-                            echo "Inativo";
-                        }
+                    <td><?php echo $this->clientes[$key]['UF']; ?></td>  
+                    <?php if ($this->clientes[$key]['status']) {
+                        ?>  <td><span class="success label">Ativo</span> </td>   
+                        <?php
+                    } else {
                         ?>
-                    </td>
+                        <td><span class="alert label">Inativo</span> </td> 
+                    <?php }
+                    ?> 
                     <td >
                         <a href="/cliente/update/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
                            class="small button secondary">EDITAR</a>
@@ -59,10 +59,10 @@
                     <td> 
                         <?php if ($this->clientes[$key]['status']) { ?>  
                             <a href="/cliente/inactive/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
-                               class="small button success " id="btn_usuario_excluir" >INATIVAR </a>
+                               class="small button secondary " id="btn_usuario_excluir" >INATIVAR </a>
                            <?php } else { ?>
                             <a href="/cliente/active/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
-                               class="small button alert " id="btn_usuario_excluir" >ATIVAR </a>
+                               class="small button secondary " id="btn_usuario_excluir" >ATIVAR </a>
 
                         <?php } ?> <!-- End if -->
                     </td>

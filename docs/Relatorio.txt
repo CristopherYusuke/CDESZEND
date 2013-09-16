@@ -17,3 +17,4 @@ model criado corretamente 01:16 11/09/2013
 https e http contigurado para rodar em varias maquinas 17:41 13/09/2013
 Cadastro cliente validação quase completa, criando validadores de CPF e CNPJ ,falta testar 11:54 16/09/2013
 create de cliente com o campo cpf validando com NoRecordExists 12:11 16/09/2013
+Alterações no layout  de listagem dos clientes 13:03 16/09/2013
