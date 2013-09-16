@@ -7,11 +7,10 @@ class ClienteController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-        
+
         $Model = new Application_Model_DbTable_Cliente();
-        
+
         $this->view->clientes = $Model->fetchAll("status = 1")->toArray();
-        
     }
 
     public function createAction() {
@@ -23,24 +22,16 @@ class ClienteController extends Zend_Controller_Action {
             unset($data['submit']);
             if ($form->isValid($data)) {
                 
-                if($data['tipo'] =="F"){
+                if ($data['tipo'] == "F") {
                     $validaCPF_CNPJ = new Zend_Validate_Cpf();
-                }else{
-                     $validaCPF_CNPJ = new Zend_Validate_Cpf();
+                } else {
+                    $validaCPF_CNPJ = new Zend_Validate_Cpf();
                 };
                 
                 $model = new Application_Model_DbTable_Cliente();
-                $ExisteCPF_CNPJ = $model->fetchRow('CPF_CNPJ = "' . $data['CPF_CNPJ'] . '"');
-                if (!isset($ExisteCPF_CNPJ)) {
-                    $model->insert($data);
-                    $mensagens = "Cliente criado com sucesso.";
-                    $erro = false;
-                } else {
-                    $mensagens = "O cliente com o ' " . $data['CPF_CNPJ'] . " ' já existe.";
-                    $erro = true;
-                }
-                
-                
+                $model->insert($data);
+                $mensagens = "Cliente criado com sucesso.";
+                $erro = false;
             } else {
                 $mensagens = "Não foi possível criar cliente.";
                 $erro = true;
@@ -67,8 +58,8 @@ class ClienteController extends Zend_Controller_Action {
             unset($data['submit']);
             if ($form->isValid($data)) {
                 $values = $form->getValues();
-                /* and idCliente <> '.$data['idCliente']*/
-                $ExisteCPF_CNPJ = $model->fetchRow('CPF_CNPJ = "' . $data['CPF_CNPJ'] . '"and idCliente <> '.(int) $this->_getParam('idCliente'));
+                /* and idCliente <> '.$data['idCliente'] */
+                $ExisteCPF_CNPJ = $model->fetchRow('CPF_CNPJ = "' . $data['CPF_CNPJ'] . '"and idCliente <> ' . (int) $this->_getParam('idCliente'));
                 if (count($ExisteCPF_CNPJ) == 0) {
                     $model->update($values, 'idCliente = ' . $values['idCliente']);
                     $mensagens = "Cliente criado com sucesso.";
@@ -87,14 +78,13 @@ class ClienteController extends Zend_Controller_Action {
             $this->view->mensagens = $mensagens;
         } else {
             $id = $this->_getParam('idCliente');
-            $cliente = $model->fetchRow("idCliente =".$id)->toArray();
-            
+            $cliente = $model->fetchRow("idCliente =" . $id)->toArray();
+
             $form->populate($cliente);
             $form->getElement('cidade')->addMultiOption('', $cliente['cidade']);
         }
         $this->view->formulario = $form;
     }
-   
 
     public function deleteAction() {
         $usuario = new Application_Model_Usuario();

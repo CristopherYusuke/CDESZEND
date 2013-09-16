@@ -78,7 +78,17 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         )));
         $inputCPF_CNPJ
                 ->setRequired(true)
-                ->addValidator('NotEmpty')
+                ->addValidator(array('NotEmpty',
+                    array('Db_NoRecordExists', true,
+                        array(
+                            'table' => 'cliente',
+                            'field' => 'CPF_CNPJ',
+                            'messages' => array(
+                                'recordFound' => 'CPF/CNPJ ja foi cadastrado '
+                            )
+                        )
+                    )
+                ))
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
                 ->addErrorMessage('Informe o seu CPF')
