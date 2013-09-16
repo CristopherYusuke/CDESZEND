@@ -21,13 +21,16 @@ class ClienteController extends Zend_Controller_Action {
             $data = $this->_request->getPost();
             unset($data['submit']);
             if ($form->isValid($data)) {
-                
-                if ($data['tipo'] == "F") {
-                    $validaCPF_CNPJ = new Zend_Validate_Cpf();
-                } else {
-                    $validaCPF_CNPJ = new Zend_Validate_Cpf();
-                };
-                
+                /*
+                  if ($data['tipo'] == "F") {
+                  $validaCPF_CNPJ = new Zend_Validate_Cpf();
+                  } else {
+                  $validaCPF_CNPJ = new Zend_Validate_Cpf();
+                  };
+                 */
+
+
+
                 $model = new Application_Model_DbTable_Cliente();
                 $model->insert($data);
                 $mensagens = "Cliente criado com sucesso.";
@@ -50,24 +53,20 @@ class ClienteController extends Zend_Controller_Action {
         $form = new Application_Form_Cliente_Cliente();
         $form->setAction('/cliente/update');
         $form->submit->setLabel('Alterar');
-//        $form->getElement('tipo')->getValue();
         $this->view->form = $form;
         $model = new Application_Model_DbTable_Cliente();
+        $form->CPF_CNPJ
+                ->removeValidator('Db_NoRecordExists')
+               
+                ;
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             unset($data['submit']);
             if ($form->isValid($data)) {
                 $values = $form->getValues();
-                /* and idCliente <> '.$data['idCliente'] */
-                $ExisteCPF_CNPJ = $model->fetchRow('CPF_CNPJ = "' . $data['CPF_CNPJ'] . '"and idCliente <> ' . (int) $this->_getParam('idCliente'));
-                if (count($ExisteCPF_CNPJ) == 0) {
-                    $model->update($values, 'idCliente = ' . $values['idCliente']);
-                    $mensagens = "Cliente criado com sucesso.";
-                    $erro = false;
-                } else {
-                    $mensagens = "ja existe cliente com o CPF '" . $data['CPF_CNPJ'] . "'";
-                    $erro = true;
-                }
+                $model->update($values, 'idCliente = ' . $values['idCliente']);
+                $mensagens = "Cliente Atualizado com sucesso.";
+                $erro = false;
             } else {
                 $mensagens = "Não foi possível criar cliente.";
                 $erro = true;
@@ -79,7 +78,6 @@ class ClienteController extends Zend_Controller_Action {
         } else {
             $id = $this->_getParam('idCliente');
             $cliente = $model->fetchRow("idCliente =" . $id)->toArray();
-
             $form->populate($cliente);
             $form->getElement('cidade')->addMultiOption('', $cliente['cidade']);
         }

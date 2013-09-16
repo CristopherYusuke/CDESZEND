@@ -61,7 +61,6 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ->addValidator('NotEmpty')
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
-                ->addErrorMessage('Informe o seu nome')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -78,20 +77,10 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         )));
         $inputCPF_CNPJ
                 ->setRequired(true)
-                ->addValidator(array('NotEmpty',
-                    array('Db_NoRecordExists', true,
-                        array(
-                            'table' => 'cliente',
-                            'field' => 'CPF_CNPJ',
-                            'messages' => array(
-                                'recordFound' => 'CPF/CNPJ ja foi cadastrado '
-                            )
-                        )
-                    )
-                ))
+                ->addValidator('NotEmpty')
+                ->addValidator(new Zend_Validate_Db_NoRecordExists('cliente', 'CPF_CNPJ'))
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
-                ->addErrorMessage('Informe o seu CPF')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -114,7 +103,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ->addValidator('NotEmpty')
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
-                ->addErrorMessage('Informe o seu Telefone')
+                
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -156,7 +145,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ->addValidator('NotEmpty')
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
-                ->addErrorMessage('Informe o seu Endereço')
+                
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -177,7 +166,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ->addValidator('NotEmpty')
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
-                ->addErrorMessage('Informe o Numero de sua residencia')
+                
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
