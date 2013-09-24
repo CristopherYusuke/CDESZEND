@@ -55,10 +55,11 @@ class ClienteController extends Zend_Controller_Action {
         $form->submit->setLabel('Alterar');
         $this->view->form = $form;
         $model = new Application_Model_DbTable_Cliente();
+        $modelCid = new Application_Model_Cidade();
         $form->CPF_CNPJ
                 ->removeValidator('Db_NoRecordExists')
-               
-                ;
+
+        ;
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             unset($data['submit']);
@@ -78,8 +79,14 @@ class ClienteController extends Zend_Controller_Action {
         } else {
             $id = $this->_getParam('idCliente');
             $cliente = $model->fetchRow("idCliente =" . $id)->toArray();
+            $cidades = $modelCid->fetchAll("UF = ".$cliente['uf'])->toArray();
             $form->populate($cliente);
-            $form->getElement('cidade')->addMultiOption('', $cliente['cidade']);
+            unset($cidades['uf']);
+            unset($cidades['id']);
+            foreach ($cidades as $id ) {
+                $form->cidade->addMultiOption($id);
+            }
+            $form->cidade->setValue($cliente['cidade']);
         }
         $this->view->formulario = $form;
     }
