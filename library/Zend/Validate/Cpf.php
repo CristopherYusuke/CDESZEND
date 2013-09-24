@@ -1,6 +1,6 @@
 <?php
 
-class Zend_Validate_Cpf extends Zend_Validator_cpfCnpjAbstract {
+class Zend_Validate_Cpf extends Zend_Validate_cpfCnpjAbstract {
     /**
      * Tamanho do Campo
      * @var int

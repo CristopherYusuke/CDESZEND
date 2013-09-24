@@ -29,7 +29,7 @@
                     <th>UF</th>
                     <th>status</th>
                     <th>Editar</th>
-                    <th>Ativar/Inativar</th>
+    <!--                    <th>Ativar/Inativar</th>-->
                 </tr>
             </thead>
             <?php foreach ($this->clientes as $key => $value) { ?>
@@ -56,16 +56,16 @@
                         <a href="/cliente/update/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
                            class="small button secondary">EDITAR</a>
                     </td>
-                    <td> 
-                        <?php if ($this->clientes[$key]['status']) { ?>  
+<!--                    <td> 
+                        <?php //if ($this->clientes[$key]['status']) { ?>  
                             <a href="/cliente/inactive/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
                                class="small button secondary " id="btn_usuario_excluir" >INATIVAR </a>
-                           <?php } else { ?>
+                           <?php //} else { ?>
                             <a href="/cliente/active/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
                                class="small button secondary " id="btn_usuario_excluir" >ATIVAR </a>
 
-                        <?php } ?> <!-- End if -->
-                    </td>
+                        <?php// } ?>  End if 
+                    </td>-->
                 </tr>
             <?php } ?> <!-- End foreach -->
         </table>

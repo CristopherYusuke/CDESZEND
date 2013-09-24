@@ -1,6 +1,6 @@
 <div class="row">
     <div class="small-12 columns text-center">
-        <h1> Cadastrar Usuario </h1>
+        <h1> Cadastrar Usuário </h1>
     </div>
 </div>
 <div  class="row ">
@@ -19,7 +19,32 @@
             <?php } ?>
         <?php } ?>
         <?php
-            echo $this->form;
+        //echo $this->form;
         ?>
+
+        <form method="<?php echo $this->form->getMethod() ?>" action="<?php echo $this->form->getAction() ?>">
+            <div class="row">
+                <?php
+                echo $this->form->nome;
+                echo $this->form->login;
+                ?>
+            </div>
+
+            <div class="row">
+                <?php
+                echo $this->form->senha;
+                echo $this->form->tp_acesso;
+                ?>
+            </div>
+            <div class="row">
+                <?php
+                echo $this->form->submit;
+                ?>
+                <?php
+                echo $this->form->button;
+                ?>
+            </div>
+
+        </form>
     </div>
 </div>

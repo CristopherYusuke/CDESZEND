@@ -34,7 +34,7 @@ class Application_Form_Usuario_Usuario extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 columns',
+                    'class' => 'small-12 large-6 columns',
                     'id' => array('callback' => array(get_class($inputNome), 'resolveElementId'))
                 ))
         ;
@@ -51,7 +51,7 @@ class Application_Form_Usuario_Usuario extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 columns',
+                    'class' => 'small-12 large-6 columns',
                     'id' => array('callback' => array(get_class($inputLogin), 'resolveElementId'))
                 ))
         ;
@@ -69,7 +69,7 @@ class Application_Form_Usuario_Usuario extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 columns',
+                    'class' => 'small-12 large-6 columns',
                     'id' => array('callback' => array(get_class($inputSenha), 'resolveElementId'))
                 ))
         ;
@@ -89,7 +89,7 @@ class Application_Form_Usuario_Usuario extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12  columns',
+                    'class' => 'small-12 large-6  columns',
                     'id' => array('callback' => array(get_class($select), 'resolveElementId'))
                 ))
         ;

@@ -7,7 +7,7 @@
  * @category Hazel
  * @package  Hazel_Validator
  */
-class Zend_Validate_Cnpj extends Hazel_Validator_CpAbstract
+class Zend_Validate_Cnpj extends Zend_Validate_cpfCnpjAbstract
 {
     /**
      * Tamanho do Campo

@@ -10,7 +10,8 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
 
         $this->setAction("/cliente/create");
         $this->setMethod("POST");
-
+        $this->addAttribs(array('class'=>'row'));
+                
         $this->addElement($id = new Zend_Form_Element_Hidden('idCliente'));
         $id->removeDecorator('label');
 
@@ -86,7 +87,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 columns',
+                    'class' => 'small-12  columns',
                     'id' => array('callback' => array(get_class($inputCPF_CNPJ), 'resolveElementId'))
                 ))
         ;
@@ -100,16 +101,14 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         )));
         $inputTelefone
                 ->setRequired(true)
-                ->addValidator('NotEmpty')
-                ->addFilter('StripTags')
-                ->addFilter('StringTrim')
-                
+                ->addValidators(array('NotEmpty','Alnum'))
+                ->addFilters(array('StripTags','StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 columns',
+                    'class' => 'small-12  large-6 columns',
                     'id' => array('callback' => array(get_class($inputTelefone), 'resolveElementId'))
                 ))
         ;
@@ -151,7 +150,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 columns',
+                    'class' => 'small-12 large-6 columns',
                     'id' => array('callback' => array(get_class($inputEndereco), 'resolveElementId'))
                 ))
         ;
@@ -172,7 +171,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 columns',
+                    'class' => 'small-12 large-6 columns',
                     'id' => array('callback' => array(get_class($inputNumero), 'resolveElementId'))
                 ))
         ;
@@ -188,7 +187,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 columns',
+                    'class' => 'small-12 large-6 columns',
                     'id' => array('callback' => array(get_class($inputBairro), 'resolveElementId'))
                 ))
         ;
@@ -227,7 +226,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-6  columns',
+                    'class' => 'small-12 large-6  columns',
                     'id' => array('callback' => array(get_class($selectUF), 'resolveElementId'))
                 ))
         ;
@@ -244,7 +243,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ->setRegisterInArrayValidator(false)
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-6  columns',
+                    'class' => 'small-12 large-6 columns',
                     'id' => array('callback' => array(get_class($selectCID), 'resolveElementId'))
                 ))
         ;

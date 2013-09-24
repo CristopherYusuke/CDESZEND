@@ -42,7 +42,7 @@ $(document).ready(function() {// on Load
             success: function(data) {
                 var html = "";
                 for (var i in data) {
-                    html += "<option>" +"'"+ data[i].nome +"'"+ "</option>";
+                    html += "<option>" +""+ data[i].nome +""+ "</option>";
                 }
                 $("#cidade").html(html);
             }

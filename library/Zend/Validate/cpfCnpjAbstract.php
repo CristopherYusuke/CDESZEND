@@ -10,7 +10,7 @@
  * @package  Hazel_Validator
  * @author   Wanderson Henrique Camargo Rosa
  */
-abstract class Zend_Validator_cpfCnpjAbstract extends Zend_Validate_Abstract
+abstract class Zend_Validate_cpfCnpjAbstract extends Zend_Validate_Abstract
 {
     /**
      * Tamanho Inválido
@@ -40,7 +40,7 @@ abstract class Zend_Validator_cpfCnpjAbstract extends Zend_Validate_Abstract
      * Modelos de Mensagens
      * @var string
      */
-    protected $_messageTemplates = array(
+    public $_messageTemplates = array(
         self::SIZE     => "'%value%' não possui tamanho esperado",
         self::EXPANDED => "'%value%' não possui um formato aceitável",
         self::DIGIT    => "'%value%' não é um documento válido"

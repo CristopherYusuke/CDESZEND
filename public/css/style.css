@@ -66,6 +66,22 @@ select:focus{
     height: auto;
 }
 
+ input[type="text"].disabled,
+  input[type="password"].disabled,
+  input[type="date"].disabled,
+  input[type="datetime"].disabled,
+  input[type="datetime-local"].disabled,
+  input[type="month"].disabled,
+  input[type="week"].disabled,
+  input[type="email"].disabled,
+  input[type="number"].disabled,
+  input[type="search"].disabled,
+  input[type="tel"].disabled,
+  input[type="time"].disabled,
+  input[type="url"].disabled,
+  textarea.disabled {
+    background-color: #dddddd; }
+
 /*.styled-select select {
     background: transparent;
 
