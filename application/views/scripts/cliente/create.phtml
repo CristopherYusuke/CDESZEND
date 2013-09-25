@@ -4,7 +4,7 @@
     </div>
 </div>
 <div  class="row ">
-    <div class="small-12 small-centered large-7 columns">
+    <div class="small-12 small-centered  columns">
         <?php if (isset($this->mensagens)) : ?>
             <?php if ($this->erro): ?>
                 <div data-alert class="alert-box alert ">
@@ -26,10 +26,6 @@
                 </div>
             <?php endif ?>
         <?php endif ?>
-
-        <?php
-        echo $this->form;
-        ?>
         <form method="<?php echo $this->form->getMethod() ?>" action="<?php echo $this->form->getAction() ?>">
             <div class="row">
                 <?php
@@ -39,7 +35,7 @@
                 ?>
             </div>
 
-           <div class="row">
+            <div class="row">
                 <?php
                 echo $this->form->nome;
                 echo $this->form->CPF_CNPJ;
@@ -50,29 +46,19 @@
                 <?php
                 echo $this->form->telefone;
                 echo $this->form->endereco;
-                ?>
-            </div>
-            <div class="row">
-                <?php
                 echo $this->form->numero;
                 ?>
-                <?php
-                echo $this->form->bairro;
-                ?>
             </div>
             <div class="row">
                 <?php
+                echo $this->form->bairro;
                 echo $this->form->UF;
-                ?>
-                <?php
-                echo $this->form->button;
+                echo $this->form->cidade;
                 ?>
             </div>
             <div class="row">
                 <?php
                 echo $this->form->submit;
-                ?>
-                <?php
                 echo $this->form->button;
                 ?>
             </div>

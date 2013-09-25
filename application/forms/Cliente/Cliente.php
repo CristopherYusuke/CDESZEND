@@ -59,7 +59,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         )));
         $inputNome
                 ->setRequired(true)
-                ->addValidator('NotEmpty')
+
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
                 ->addDecorator('ViewHelper')
@@ -67,7 +67,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 columns',
+                    'class' => 'small-12 large-6 columns',
                     'id' => array('callback' => array(get_class($inputNome), 'resolveElementId'))
                 ))
         ;
@@ -78,16 +78,16 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         )));
         $inputCPF_CNPJ
                 ->setRequired(true)
-                ->addValidator('NotEmpty')
                 ->addValidator(new Zend_Validate_Db_NoRecordExists('cliente', 'CPF_CNPJ'))
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
+                ->addFilter('Digits')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12  columns',
+                    'class' => 'small-12 large-6  columns',
                     'id' => array('callback' => array(get_class($inputCPF_CNPJ), 'resolveElementId'))
                 ))
         ;
@@ -100,15 +100,14 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputTelefone
-                ->setRequired(true)
-                ->addValidators(array('NotEmpty','Alnum'))
+                ->addValidators(array('Digits'))
                 ->addFilters(array('StripTags','StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12  large-6 columns',
+                    'class' => 'small-12  large-4 columns',
                     'id' => array('callback' => array(get_class($inputTelefone), 'resolveElementId'))
                 ))
         ;
@@ -141,16 +140,13 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         )));
         $inputEndereco
                 ->setRequired(true)
-                ->addValidator('NotEmpty')
-                ->addFilter('StripTags')
-                ->addFilter('StringTrim')
-                
+                ->addFilters(array('StripTags','StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
+                    'class' => 'small-12 large-4 columns',
                     'id' => array('callback' => array(get_class($inputEndereco), 'resolveElementId'))
                 ))
         ;
@@ -162,16 +158,14 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         )));
         $inputNumero
                 ->setRequired(true)
-                ->addValidator('NotEmpty')
-                ->addFilter('StripTags')
-                ->addFilter('StringTrim')
-                
+                ->addValidators(array('Digits'))
+                ->addFilters(array('StripTags','StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
+                    'class' => 'small-12 large-4 columns',
                     'id' => array('callback' => array(get_class($inputNumero), 'resolveElementId'))
                 ))
         ;
@@ -182,12 +176,14 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputBairro
+                ->addValidators(array('Alpha','alnum'))
+                ->addFilters(array('StripTags','StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
+                    'class' => 'small-12 large-4 columns',
                     'id' => array('callback' => array(get_class($inputBairro), 'resolveElementId'))
                 ))
         ;
@@ -226,7 +222,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-6  columns',
+                    'class' => 'small-12 large-4  columns',
                     'id' => array('callback' => array(get_class($selectUF), 'resolveElementId'))
                 ))
         ;
@@ -243,7 +239,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ->setRegisterInArrayValidator(false)
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
+                    'class' => 'small-12 large-4     columns',
                     'id' => array('callback' => array(get_class($selectCID), 'resolveElementId'))
                 ))
         ;

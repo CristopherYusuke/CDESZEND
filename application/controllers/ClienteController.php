@@ -7,8 +7,17 @@ class ClienteController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
+
+        $form = new Application_Form_Cliente_Busca();
+
         $Model = new Application_Model_DbTable_Cliente();
         $this->view->clientes = $Model->fetchAll()->toArray();
+        if ($this->_request->isPost()) {
+             $this->view->clientes = $Model->fetchAll()->toArray();
+        } else {
+            $this->view->clientes = $Model->fetchAll()->toArray();
+            $this->view->formBusca = $form;
+        }
     }
 
     public function createAction() {
@@ -19,28 +28,32 @@ class ClienteController extends Zend_Controller_Action {
             $data = $this->_request->getPost();
             unset($data['submit']);
             if ($form->isValid($data)) {
-                $validaCPF_CNPJ = ($data['tipo'] == "F")? new Zend_Validate_Cpf() : new Zend_Validate_Cnpj();
-                if($validaCPF_CNPJ->isValid($data['CPF_CNPJ'])) {
+                $validaCPF_CNPJ = ($data['tipo'] == "F") ? new Zend_Validate_Cpf() : new Zend_Validate_Cnpj();
+                if ($validaCPF_CNPJ->isValid($data['CPF_CNPJ'])) {
                     $model = new Application_Model_DbTable_Cliente();
                     $model->insert($data);
                     $mensagens[] = "Cliente criado com sucesso.";
                     $erro = false;
                     $form->getElement('cidade')->addMultiOption('', $data['cidade']);
-                }else{
-                    $mensagens =  $validaCPF_CNPJ->getMessages();
-                    $form->getElement('cidade')->addMultiOption('', $data['cidade']);                            
+                } else {
+                    $mensagens = $validaCPF_CNPJ->getMessages();
+                    if (isset($data['cidade'])) {
+                        $form->getElement('cidade')->addMultiOption('', $data['cidade']);
+                    }
                 }
             } else {
                 $mensagens[] = "Não foi possível criar cliente.";
                 $erro = true;
                 $form->populate($data);
-                $this->view->formulario = $form;
-                $form->getElement('cidade')->addMultiOption('', $data['cidade']);
+                $this->view->form = $form;
+                if (isset($data['cidade'])) {
+                    $form->getElement('cidade')->addMultiOption('', $data['cidade']);
+                }
             }
             $this->view->erro = $erro;
             $this->view->mensagens = $mensagens;
         } else {
-            $this->view->formulario = $form;
+            $this->view->form = $form;
         }
     }
 
