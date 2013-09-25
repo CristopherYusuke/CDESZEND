@@ -20,4 +20,5 @@ create de cliente com o campo cpf validando com NoRecordExists 12:11 16/09/2013
 Alterações no layout  de listagem dos clientes 13:03 16/09/2013
 erro cadastro de cliente add multioptions  01:26 24/09/2013 
 cadastro de cliente completo , alterções no layout 17:50 24/09/2013
+Mudanças no layout 01:29 25/09/2013
 

@@ -1,7 +1,6 @@
 <div class="row ">
-    <div class="small-12 small-centered large-8 columns">
+    <div class="small-12 small-centered large-12 columns">
         <h2 class="text-center" > Listar Cliente </h2>
-
         <div class="row collapse">
             <div class="small-12  large-10 columns">
                 <input id="input_nome" type="text" placeholder="Buscar" >
@@ -12,63 +11,62 @@
         </div>
     </div>
 </div>
-<div class="small-12 columns">
-    <div class="scroll">
-        <table width="100%">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nome</th>
-                    <th>Tipo</th>
-                    <th>CPF_CNPJ</th>
-                    <th>Telefone</th>
-                    <th>Endereco</th>
-                    <th>Numero</th>
-                    <th>Bairro</th>
-                    <th>Cidade</th>
-                    <th>UF</th>
-                    <th>status</th>
-                    <th>Editar</th>
-    <!--                    <th>Ativar/Inativar</th>-->
-                </tr>
-            </thead>
-            <?php foreach ($this->clientes as $key => $value) { ?>
-                <tr>
-                    <td><?php echo $this->clientes[$key]['idCliente']; ?> </td>
-                    <td><?php echo $this->clientes[$key]['nome']; ?></td>
-                    <td><?php echo $this->clientes[$key]['tipo']; ?></td>
-                    <td><?php echo $this->clientes[$key]['CPF_CNPJ']; ?></td>
-                    <td><?php echo $this->clientes[$key]['telefone']; ?></td>
-                    <td><?php echo $this->clientes[$key]['endereco']; ?></td>
-                    <td><?php echo $this->clientes[$key]['numero']; ?></td>
-                    <td><?php echo $this->clientes[$key]['bairro']; ?></td>
-                    <td><?php echo $this->clientes[$key]['cidade']; ?></td>
-                    <td><?php echo $this->clientes[$key]['UF']; ?></td>  
-                    <?php if ($this->clientes[$key]['status']) {
-                        ?>  <td><span class="success label">Ativo</span> </td>   
-                        <?php
-                    } else {
-                        ?>
-                        <td><span class="alert label">Inativo</span> </td> 
-                    <?php }
-                    ?> 
-                    <td >
-                        <a href="/cliente/update/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
-                           class="small button secondary">EDITAR</a>
-                    </td>
-<!--                    <td> 
+<div class="row">
+    <div class="small-12 columns">
+        <div class="scroll">
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>CPF_CNPJ</th>
+                        <th>Telefone</th>
+                        <th>Endereco</th>
+                        <th>Numero</th>
+                        <th>Bairro</th>
+                        <th>Cidade</th>
+                        <th>UF</th>
+                        <th>status</th>
+                        <th>Editar</th>
+        <!--            <th>Ativar/Inativar</th>-->
+                    </tr>
+                </thead>
+                <?php foreach ($this->clientes as $key => $value) : ?>
+                    <tr>
+                        <td><?php echo $this->clientes[$key]['idCliente']; ?> </td>
+                        <td><?php echo $this->clientes[$key]['nome']; ?></td>
+                        <td><?php echo $this->clientes[$key]['tipo']; ?></td>
+                        <td><?php echo $this->clientes[$key]['CPF_CNPJ']; ?></td>
+                        <td><?php echo $this->clientes[$key]['telefone']; ?></td>
+                        <td><?php echo $this->clientes[$key]['endereco']; ?></td>
+                        <td><?php echo $this->clientes[$key]['numero']; ?></td>
+                        <td><?php echo $this->clientes[$key]['bairro']; ?></td>
+                        <td><?php echo $this->clientes[$key]['cidade']; ?></td>
+                        <td><?php echo $this->clientes[$key]['UF']; ?></td>  
+                        <?php if ($this->clientes[$key]['status']) : ?>
+                            <td><span class="success label">Ativo</span> </td>   
+                        <?php else: ?>
+                            <td><span class="alert label">Inativo</span> </td> 
+                        <?php endif; ?> 
+                        <td>
+                            <a href="/cliente/update/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
+                               class="small button secondary">EDITAR</a>
+                        </td>
+    <!--                    <td> 
                         <?php //if ($this->clientes[$key]['status']) { ?>  
-                            <a href="/cliente/inactive/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
-                               class="small button secondary " id="btn_usuario_excluir" >INATIVAR </a>
-                           <?php //} else { ?>
-                            <a href="/cliente/active/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
-                               class="small button secondary " id="btn_usuario_excluir" >ATIVAR </a>
+                                <a href="/cliente/inactive/idCliente/<?php //echo $this->clientes[$key]['idCliente']; ?>"
+                                   class="small button secondary " id="btn_usuario_excluir" >INATIVAR </a>
+                        <?php //} else { ?>
+                                <a href="/cliente/active/idCliente/<?php //echo $this->clientes[$key]['idCliente']; ?>"
+                                   class="small button secondary " id="btn_usuario_excluir" >ATIVAR </a>
 
-                        <?php// } ?>  End if 
-                    </td>-->
-                </tr>
-            <?php } ?> <!-- End foreach -->
-        </table>
+                        <?php // } ?>  End if 
+                        </td>-->
+                    </tr>
+                <?php endforeach; ?> <!-- End foreach -->
+            </table>
+        </div>
     </div>
 </div>
 
