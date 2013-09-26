@@ -1,16 +1,18 @@
 <div class="row ">
     <div class="small-12 small-centered large-12 columns">
         <h2 class="text-center" > Listar Cliente </h2>
-        <form method="<?php echo $this->formBusca->getMethod(); ?>" action="<?php echo $this->formBusca->getAction();?>" >
+        <?php // echo $this->form;?>
+                
+         <form method="<?php echo $this->form->getMethod();?>" action="<?php echo $this->form->getAction(); ?>">
             <div class="row">
                 <?php
-                echo $this->formBusca->nome;
-                echo $this->formBusca->status;
+                echo $this->form->nome;
+                echo $this->form->status;
                 ?>
             </div>
             <div class="row">
                 <?php
-                echo $this->formBusca->submit;
+                echo $this->form->submit;
                 ?>
             </div>
         </form>

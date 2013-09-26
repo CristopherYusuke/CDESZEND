@@ -10,7 +10,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
 
         $this->setAction("/cliente/create");
         $this->setMethod("POST");
-        $this->addAttribs(array('class'=>'row'));
+       
                 
         $this->addElement($id = new Zend_Form_Element_Hidden('idCliente'));
         $id->removeDecorator('label');
@@ -27,10 +27,10 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         $radioTipo
                 ->addDecorator('Label', array(
                     'tag' => 'div',
-                    'class' => 'small-3 columns text-right '))
+                    'class' => 'small-6 columns text-right '))
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => ' small-3 columns panel ',
+                    'class' => ' small-6 columns panel ',
                     'id' => array('callback' => array(get_class($radioTipo), 'resolveElementId'))
                 ))
                 ->setValue("F");
@@ -43,7 +43,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         $Status
                 ->addDecorator('Label', array(
                     'tag' => 'div',
-                    'class' => ' small-3 columns text-right '))
+                    'class' => ' small-11 columns text-right '))
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
                     'class' => 'small-1 columns panel',
@@ -176,8 +176,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputBairro
-                ->addValidators(array('Alpha','alnum'))
-                ->addFilters(array('StripTags','StringTrim'))
+                ->addFilters(array('StripTags','StringTrim','alnum'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())

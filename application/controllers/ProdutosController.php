@@ -1,6 +1,6 @@
 <?php
 
-class ProdutoController extends Zend_Controller_Action {
+class ProdutosController extends Zend_Controller_Action {
 
     public function init() {
         

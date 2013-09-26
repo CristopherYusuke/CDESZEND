@@ -28,11 +28,20 @@
         <?php endif ?>
         <form method="<?php echo $this->form->getMethod() ?>" action="<?php echo $this->form->getAction() ?>">
             <div class="row">
+
                 <?php
                 echo $this->form->idCliente;
-                echo $this->form->tipo;
-                echo $this->form->status;
                 ?>
+                <div class="small-6 columns">
+                    <?php
+                    echo $this->form->tipo;
+                    ?>
+                </div>
+                <div class="small-6 columns">
+                    <?php
+                    echo $this->form->status;
+                    ?>
+                </div>
             </div>
 
             <div class="row">

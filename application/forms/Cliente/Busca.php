@@ -9,8 +9,9 @@ class Application_Form_Cliente_Busca extends Zend_Form {
     public function init() {
 
         
-        $this->setMethod("POST");
+        
         $this->setAction("/cliente");
+        $this->setMethod("POST");
         
         $this->addElement($inputNome = new Zend_Form_Element_Text('nome', array('label' => 'Nome',
             'maxLength' => 49,

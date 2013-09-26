@@ -105,5 +105,10 @@ textarea.disabled {
     list-style: none;
     font-size: 0.8em;
     color: red;
-    
+
+}
+
+div#nav {
+    background-color: #000;
+    color: white;
 }

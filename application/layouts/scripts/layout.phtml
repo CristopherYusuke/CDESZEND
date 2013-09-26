@@ -6,7 +6,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <title>Controle de Estoque Stillo Tapeçaria</title>
-        <base href="  <?php echo 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] ?> " />
+        <base href="  <?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] ?> " />
         <link href="css/jquery-ui-1.9.2.custom.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/foundation.css" />
         <link rel="stylesheet" href="css/style.css" />
@@ -30,7 +30,7 @@
                         <a href="/">Cadastro</a>
                         <ul class="dropdown">
                             <li class="divider"></li>
-                            <li><a href="/produto">Produto</a></li>
+                            <li><a href="/produtos">Produto</a></li>
                             <li class="divider"></li>
                             <li><a href="/cliente">Cliente</a></li>
                             <li class="divider"></li>
@@ -67,6 +67,15 @@
                     <li class="divider"></li>
                     <li><a href="#">Relatorios</a></li>
                     <li class="divider"></li>
+                    <li>
+                        <div id="nav">
+                            voce esta em: <a href="/" title="Home">Home</a> 
+                            <?php
+                            $breadCrumbs = $this->navigation()->breadcrumbs()->setLinkLast(true)->setMinDepth(0)->render();
+                            echo ($breadCrumbs != "") ? "> " . $breadCrumbs : ""
+                            ?>
+                        </div>
+                    </li>
                 </ul>
 
                 <!-- Right Nav Section -->
@@ -79,16 +88,10 @@
                 </ul>
             </section>
         </nav>
-        <div id=" nav" class="row">
-            voce esta em: <a href="/" title="Home">Home</a> 
-            <?php
-            $breadCrumbs = $this->navigation()->breadcrumbs()->setLinkLast(true)->setMinDepth(0)->render();
-            echo ($breadCrumbs != "") ? "> " . $breadCrumbs : ""
-            ?>
-        </div>
+
 
         <div id="conteudo">
-<?php echo $this->layout()->content; ?>
+            <?php echo $this->layout()->content; ?>
         </div>
 
 
