@@ -7,9 +7,10 @@ class ProdutosController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
+        $form = new Application_Form_Produto_Busca();
         $model = new Application_Model_DbTable_Produto();
-        $this->view->produtos = $model;   
-        
+        $this->view->form = $form;
+        $this->view->produtos = $model;
     }
 
     public function createAction() {
@@ -18,11 +19,9 @@ class ProdutosController extends Zend_Controller_Action {
     }
 
     public function updateAction() {
-         $form = new Application_Form_Produto_Produto();
+        $form = new Application_Form_Produto_Produto();
         $this->view->form = $form;
     }
-
-
 
 }
 

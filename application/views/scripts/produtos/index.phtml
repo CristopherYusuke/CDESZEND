@@ -2,14 +2,15 @@
     <div class="small-12 small-centered large-8 columns">
         <h2 class="text-center" > Listar Produto </h2>
 
-        <div class="row collapse">
-            <div class="small-12  large-10 columns">
-                <input id="input_nome" type="text" placeholder="Buscar" >
+        <form method="<?php echo $this->form->getMethod();?>" action="<?php echo $this->form->getAction(); ?>">
+            <div class="row collapse">
+                <?php
+                echo $this->form->descricao;
+               echo $this->form->submit;
+                ?>
             </div>
-            <div class="small-12 large-2 columns">
-                <a href="#" class="button prefix">Buscar</a>
-            </div>
-        </div>
+           
+        </form>
     </div>
 </div>
 <div class="row">
@@ -35,8 +36,7 @@
                         <td><?php echo $this->produtos[$key]['precoCusto']; ?></td>
                         <td><?php echo $this->produtos[$key]['estoque']; ?></td>
                         <td><?php echo $this->produtos[$key]['status']; ?></td>
-                        <td width="50px"><a href="/usuario/update/idUsuario/<?php echo $this->produtos[$key]['idProduto']; ?>" class="small button secondary">Editar</a></td>
-                        <td width="50px"><a href="/usuario/delete/idUsuario/<?php echo $this->produtos[$key]['idProduto']; ?>" onclick="return confirm('Confirma a exclução do login : <?php echo $this->usuarios[$key]['login']; ?> ?');" class="small button alert" id="btn_usuario_excluir" >Excluir</a></td>
+                        <td width="50px"><a href="/usuario/update/idProduto/<?php echo $this->produtos[$key]['idProduto']; ?>" class="small button secondary">Editar</a></td>
                     </tr>
                 <?php } ?>
             </table>

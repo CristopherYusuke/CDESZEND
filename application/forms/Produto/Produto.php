@@ -4,7 +4,7 @@ class Application_Form_Produto_Produto extends Zend_Form {
 
     public function init() {
 
-        $this->setAction("/usuario/create");
+        $this->setAction("/produtos/create");
         $this->setMethod("POST");
 
         $this->addElement($id = new Zend_Form_Element_Hidden('idProduto'));
@@ -32,6 +32,8 @@ class Application_Form_Produto_Produto extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputDesc
+                ->addValidators(array('Alpha'))
+                ->addFilters(array('StripTags','StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -49,6 +51,8 @@ class Application_Form_Produto_Produto extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputPC
+                ->addValidators(array('Digits'))
+                ->addFilters(array('StripTags','StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -65,6 +69,8 @@ class Application_Form_Produto_Produto extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputEstoque
+                ->addFilters(array('StripTags','StringTrim'))
+                ->addValidators(array('Digits'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())

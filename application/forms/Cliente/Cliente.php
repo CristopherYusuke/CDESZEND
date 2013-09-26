@@ -43,10 +43,10 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         $Status
                 ->addDecorator('Label', array(
                     'tag' => 'div',
-                    'class' => ' small-11 columns text-right '))
+                    'class' => ' small-10 columns text-right '))
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-1 columns panel',
+                    'class' => 'small-2 columns panel',
                     'id' => array('callback' => array(get_class($Status), 'resolveElementId'))
                 ))
 
@@ -60,8 +60,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         $inputNome
                 ->setRequired(true)
 
-                ->addFilter('StripTags')
-                ->addFilter('StringTrim')
+                ->addFilters(array('StripTags','StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())

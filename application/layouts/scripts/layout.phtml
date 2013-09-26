@@ -69,10 +69,10 @@
                     <li class="divider"></li>
                     <li>
                         <div id="nav">
-                            voce esta em: <a href="/" title="Home">Home</a> 
+                            Você está em: <a href="/" title="Home">Home</a> 
                             <?php
                             $breadCrumbs = $this->navigation()->breadcrumbs()->setLinkLast(true)->setMinDepth(0)->render();
-                            echo ($breadCrumbs != "") ? "> " . $breadCrumbs : ""
+                            echo ($breadCrumbs != "")? "> ".$breadCrumbs:"";
                             ?>
                         </div>
                     </li>
