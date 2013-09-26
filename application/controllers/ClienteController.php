@@ -10,15 +10,13 @@ class ClienteController extends Zend_Controller_Action {
         $form = new Application_Form_Cliente_Busca();
         $Model = new Application_Model_DbTable_Cliente();
         $where = array("status = 1 ");
-
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
-                var_dump($data);
-                $where[0] = $data['status'];
+                $where[0] = "status = ".$data['status'];
+                $where[] = "NOME like('%".$data['nome']."%')";      
              //    $where[] = ($data['nome'] != "") ? "%" . $data['nome'] . "%" : null;
-                echo $where;
-                var_dump($where);
+             print_r($where);
                 $this->view->clientes = $Model->fetchAll($where)->toArray();
             } else {
                 $form->populate($data);

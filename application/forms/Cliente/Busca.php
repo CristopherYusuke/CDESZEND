@@ -14,12 +14,10 @@ class Application_Form_Cliente_Busca extends Zend_Form {
         
         $this->addElement($inputNome = new Zend_Form_Element_Text('nome', array('label' => 'Nome',
             'maxLength' => 49,
-            'required' => true,
             'placeholder' => 'digite o  nome para busca',
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputNome
-                
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
                 ->addDecorator('ViewHelper')
