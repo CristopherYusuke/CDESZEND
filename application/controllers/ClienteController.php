@@ -7,15 +7,24 @@ class ClienteController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-
         $form = new Application_Form_Cliente_Busca();
-
         $Model = new Application_Model_DbTable_Cliente();
-        $this->view->clientes = $Model->fetchAll()->toArray();
+        $where = array("status = 1 ");
+
         if ($this->_request->isPost()) {
-             $this->view->clientes = $Model->fetchAll()->toArray();
+            $data = $this->_request->getPost();
+            if ($form->isValid($data)) {
+                var_dump($data);
+                $where[0] = $data['status'];
+             //    $where[] = ($data['nome'] != "") ? "%" . $data['nome'] . "%" : null;
+                echo $where;
+                var_dump($where);
+                $this->view->clientes = $Model->fetchAll($where)->toArray();
+            } else {
+                $form->populate($data);
+            }
         } else {
-            $this->view->clientes = $Model->fetchAll()->toArray();
+            $this->view->clientes = $Model->fetchAll($where)->toArray();
             $this->view->formBusca = $form;
         }
     }
@@ -92,7 +101,7 @@ class ClienteController extends Zend_Controller_Action {
             $this->view->erro = $erro;
             $this->view->mensagens = $mensagens;
         } else {
-            $id = $this->_getParam('idCliente');
+            $id = (int) $this->_getParam('idCliente');
             $cliente = $model->fetchRow("idCliente =" . $id)->toArray();
             $cidades = $modelCid->fetchAll("uf = '" . $cliente['UF'] . "'")->toArray();
             $form->populate($cliente);
@@ -102,13 +111,6 @@ class ClienteController extends Zend_Controller_Action {
             $form->getElement('cidade')->setValue($cliente['cidade']);
         }
         $this->view->formulario = $form;
-    }
-
-    public function deleteAction() {
-        $usuario = new Application_Model_Usuario();
-        $id = $this->_getParam('idUsuario');
-        $usuario->delete("idUsuario = $id");
-        $this->_redirect('usuario/index');
     }
 
 }

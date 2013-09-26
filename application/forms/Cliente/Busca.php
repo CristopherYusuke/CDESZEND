@@ -8,17 +8,18 @@ class Application_Form_Cliente_Busca extends Zend_Form {
 
     public function init() {
 
-        $this->setAction("/cliente/index");
+        
         $this->setMethod("POST");
-                 
+        $this->setAction("/cliente");
+        
         $this->addElement($inputNome = new Zend_Form_Element_Text('nome', array('label' => 'Nome',
             'maxLength' => 49,
+            'required' => true,
             'placeholder' => 'digite o  nome para busca',
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputNome
-                ->setRequired(true)
-                ->addValidator('NotEmpty')
+                
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
                 ->addDecorator('ViewHelper')
@@ -39,8 +40,8 @@ class Application_Form_Cliente_Busca extends Zend_Form {
             
         )));
         $selectStatus
-                ->addMultiOption('1', 'Ativo')
-                ->addMultiOption('0', 'Inativo')
+                ->addMultiOption(1, 'Ativo')
+                ->addMultiOption(0, 'Inativo')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -53,7 +54,7 @@ class Application_Form_Cliente_Busca extends Zend_Form {
    
 
         $this->addElement($submit = new Zend_Form_Element_Submit('submit', array(
-            'label' => 'Salvar',
+            'label' => 'Buscar',
             'disableLoadDefaultDecorators' => TRUE,
             'class' => 'button'
         )));

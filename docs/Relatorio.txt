@@ -22,3 +22,5 @@ erro cadastro de cliente add multioptions  01:26 24/09/2013
 cadastro de cliente completo , alterções no layout 17:50 24/09/2013
 Mudanças no layout 01:29 25/09/2013
 remoção de bugs no cadastro de cliente ,e implementando a busca  18:22 25/09/2013
+problema com a busca de cliente 00:57 26/09/2013
+
