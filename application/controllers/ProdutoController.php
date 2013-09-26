@@ -9,6 +9,7 @@ class ProdutoController extends Zend_Controller_Action {
     public function indexAction() {
         $model = new Application_Model_DbTable_Produto();
         $this->view->produtos = $model;   
+        
     }
 
     public function createAction() {
@@ -17,12 +18,11 @@ class ProdutoController extends Zend_Controller_Action {
     }
 
     public function updateAction() {
-        
+         $form = new Application_Form_Produto_Produto();
+        $this->view->form = $form;
     }
 
-    public function deleteAction() {
-        
-    }
+
 
 }
 
