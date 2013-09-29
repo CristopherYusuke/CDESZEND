@@ -11,7 +11,8 @@ class Application_Form_Produto_Produto extends Zend_Form {
         $id->removeDecorator('label');
 
         $this->addElement($Status = new Zend_Form_Element_Checkbox('status', array(
-            'label' => 'Ativo')
+            'label' => 'Ativo',
+            'Value' => true)
         ));
 
         $Status
@@ -31,9 +32,10 @@ class Application_Form_Produto_Produto extends Zend_Form {
             'placeholder' => 'digite a Descrição',
             'disableLoadDefaultDecorators' => TRUE,
         )));
+        $Alpha = new Zend_Validate_Alpha(array('allowWhiteSpace' => true));
         $inputDesc
-                ->addValidators(array('Alpha'))
-                ->addFilters(array('StripTags','StringTrim'))
+                ->addValidators(array($Alpha))
+                ->addFilters(array('StripTags', 'StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -50,9 +52,17 @@ class Application_Form_Produto_Produto extends Zend_Form {
             'placeholder' => 'digite o seu Preco de Custo',
             'disableLoadDefaultDecorators' => TRUE,
         )));
+        
+        $float = new Zend_Validate_Float();
+        
+        $float->setMessage(
+                    "'%value%' nao é um número decimal válido.",
+                    Zend_Validate_Float::NOT_FLOAT);
+        
         $inputPC
-                ->addValidators(array('Digits'))
-                ->addFilters(array('StripTags','StringTrim'))
+              
+                ->addValidators(array($float))
+                ->addFilters(array('StripTags', 'StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -69,7 +79,7 @@ class Application_Form_Produto_Produto extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputEstoque
-                ->addFilters(array('StripTags','StringTrim'))
+                ->addFilters(array('StripTags', 'StringTrim'))
                 ->addValidators(array('Digits'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')

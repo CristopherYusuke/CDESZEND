@@ -64,7 +64,7 @@ class ClienteController extends Zend_Controller_Action {
         }
     }
 
-    public function updateAction() {/* do cliente */
+    public function updateAction() {
         $erro = true;
         $form = new Application_Form_Cliente_Cliente();
         $form->setAction('/cliente/update');

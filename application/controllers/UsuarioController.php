@@ -33,12 +33,12 @@ class UsuarioController extends Zend_Controller_Action {
                 $mensagens = "Não foi possível criar usuário.";
                 $erro = true;
                 $form->populate($data);
-                $this->view->formulario = $form;
+                $this->view->form = $form;
             }
             $this->view->erro = $erro;
             $this->view->mensagens = $mensagens;
         } else {
-            $this->view->formulario = $form;
+            $this->view->form = $form;
         }
     }
 
@@ -66,7 +66,7 @@ class UsuarioController extends Zend_Controller_Action {
                 $form2->populate($form2->getValues());
                 $mensagens = "Não foi possível criar usuário.";
                 $erro = true;
-                $this->view->formulario = $form2;
+                $this->view->form = $form2;
             }
             $this->view->erro = $erro;
             $this->view->mensagens = $mensagens;

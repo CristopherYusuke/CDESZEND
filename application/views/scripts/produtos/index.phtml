@@ -2,14 +2,19 @@
     <div class="small-12 small-centered large-8 columns">
         <h2 class="text-center" > Listar Produto </h2>
 
-        <form method="<?php echo $this->form->getMethod();?>" action="<?php echo $this->form->getAction(); ?>">
-            <div class="row collapse">
+        <form method="<?php echo $this->form->getMethod(); ?>" action="<?php echo $this->form->getAction(); ?>" class="custom">
+            <div class="row ">
                 <?php
                 echo $this->form->descricao;
-               echo $this->form->submit;
+                echo $this->form->status;
                 ?>
             </div>
-           
+             <div class="row ">
+                <?php
+                echo $this->form->submit;
+                ?>
+            </div>
+
         </form>
     </div>
 </div>
@@ -24,19 +29,23 @@
                         <th>precoCusto</th>
                         <th>estoque</th>
                         <th>status</th>
-                        <th>Tipo</th>
                         <th>Editar</th>
                     </tr>
                 </thead>
                 <?php foreach ($this->produtos as $key => $value) {
+     
                     ?>
                     <tr>
                         <td><?php echo $this->produtos[$key]['idProduto']; ?></td>
                         <td><?php echo $this->produtos[$key]['descricao']; ?></td>
-                        <td><?php echo $this->produtos[$key]['precoCusto']; ?></td>
+                        <td><?php echo "R$".  str_replace('.', ',',  $this->produtos[$key]['precoCusto']); ?></td>
                         <td><?php echo $this->produtos[$key]['estoque']; ?></td>
-                        <td><?php echo $this->produtos[$key]['status']; ?></td>
-                        <td width="50px"><a href="/usuario/update/idProduto/<?php echo $this->produtos[$key]['idProduto']; ?>" class="small button secondary">Editar</a></td>
+                        <?php if ($this->produtos[$key]['status']) : ?>
+                            <td><span class="success label">Ativo</span> </td>   
+                        <?php else: ?>
+                            <td><span class="alert label">Inativo</span> </td> 
+                        <?php endif; ?> 
+                        <td width="50px"><a href="/produtos/update/idProduto/<?php echo $this->produtos[$key]['idProduto']; ?>" class="small button secondary">Editar</a></td>
                     </tr>
                 <?php } ?>
             </table>

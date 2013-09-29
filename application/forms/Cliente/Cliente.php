@@ -37,7 +37,9 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         ;
 
         $this->addElement($Status = new Zend_Form_Element_Checkbox('status', array(
-            'label' => 'Ativo')
+            'label' => 'Ativo',
+            'Value' => true
+            )
         ));
 
         $Status
@@ -59,7 +61,6 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         )));
         $inputNome
                 ->setRequired(true)
-
                 ->addFilters(array('StripTags','StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
