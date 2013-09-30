@@ -33,17 +33,17 @@ class ProdutosController extends Zend_Controller_Action {
         $this->view->form = $form;
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
-            unset($data['submit']);
             if ($form->isValid($data)) {
+                $values = $form->getValues();
                 $model = new Application_Model_DbTable_Produto();
-                $data['precoCusto'] = str_replace(',', '.', $data['precoCusto']);
-                $model->insert($data);
+                $values['precoCusto'] = str_replace(',', '.', $values['precoCusto']);
+                $model->insert($values);
                 $mensagens = "Produto criado com sucesso.";
                 $erro = false;
             } else {
                 $mensagens = "Não foi possível criar produto.";
                 $erro = true;
-                $form->populate($data);
+                $form->populate($values);
                 $this->view->form = $form;
             }
             $this->view->erro = $erro;
@@ -59,10 +59,8 @@ class ProdutosController extends Zend_Controller_Action {
         $form->submit->setLabel('Alterar');
         $this->view->form = $form;
         $Produto = new Application_Model_DbTable_Produto();
-
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
-            unset($data['submit']);
             if ($form->isValid($data)) {
                 $values = $form->getValues();
                 $Produto->update($values, 'idProduto = ' . $values['idProduto']);

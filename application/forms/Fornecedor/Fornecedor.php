@@ -4,19 +4,19 @@
  * 'placement' => Zend_Form_Decorator_Abstract::APPEND
  */
 
-class Application_Form_Cliente_Cliente extends Zend_Form {
+class Application_Form_Fornecedor_Fornecedor extends Zend_Form {
 
     public function init() {
 
-        $this->setAction("/cliente/create");
+        $this->setAction("/fornecedor/create");
         $this->setMethod("POST");
-
-
-        $this->addElement($id = new Zend_Form_Element_Hidden('idCliente'));
+       
+                
+        $this->addElement($id = new Zend_Form_Element_Hidden('idFornecedor'));
         $id->removeDecorator('label');
 
         $this->addElement($radioTipo = new Zend_Form_Element_Radio('tipo', array(
-            'label' => 'Tipo Cliente',
+            'label' => 'Tipo Fornecedor',
             'required' => true,
             'multiOptions' => array(
                 'F' => 'Fisico',
@@ -39,7 +39,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         $this->addElement($Status = new Zend_Form_Element_Checkbox('status', array(
             'label' => 'Ativo',
             'Value' => true
-                )
+            )
         ));
 
         $Status
@@ -55,13 +55,13 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         ;
 
         $this->addElement($inputNome = new Zend_Form_Element_Text('nome', array('label' => 'Nome',
-            'required' => true,
             'maxLength' => 49,
             'placeholder' => 'digite o seu nome',
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputNome
-                ->addFilters(array('StripTags', 'StringTrim'))
+                ->setRequired(true)
+                ->addFilters(array('StripTags','StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -72,13 +72,13 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ))
         ;
         $this->addElement($inputCPF_CNPJ = new Zend_Form_Element_Text('CPF_CNPJ', array('label' => 'CPF_CNPJ',
-            'required' => true,
             'maxLength' => 49,
             'placeholder' => 'CPF_CNPJ',
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputCPF_CNPJ
-                ->addValidator(new Zend_Validate_Db_NoRecordExists('cliente', 'CPF_CNPJ'))
+                ->setRequired(true)
+                ->addValidator(new Zend_Validate_Db_NoRecordExists('fornecedor', 'CPF_CNPJ'))
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
                 ->addFilter('Digits')
@@ -94,7 +94,6 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
 
 
         $this->addElement($inputTelefone = new Zend_Form_Element_Text('telefone', array(
-            'required' => true,
             'label' => 'Telefone',
             'maxLength' => 49,
             'placeholder' => 'Telefone',
@@ -102,7 +101,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         )));
         $inputTelefone
                 ->addValidators(array('Digits'))
-                ->addFilters(array('StripTags', 'StringTrim'))
+                ->addFilters(array('StripTags','StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -113,15 +112,35 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
                 ))
         ;
 
+
+        /*
+          $this->addElement($inputDataNasc = new Zend_Form_Element_Text('dataNasc', array(
+          'label' => 'Data de Nascimento',
+          'placeholder' => 'Data de Nascimento',
+          'class' => 'datepicker',
+          'disableLoadDefaultDecorators' => TRUE,
+          )));
+          $inputDataNasc
+          ->addDecorator('ViewHelper')
+          ->addDecorator('Errors')
+          ->addDecorator('Label', array())
+          ->addDecorator('HtmlTag', array(
+          'tag' => 'div',
+          'class' => 'small-12 columns',
+          'id' => array('callback' => array(get_class($inputDataNasc), 'resolveElementId'))
+          ))
+          ;
+         */
+
         $this->addElement($inputEndereco = new Zend_Form_Element_Text('endereco', array(
-            'required' => true,
             'label' => 'Endereco',
             'maxLength' => 49,
             'placeholder' => 'Endereco',
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputEndereco
-                ->addFilters(array('StripTags', 'StringTrim'))
+                ->setRequired(true)
+                ->addFilters(array('StripTags','StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -133,14 +152,14 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         ;
 
         $this->addElement($inputNumero = new Zend_Form_Element_Text('numero', array(
-            'required' => true,
             'label' => 'Numero',
             'placeholder' => 'Numero',
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputNumero
+                ->setRequired(true)
                 ->addValidators(array('Digits'))
-                ->addFilters(array('StripTags', 'StringTrim'))
+                ->addFilters(array('StripTags','StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -157,7 +176,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputBairro
-                ->addFilters(array('StripTags', 'StringTrim', 'alnum'))
+                ->addFilters(array('StripTags','StringTrim','alnum'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -244,7 +263,7 @@ class Application_Form_Cliente_Cliente extends Zend_Form {
         $this->addElement($button = new Zend_Form_Element_Button('button', array(
             'label' => 'Voltar',
             'disableLoadDefaultDecorators' => TRUE,
-            'onClick' => "parent.location='/cliente'",
+            'onClick' => "parent.location='/fornecedor'",
             'class' => 'secondary right'
         )));
         $button

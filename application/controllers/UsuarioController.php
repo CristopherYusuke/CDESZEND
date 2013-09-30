@@ -17,16 +17,16 @@ class UsuarioController extends Zend_Controller_Action {
         $this->view->form = $form;
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
-            unset($data['submit']);
             if ($form->isValid($data)) {
+                $values = $form->getValues();
                 $model = new Application_Model_DbTable_Usuario();
-                $ExisteUsuario = $model->fetchRow('login = "'.$data['login'].'"');
+                $ExisteUsuario = $model->fetchRow('login = "' . $values['login'] . '"');
                 if (!isset($ExisteUsuario)) {
-                    $model->insert($data);
+                    $model->insert($values);
                     $mensagens = "Usuário criado com sucesso.";
                     $erro = false;
                 } else {
-                    $mensagens = "O login ' " . $data['login'] . " ' já existe.";
+                    $mensagens = "O login ' " . $values['login'] . " ' já existe.";
                     $erro = true;
                 }
             } else {
@@ -46,22 +46,17 @@ class UsuarioController extends Zend_Controller_Action {
         $form2 = new Application_Form_Usuario_Usuario();
         $form2->setAction('/usuario/update');
         $form2->submit->setLabel('Alterar');
+        $form2->login
+                ->setAttribs(array('readonly' => true, 'class' => 'disabled'))
+                ->setIgnore(true);
         $usuario = new Application_Model_DbTable_Usuario();
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form2->isValid($data)) {
                 $values = $form2->getValues();
-                unset($data['submit']);
-                $where = $usuario->select()->where('login = ?', $data['login']);
-                $ExisteUsuario = $usuario->fetchRow($where);
-                if (!isset($ExisteUsuario)) {
-                    $usuario->update($values, 'idUsuario = ' . $values['idUsuario']);
-                    $mensagens = "Usuário alterado com sucesso.";
-                    $erro = false;
-                } else {
-                    $mensagens = "O login ' " . $data['login'] . " ' já existe.";
-                    $erro = true;
-                }
+                $usuario->update($values, 'idUsuario = ' . $values['idUsuario']);
+                $mensagens = "Usuário alterado com sucesso.";
+                $erro = false;
             } else {
                 $form2->populate($form2->getValues());
                 $mensagens = "Não foi possível criar usuário.";

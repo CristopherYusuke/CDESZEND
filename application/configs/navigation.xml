@@ -52,6 +52,23 @@
                 </produtoUpdate>
             </pages>
         </produto>
+         <fornecedor>
+            <label>Fornecedor</label>
+            <controller>fornecedor</controller>
+            <action>index</action>
+            <pages>
+                 <fornecedorCreate>
+                    <label>Cadastrar Fornecedor</label>
+                    <controller>fornecedor</controller>
+                    <action>create</action>
+                </fornecedorCreate>
+                 <fornecedorUpdate>
+                    <label>Atualizar Fornecedor</label>
+                    <controller>fornecedor</controller>
+                    <action>update</action>
+                </fornecedorUpdate>
+            </pages>
+        </fornecedor>
     </nav>
 </config>
     

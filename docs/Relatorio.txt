@@ -26,3 +26,4 @@ problema com a busca de cliente 00:57 26/09/2013
 Busca cliente concluido , crud produtos em andamento 12:03 26/09/2013
 form busca produto conclido , validação form prudto em andamento 18:16 26/09/2013
 produto crud concluido 19:20 29/09/2013
+fornecedor crud conclido 02:10 30/09/2013
