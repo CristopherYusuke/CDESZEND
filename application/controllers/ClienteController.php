@@ -28,6 +28,7 @@ class ClienteController extends Zend_Controller_Action {
     }
 
     public function createAction() {
+        $mensagens = array();
         $erro = true;
         $form = new Application_Form_Cliente_Cliente();
         $this->view->form = $form;
@@ -73,17 +74,32 @@ class ClienteController extends Zend_Controller_Action {
         $model = new Application_Model_DbTable_Cliente();
         $modelCid = new Application_Model_Cidade();
         $form->CPF_CNPJ
-                ->removeValidator('Db_NoRecordExists')
-                ->setAttribs(array( 'readonly' => true,'class' => 'disabled' ))
-                ->setIgnore(true);
+                ->removeValidator('Db_NoRecordExists');
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
                 $values = $form->getValues();
-                $model->update($values, 'idCliente = ' . $values['idCliente']);
-                $mensagens = "Cliente Atualizado com sucesso.";
-                $erro = false;
-                $form->getElement('cidade')->addMultiOption('', $data['cidade']);
+                $validaCPF_CNPJ = ($values['tipo'] == "F") ? new Zend_Validate_Cpf() : new Zend_Validate_Cnpj();
+                if ($validaCPF_CNPJ->isValid($values['CPF_CNPJ'])) {
+                    $existCC = $model
+                            ->fetchRow("idCliente != " . $values['idCliente']
+                            . " and CPF_CNPJ = '" . $values['CPF_CNPJ'] . "'");
+                    if (count($existCC) <= 0) {
+                        $model->update($values, 'idCliente = ' . $values['idCliente']);
+                        $mensagens = "Cliente Atualizado com sucesso.";
+                        $erro = false;
+                        $form->getElement('cidade')->addMultiOption('', $data['cidade']);
+                    } else {
+                        $mensagens = "deu merda";
+                        $erro = true;
+                        $form->getElement('cidade')->addMultiOption('', $data['cidade']);
+                    }
+                }else{
+                    $mensagens = $validaCPF_CNPJ->getMessages();
+                    if (isset($values['cidade'])) {
+                        $form->getElement('cidade')->addMultiOption('', $values['cidade']);
+                    }
+                }
             } else {
                 $mensagens = "Não foi possível criar cliente.";
                 $erro = true;
@@ -105,6 +121,5 @@ class ClienteController extends Zend_Controller_Action {
         }
         $this->view->form = $form;
     }
-
 }
 

@@ -75,6 +75,7 @@ class FornecedorController extends Zend_Controller_Action {
         $form->CPF_CNPJ
                 ->removeValidator('Db_NoRecordExists')
                 ->setAttribs(array('readonly' => true, 'class' => 'disabled'));
+        $form->tipo->setAttribs(array( 'disabled' => 'disabled'));
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
