@@ -1,7 +1,7 @@
 <div class="row ">
     <div class="small-12 small-centered large-12 columns">
         <h2 class="text-center" > Listar Venda </h2>        
-        <form method="<?php echo $this->form->getMethod();?>" action="<?php echo $this->form->getAction(); ?>" class="custom">
+        <form method="<?php echo $this->form->getMethod(); ?>" action="<?php echo $this->form->getAction(); ?>" class="custom">
             <div class="row">
                 <?php
                 echo $this->form->nome;
@@ -16,45 +16,33 @@
         </form>
     </div>
 </div>
+<div class="row">
 
-    <div class="small-10 small-centered columns">
+
+    <div class="small-12 small-centered columns">
         <div class="scroll">
             <table width="100%">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nome</th>
-                        <th>Tipo</th>
-                        <th>CPF/CNPJ</th>
-                        <th>Telefone</th>
-                        <th>Endereco</th>
-                        <th>Numero</th>
-                        <th>Bairro</th>
-                        <th>Cidade</th>
-                        <th>UF</th>
-                        <th>status</th>
+                        <th>Cliente</th>
+                        <th>Data Venda</th>
+                        <th>total</th>
+                        <th>formasPagamento</th>
+                        <th>Situacao</th>
                         <th>Editar</th>
                     </tr>
                 </thead>
-                <?php foreach ($this->clientes as $key => $value) : ?>
+                <?php foreach ($this->venda as $key => $value) : ?>
                     <tr>
-                        <td><?php echo $this->clientes[$key]['idCliente']; ?> </td>
-                        <td><?php echo $this->clientes[$key]['nome']; ?></td>
-                        <td><?php echo $this->clientes[$key]['tipo']; ?></td>
-                        <td><?php echo $this->clientes[$key]['CPF_CNPJ']; ?></td>
-                        <td><?php echo $this->clientes[$key]['telefone']; ?></td>
-                        <td><?php echo $this->clientes[$key]['endereco']; ?></td>
-                        <td><?php echo $this->clientes[$key]['numero']; ?></td>
-                        <td><?php echo $this->clientes[$key]['bairro']; ?></td>
-                        <td><?php echo $this->clientes[$key]['cidade']; ?></td>
-                        <td><?php echo $this->clientes[$key]['UF']; ?></td>  
-                        <?php if ($this->clientes[$key]['status']) : ?>
-                            <td><span class="success label">Ativo</span> </td>   
-                        <?php else: ?>
-                            <td><span class="alert label">Inativo</span> </td> 
-                        <?php endif; ?> 
+                        <td><?php echo $this->clientes[$key]['idVenda']; ?> </td>
+                        <td><?php echo $this->clientes[$key]['idCliente']; ?></td>
+                        <td><?php echo $this->clientes[$key]['dataVenda']; ?></td>
+                        <td><?php echo $this->clientes[$key]['total']; ?></td>
+                        <td><?php echo $this->clientes[$key]['formasPagamento']; ?></td>
+                        <td><?php echo $this->clientes[$key]['situacao']; ?></td>
                         <td>
-                            <a href="/cliente/update/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
+                            <a href="/venda/update/idVenda/<?php echo $this->clientes[$key]['idVenda']; ?>"
                                class="small button secondary">EDITAR</a>
                         </td>
                     </tr>
@@ -62,10 +50,12 @@
             </table>
         </div>
     </div>
-
-    <div class="small-10 small-centered columns">
+</div>
+<div class="row">
+    <div class="small-12 small-centered columns">
         <a id="btn_Cadastrar_usuario" href="/venda/create" class="button">Novo</a>
     </div>
+</div>
 
 
 

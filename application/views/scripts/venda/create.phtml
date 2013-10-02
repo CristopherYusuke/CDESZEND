@@ -1,6 +1,6 @@
 <div class="row">
     <div class="small-12 columns text-center">
-        <h2 class="text-center"> Cadastro Cliente </h2>
+        <h2 class="text-center"> Efetuar Venda </h2>
     </div>
 </div>
 <div  class="row ">
@@ -30,46 +30,9 @@
             <div class="row">
 
                 <?php
-                echo $this->form->idCliente;
+                echo $this->form;
                 ?>
-                <div class="small-6 columns">
-                    <?php
-                    echo $this->form->tipo;
-                    ?>
-                </div>
-                <div class="small-6 columns">
-                    <?php
-                    echo $this->form->status;
-                    ?>
-                </div>
-            </div>
-
-            <div class="row">
-                <?php
-                echo $this->form->nome;
-                echo $this->form->CPF_CNPJ;
-                ?>
-            </div>
-
-            <div class="row">
-                <?php
-                echo $this->form->telefone;
-                echo $this->form->endereco;
-                echo $this->form->numero;
-                ?>
-            </div>
-            <div class="row">
-                <?php
-                echo $this->form->bairro;
-                echo $this->form->UF;
-                echo $this->form->cidade;
-                ?>
-            </div>
-            <div class="row">
-                <?php
-                echo $this->form->submit;
-                echo $this->form->button;
-                ?>
+               
             </div>
         </form>
     </div>
