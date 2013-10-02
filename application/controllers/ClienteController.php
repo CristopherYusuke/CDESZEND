@@ -66,6 +66,7 @@ class ClienteController extends Zend_Controller_Action {
     }
 
     public function updateAction() {
+        $mensagens = array();
         $erro = true;
         $form = new Application_Form_Cliente_Cliente();
         $form->setAction('/cliente/update');
@@ -86,11 +87,11 @@ class ClienteController extends Zend_Controller_Action {
                             . " and CPF_CNPJ = '" . $values['CPF_CNPJ'] . "'");
                     if (count($existCC) <= 0) {
                         $model->update($values, 'idCliente = ' . $values['idCliente']);
-                        $mensagens = "Cliente Atualizado com sucesso.";
+                        $mensagens[] = "Cliente Atualizado com sucesso.";
                         $erro = false;
                         $form->getElement('cidade')->addMultiOption('', $data['cidade']);
                     } else {
-                        $mensagens = "deu merda";
+                        $mensagens[] = "deu merda";
                         $erro = true;
                         $form->getElement('cidade')->addMultiOption('', $data['cidade']);
                     }
@@ -101,7 +102,7 @@ class ClienteController extends Zend_Controller_Action {
                     }
                 }
             } else {
-                $mensagens = "Não foi possível criar cliente.";
+                $mensagens[] = "Não foi possível criar cliente.";
                 $erro = true;
                 $form->populate($data);
                 $form->getElement('cidade')->addMultiOption('', $data['cidade']);

@@ -46,17 +46,22 @@ class UsuarioController extends Zend_Controller_Action {
         $form2 = new Application_Form_Usuario_Usuario();
         $form2->setAction('/usuario/update');
         $form2->submit->setLabel('Alterar');
-        $form2->login
-                ->setAttribs(array('readonly' => true, 'class' => 'disabled'))
-                ->setIgnore(true);
         $usuario = new Application_Model_DbTable_Usuario();
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form2->isValid($data)) {
                 $values = $form2->getValues();
-                $usuario->update($values, 'idUsuario = ' . $values['idUsuario']);
-                $mensagens = "Usuário alterado com sucesso.";
-                $erro = false;
+                $existCC = $usuario
+                        ->fetchRow("idUsuario != " . $values['idUsuario']
+                        . " and login = '" . $values['login'] . "'");
+                if (count($existCC) <= 0) {
+                    $usuario->update($values, 'idUsuario = ' . $values['idUsuario']);
+                    $mensagens = "Usuário alterado com sucesso.";
+                    $erro = false;
+                }else{
+                     $mensagens = "O Login : ".$values['login'] ." já existe";
+                    $erro = true;
+                }
             } else {
                 $form2->populate($form2->getValues());
                 $mensagens = "Não foi possível criar usuário.";

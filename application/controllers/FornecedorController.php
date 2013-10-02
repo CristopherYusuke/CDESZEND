@@ -65,43 +65,59 @@ class FornecedorController extends Zend_Controller_Action {
     }
 
     public function updateAction() {
+        $mensagens = array();
         $erro = true;
         $form = new Application_Form_Fornecedor_Fornecedor();
         $form->setAction('/fornecedor/update');
         $form->submit->setLabel('Alterar');
         $this->view->form = $form;
         $model = new Application_Model_DbTable_Fornecedor();
-        $modelCid = new Application_Model_Cidade();
+        $modelCid = new Application_Model_DbTable_TbCidades();
         $form->CPF_CNPJ
-                ->removeValidator('Db_NoRecordExists')
-                ->setAttribs(array('readonly' => true, 'class' => 'disabled'));
-        $form->tipo->setAttribs(array( 'disabled' => 'disabled'));
+                ->removeValidator('Db_NoRecordExists');
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
                 $values = $form->getValues();
-                $model->update($values, 'idFornecedor = ' . $values['idFornecedor']);
-                $mensagens = "Fornecedor Atualizado com sucesso.";
-                $erro = false;
-                $form->getElement('cidade')->addMultiOption('', $values['cidade']);
+                $validaCPF_CNPJ = ($values['tipo'] == "F") ? new Zend_Validate_Cpf() : new Zend_Validate_Cnpj();
+                if ($validaCPF_CNPJ->isValid($values['CPF_CNPJ'])) {
+                    $existCC = $model
+                            ->fetchRow("idFornecedor != " . $values['idFornecedor']
+                            . " and CPF_CNPJ = '" . $values['CPF_CNPJ'] . "'");
+                    if (count($existCC) <= 0) {
+                        $model->update($values, 'idFornecedor = ' . $values['idFornecedor']);
+                        $mensagens[] = "Fornecedor Atualizado com sucesso.";
+                        $erro = false;
+                        $form->getElement('cidade')->addMultiOption('', $data['cidade']);
+                    } else {
+                        $mensagens[] = "Não foi possível atualizar fornecedor.";
+                        $erro = true;
+                        $form->getElement('cidade')->addMultiOption('', $data['cidade']);
+                    }
+                } else {
+                    $mensagens = $validaCPF_CNPJ->getMessages();
+                    if (isset($values['cidade'])) {
+                        $form->getElement('cidade')->addMultiOption('', $values['cidade']);
+                    }
+                }
             } else {
-                $mensagens = "Não foi possível criar cliente.";
+                $mensagens[] = "Não foi possível atualizar fornecedor.";
                 $erro = true;
-                $form->populate($values);
-                $form->getElement('cidade')->addMultiOption('', $values['cidade']);
+                $form->populate($data);
+                $form->getElement('cidade')->addMultiOption('', $data['cidade']);
                 $this->view->form = $form;
             }
             $this->view->erro = $erro;
             $this->view->mensagens = $mensagens;
         } else {
             $id = (int) $this->_getParam('idFornecedor');
-            $cliente = $model->fetchRow("idFornecedor =" . $id)->toArray();
-            $cidades = $modelCid->fetchAll("uf = '" . $cliente['UF'] . "'")->toArray();
-            $form->populate($cliente);
+            $fornecedor = $model->fetchRow("idFornecedor =" . $id)->toArray();
+            $cidades = $modelCid->fetchAll("uf = '" . $fornecedor['UF'] . "'")->toArray();
+            $form->populate($fornecedor);
             foreach ($cidades as $id => $data) {
                 $form->cidade->addMultiOption($data['nome'], $data['nome']);
             }
-            $form->getElement('cidade')->setValue($cliente['cidade']);
+            $form->getElement('cidade')->setValue($fornecedor['cidade']);
         }
         $this->view->form = $form;
     }
