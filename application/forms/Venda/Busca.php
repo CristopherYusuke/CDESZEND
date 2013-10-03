@@ -10,12 +10,12 @@ class Application_Form_Venda_Busca extends Zend_Form {
 
         
         
-        $this->setAction("/cliente");
+        $this->setAction("/venda");
         $this->setMethod("POST");
         
         $this->addElement($inputNome = new Zend_Form_Element_Text('nome', array('label' => 'Nome',
             'maxLength' => 49,
-            'placeholder' => 'digite o  nome para busca',
+            'placeholder' => 'digite o nome para busca',
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputNome
@@ -33,8 +33,7 @@ class Application_Form_Venda_Busca extends Zend_Form {
       
 
         $this->addElement($selectStatus = new Zend_Form_Element_Select('status', array(
-            'label' => 'Status do cliente   ',
-            'maxLength' => 49,
+            'label' => 'Status da venda   ',           
             'disableLoadDefaultDecorators' => TRUE,
             
         )));

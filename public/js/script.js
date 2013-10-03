@@ -18,6 +18,9 @@ $(document).ready(function() {// on Load
      }
      });*/
 
+     $('a.disabled').click(function (event){
+         event.preventDefault();
+     });
     $(".datepicker").datepicker({
         dateFormat: 'dd/mm/yy',
         dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],

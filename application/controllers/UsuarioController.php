@@ -25,8 +25,8 @@ class UsuarioController extends Zend_Controller_Action {
                 $model = new Application_Model_DbTable_Usuario();
                 $ExisteUsuario = $model->fetchRow('login = "' . $values['login'] . '"');
                 if (!isset($ExisteUsuario)) {
-                    $model->insert($values);
-                    $mensagens = "Usuário criado com sucesso.";
+                    $id = $model->insert($values);
+                    $mensagens = "Usuário $id criado com sucesso.";
                     $erro = false;
                 } else {
                     $mensagens = "O login ' " . $values['login'] . " ' já existe.";

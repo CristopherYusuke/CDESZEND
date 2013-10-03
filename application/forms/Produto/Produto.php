@@ -32,9 +32,9 @@ class Application_Form_Produto_Produto extends Zend_Form {
             'placeholder' => 'digite a Descrição',
             'disableLoadDefaultDecorators' => TRUE,
         )));
-        $Alpha = new Zend_Validate_Alpha(array('allowWhiteSpace' => true));
+        $Alnum = new Zend_Validate_Alnum(array('allowWhiteSpace' => true));
         $inputDesc
-                ->addValidators(array($Alpha))
+                ->addValidators(array($Alnum))
                 ->addFilters(array('StripTags', 'StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')

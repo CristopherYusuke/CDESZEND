@@ -40,13 +40,13 @@ class ProdutosController extends Zend_Controller_Action {
                 $values = $form->getValues();
                 $model = new Application_Model_DbTable_Produto();
                 $values['precoCusto'] = str_replace(',', '.', $values['precoCusto']);
-                $model->insert($values);
-                $mensagens = "Produto criado com sucesso.";
+                $id = $model->insert($values);
+                $mensagens = "Produto $id criado com sucesso.";
                 $erro = false;
             } else {
                 $mensagens = "Não foi possível criar produto.";
                 $erro = true;
-                $form->populate($values);
+                $form->populate($data);
                 $this->view->form = $form;
             }
             $this->view->erro = $erro;

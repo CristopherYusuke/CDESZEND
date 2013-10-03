@@ -8,41 +8,64 @@ class Application_Form_Venda_Venda extends Zend_Form {
 
     public function init() {
 
-        $this->setAction("/venda/create");
+//        $this->setAction("");
         $this->setMethod("POST");
 
 
         $this->addElement($id = new Zend_Form_Element_Hidden('idVenda'));
         $id->removeDecorator('label');
-        
-         $this->addElement($selectCli = new Zend_Form_Element_Select('idCliente', array(
-            'label' => 'Cliente',
+
+
+/*
+ * 
+        $this->addElement($selectFP = new Zend_Form_Element_Select('formasPagamento', array(
+            'label' => 'Formas de Pagamento',
             'maxLength' => 50,
             'disableLoadDefaultDecorators' => TRUE,
             'class' => 'styled-select'
         )));
-        $selectCli
+
+        $selectFP
+                ->addMultiOption('0','A vista')
+                ->addMultiOption('30','pagamento para 30 dias')
+                ->addMultiOption('60','pagamento para 30-60 dias ')
+                ->addMultiOption('90','pagamento para 30-60-90 dias')
+                ->addMultiOption('120','pagamento para 30-60-90-120 dias')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->setRegisterInArrayValidator(false)
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-6     columns',
-                    'id' => array('callback' => array(get_class($selectCli), 'resolveElementId'))
+                    'class' => 'small-12 large-4     columns',
+                    'id' => array('callback' => array(get_class($selectFP), 'resolveElementId'))
+                ))
+
+        ;
+
+ */
+
+        $this->addElement($cliente = new Zend_Form_Element_Text('cliente', array('label' => 'cliente',
+            'readonly' => true,
+            'disableLoadDefaultDecorators' => TRUE,
+            'class' => 'disabled'
+        )));
+        $cliente
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('Label', array())
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-12 large-4 columns',
+                    'id' => array('callback' => array(get_class($cliente), 'resolveElementId'))
                 ))
         ;
-        $Model = new Application_Model_DbTable_Cliente();
-        $Clientes = $Model->fetchAll("status = 1")->toArray();
-        foreach ($Clientes as $c) {
-            $selectCli->addMultiOption($c['idCliente'], $c['nome']);
-        }
 
-        
+
         $this->addElement($dataVenda = new Zend_Form_Element_Text('dataVenda', array('label' => 'Data da venda',
-            'required' => true,
-            'placeholder'=> date('d/m/Y'),
+            'readonly' => true,
             'disableLoadDefaultDecorators' => TRUE,
+            'class' => 'disabled'
         )));
         $dataVenda
                 ->addFilters(array('StripTags', 'StringTrim'))
@@ -52,47 +75,45 @@ class Application_Form_Venda_Venda extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
+                    'class' => 'small-12 large-4 columns',
                     'id' => array('callback' => array(get_class($dataVenda), 'resolveElementId'))
                 ))
         ;
-        
-       
 
-        $this->addElement($situacao = new Zend_Form_Element_Text('situacao', array('label' => 'Data da venda',
-            'required' => true,
-            'placeholder'=> date('d/m/Y'),
+        $this->addElement($situacao = new Zend_Form_Element_Text('situacao', array('label' => 'situacao',
+            'value' => 'Aberta',
+            'readonly' => true,
             'disableLoadDefaultDecorators' => TRUE,
+            'class' => 'disabled'
         )));
-        $dataVenda
-                ->addFilters(array('StripTags', 'StringTrim'))
-                ->setValidators(array(new Zend_Validate_Date(array('format' => 'dd/MM/yyyy'))))
+        $situacao
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
-                    'id' => array('callback' => array(get_class($dataVenda), 'resolveElementId'))
+                    'class' => 'small-12 large-4 columns',
+                    'id' => array('callback' => array(get_class($situacao), 'resolveElementId'))
                 ))
         ;
 
 
-        $this->addElement($submit = new Zend_Form_Element_Submit('submit', array(
-            'label' => 'Salvar',
+        $this->addElement($Encerrar = new Zend_Form_Element_Button('Encerrar', array(
+            'label' => 'Encerrar Venda',
             'disableLoadDefaultDecorators' => TRUE,
             'class' => 'button'
         )));
-        $submit
+        $Encerrar
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
                     'class' => 'small-12 large-4 columns',
-                    'id' => array('callback' => array(get_class($submit), 'resolveElementId'))
+                    'id' => array('callback' => array(get_class($Encerrar), 'resolveElementId'))
                 ))
 
         ;
+        
 
         $this->addElement($button = new Zend_Form_Element_Button('button', array(
             'label' => 'Voltar',

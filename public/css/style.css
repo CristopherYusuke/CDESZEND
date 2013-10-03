@@ -22,8 +22,8 @@ table tr th, table tr td {
 
 }
 .scroll{
-    height: 200px;
-    overflow-y:scroll;       
+    height: 500px;
+    overflow-y:auto;       
 }
 select{
     background-color:rgba(255, 255, 255, 0.5);
@@ -80,7 +80,11 @@ input[type="tel"].disabled,
 input[type="time"].disabled,
 input[type="url"].disabled,
 textarea.disabled {
-    background-color: #dddddd; }
+    background-color: transparent;
+    color: black;
+    font-weight: bold;
+    border: 1px solid #2ba6cb;
+    box-shadow: none;    }
 
 /*.styled-select select {
     background: transparent;

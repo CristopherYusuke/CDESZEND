@@ -42,8 +42,8 @@ class ClienteController extends Zend_Controller_Action {
                 $validaCPF_CNPJ = ($values['tipo'] == "F") ? new Zend_Validate_Cpf() : new Zend_Validate_Cnpj();
                 if ($validaCPF_CNPJ->isValid($values['CPF_CNPJ'])) {
                     $model = new Application_Model_DbTable_Cliente();
-                    $model->insert($values);
-                    $mensagens[] = "Cliente criado com sucesso.";
+                    $id = $model->insert($values);
+                    $mensagens[] = "Cliente $id criado com sucesso.";
                     $erro = false;
                     $form->getElement('cidade')->addMultiOption('', $values['cidade']);
                 } else {
