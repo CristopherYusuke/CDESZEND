@@ -117,3 +117,6 @@ div#nav {
 div#nav a {
     padding: 0;
 }
+button, .button {
+    margin: 0;
+}

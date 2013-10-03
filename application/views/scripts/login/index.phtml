@@ -1,0 +1,30 @@
+<style>
+    .top-bar-section{
+        display: none;
+    }
+</style>
+
+<div class="row ">
+    <div class="small-12 small-centered large-5 columns">
+        <h1 class="text-center" >  Bem vindo! </h1>
+        <h6 class="text-center subheader" >Sign in </h6>
+
+        <form method="<?php echo $this->form->getMethod(); ?>" action="<?php echo $this->form->getAction(); ?>" class="panel callout">
+            <div class="row ">
+                <?php
+                echo $this->form->login;
+                ?>
+            </div>
+            <div class="row ">
+                <?php
+                echo $this->form->senha;
+                ?>
+            </div>
+            <div class="row ">
+                <?php
+                echo $this->form->submit;
+                ?>
+            </div>
+        </form>
+    </div>
+</div>

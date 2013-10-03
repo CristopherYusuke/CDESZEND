@@ -34,7 +34,7 @@ class Application_Form_Usuario_Usuario extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
+                    'class' => 'small-12  large-6 columns',
                     'id' => array('callback' => array(get_class($inputNome), 'resolveElementId'))
                 ))
         ;

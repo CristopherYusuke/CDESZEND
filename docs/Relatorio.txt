@@ -23,9 +23,11 @@ cadastro de cliente completo , alterções no layout 17:50 24/09/2013
 Mudanças no layout 01:29 25/09/2013
 remoção de bugs no cadastro de cliente ,e implementando a busca  18:22 25/09/2013
 problema com a busca de cliente 00:57 26/09/2013
-Busca cliente concluido , crud produtos em andamento 12:03 26/09/2013
+Busca cliente concluido , crud produtos em andamento 12:03 26/09/201
 Validação de campo unico para alteração comcluida 01:56 02/10/2013
 Alteração na validação de usuario,"crud" de venda comessando 03:34 01/10/2013
 form busca produto conclido , validação form prudto em andamento 18:16 26/09/2013
 produto crud concluido 19:20 29/09/2013
 fornecedor crud conclido 02:10 30/09/2013
+Alteração nos update do cadastrar , usuario, fornecedor , cliente, concluido 13:16 02/10/2013
+sistema de login e senha validando e funcionando 03:09 03/10/2013

@@ -41,7 +41,27 @@ class Application_Form_Venda_Venda extends Zend_Form {
         
         $this->addElement($dataVenda = new Zend_Form_Element_Text('dataVenda', array('label' => 'Data da venda',
             'required' => true,
-            'value' => date('d/m/Y'),
+            'placeholder'=> date('d/m/Y'),
+            'disableLoadDefaultDecorators' => TRUE,
+        )));
+        $dataVenda
+                ->addFilters(array('StripTags', 'StringTrim'))
+                ->setValidators(array(new Zend_Validate_Date(array('format' => 'dd/MM/yyyy'))))
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('Label', array())
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-12 large-6 columns',
+                    'id' => array('callback' => array(get_class($dataVenda), 'resolveElementId'))
+                ))
+        ;
+        
+       
+
+        $this->addElement($situacao = new Zend_Form_Element_Text('situacao', array('label' => 'Data da venda',
+            'required' => true,
+            'placeholder'=> date('d/m/Y'),
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $dataVenda
@@ -87,21 +107,6 @@ class Application_Form_Venda_Venda extends Zend_Form {
                     'tag' => 'div',
                     'class' => 'small-12 large-4 columns',
                     'id' => array('callback' => array(get_class($button), 'resolveElementId'))
-                ))
-        ;
-         $this->addElement($buttonAddItem = new Zend_Form_Element_Button('buttonAdd', array(
-            'label' => 'Adicionar Itens de venda',
-            'disableLoadDefaultDecorators' => TRUE,
-            'onClick' => "parent.location='/venda'",
-            'class' => ' right'
-        )));
-        $buttonAddItem
-                ->addDecorator('ViewHelper')
-                ->addDecorator('Errors')
-                ->addDecorator('HtmlTag', array(
-                    'tag' => 'div',
-                    'class' => 'small-12 large-4 columns',
-                    'id' => array('callback' => array(get_class($buttonAddItem), 'resolveElementId'))
                 ))
         ;
     }

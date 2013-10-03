@@ -3,7 +3,10 @@
 class CreateModelsController extends Zend_Controller_Action {
 
     public function init() {
-        /* Initialize action controller here */
+        parent::init();
+        if (!Zend_auth::getInstance()->hasIdentity()) {
+            $this->_redirect('/login');
+        }
         set_time_limit(0);
     }
 

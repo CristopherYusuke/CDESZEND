@@ -69,6 +69,23 @@
                 </fornecedorUpdate>
             </pages>
         </fornecedor>
+        <venda>
+            <label>Venda</label>
+            <controller>venda</controller>
+            <action>index</action>
+            <pages>
+                 <fornecedorCreate>
+                    <label>Efetuar Venda</label>
+                    <controller>venda</controller>
+                    <action>create</action>
+                </fornecedorCreate>
+                 <fornecedorUpdate>
+                    <label>Alterar Venda</label>
+                    <controller>venda</controller>
+                    <action>update</action>
+                </fornecedorUpdate>
+            </pages>
+        </venda>
     </nav>
 </config>
     
