@@ -2,9 +2,9 @@
 
 class ProdutosController extends Zend_Controller_Action {
 
-   public function init() {
+    public function init() {
         parent::init();
-        if(!Zend_auth::getInstance()->hasIdentity()){
+        if (!Zend_auth::getInstance()->hasIdentity()) {
             $this->_redirect('/login');
         }
     }
@@ -38,11 +38,16 @@ class ProdutosController extends Zend_Controller_Action {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
                 $values = $form->getValues();
-                $model = new Application_Model_DbTable_Produto();
-                $values['precoCusto'] = str_replace(',', '.', $values['precoCusto']);
-                $id = $model->insert($values);
-                $mensagens = "Produto $id criado com sucesso.";
-                $erro = false;
+                if ($values['precoCusto'] > 0) {
+                    $model = new Application_Model_DbTable_Produto();
+                    $values['precoCusto'] = str_replace(',', '.', $values['precoCusto']);
+                    $id = $model->insert($values);
+                    $mensagens = "Produto $id criado com sucesso.";
+                    $erro = false;
+                }else{
+                    $mensagens = "Preço não pode ser negativo ";
+                    $erro = true;
+                }
             } else {
                 $mensagens = "Não foi possível criar produto.";
                 $erro = true;

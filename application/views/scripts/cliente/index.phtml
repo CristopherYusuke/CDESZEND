@@ -1,3 +1,6 @@
+
+
+
 <div class="row ">
     <div class="small-12 small-centered large-12 columns">
         <h2 class="text-center" > Listar Cliente </h2>
@@ -62,7 +65,7 @@
                         </td>
                         <td>
                                 <?php $classBotãoVenda = ($this->clientes[$key]['status'])? 'small button' :  'small button disabled'; ?> 
-                            <a href="/venda/create/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>" class="<?php echo $classBotãoVenda ?>">EFETUAR VENDA</a>
+                            <a href="/venda/addvenda/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>" class="<?php echo $classBotãoVenda ?>">EFETUAR VENDA</a>
                         </td>
                             
                     </tr>

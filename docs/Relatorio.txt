@@ -31,3 +31,4 @@ produto crud concluido 19:20 29/09/2013
 fornecedor crud conclido 02:10 30/09/2013
 Alteração nos update do cadastrar , usuario, fornecedor , cliente, concluido 13:16 02/10/2013
 sistema de login e senha validando e funcionando 03:09 03/10/2013
+fazendo a tela de movimentação de venda 18:38 04/10/2013

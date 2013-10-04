@@ -22,7 +22,7 @@ table tr th, table tr td {
 
 }
 .scroll{
-    height: 500px;
+    height: 350px;
     overflow-y:auto;       
 }
 select{

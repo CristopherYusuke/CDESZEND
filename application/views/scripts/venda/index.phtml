@@ -1,3 +1,14 @@
+<?php
+
+function databr($datasql) {
+    if (!empty($datasql)) {
+        $p_dt = explode('-', $datasql);
+        $data_br = $p_dt[2] . '/' . $p_dt[1] . '/' . $p_dt[0];
+        return print $data_br;
+    }
+}
+?>
+
 <div class="row ">
     <div class="small-12 small-centered large-12 columns">
         <h2 class="text-center" > Listar Venda </h2>        
@@ -33,15 +44,37 @@
                 </thead>
                 <?php foreach ($this->venda as $key => $value) : ?>
                     <tr>
-                        <td><?php echo $this->clientes[$key]['idVenda']; ?> </td>
-                        <td><?php echo $this->clientes[$key]['idCliente']; ?></td>
-                        <td><?php echo $this->clientes[$key]['dataVenda']; ?></td>
-                        <td><?php echo $this->clientes[$key]['total']; ?></td>
-                        <td><?php echo $this->clientes[$key]['formasPagamento']; ?></td>
-                        <td><?php echo $this->clientes[$key]['situacao']; ?></td>
+                        <td><?php echo $this->venda[$key]['idVenda']; ?> </td>
+                        <td><?php echo $this->venda[$key]['idCliente']; ?></td>
+                        <td><?php echo databr($this->venda[$key]['dataVenda']); ?></td>
+                        <td><?php echo $this->venda[$key]['total']; ?></td>
+                        <td><?php echo $this->venda[$key]['formasPagamento']; ?></td>
+                        <td><?php
+                            switch ($this->venda[$key]['situacao']) {
+                                case 0:
+                                    echo 'Aberta';
+                                    break;
+                                case 1:
+                                    echo 'Cancelada';
+                                    break;
+                                case 2:
+                                    echo 'Faturada';
+                                    break;
+                                case 3:
+                                    echo 'Finalizada';
+                                    break;
+                                case 4:
+                                    echo 'Extornada';
+                                    break;
+                                default:
+                                    echo false;
+                                    break;
+                            };
+                            ?></td>
                         <td>
-                            <a href="/venda/update/idVenda/<?php echo $this->clientes[$key]['idVenda']; ?>"
-                               class="small button secondary">EDITAR</a>
+                            <?php $classBotãoVenda = ($this->venda[$key]['situacao'] == 0 ) ? 'small button secondary' : 'small button secondary disabled'; ?> 
+                            <a href="/venda/create/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
+                               class="<?php echo $classBotãoVenda ?>">EDITAR</a>
                         </td>
                     </tr>
                 <?php endforeach; ?> <!-- End foreach -->
