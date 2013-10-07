@@ -8,27 +8,33 @@ class Application_Form_Venda_Itens extends Zend_Form {
 
     public function init() {
 
-//        $this->setAction("");
+        $float = new Zend_Validate_Float();
+        $float->setMessage(
+                "'%value%' nao é um número decimal válido.", Zend_Validate_Float::NOT_FLOAT);
+
+
+        $this->setAction("");
         $this->setMethod("POST");
 
         $this->addElement($id = new Zend_Form_Element_Hidden('idItemVenda'));
         $this->addElement($idVenda = new Zend_Form_Element_Hidden('idVenda'));
-
-        $idVenda->removeDecorator('label');
+        
         $id->removeDecorator('label');
-
+        $idVenda->removeDecorator('label');
+        
         $this->addElement($selectPro = new Zend_Form_Element_Select('idProduto', array(
+            'required' => true,
             'label' => 'Produto',
             'disableLoadDefaultDecorators' => TRUE)));
         $selectPro
-                ->addMultiOption('','selecione')
+                ->addMultiOption('', 'selecione')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->setRegisterInArrayValidator(false)
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-3 columns',
+                    'class' => 'small-12 large-4 columns',
                     'id' => array('callback' => array(get_class($selectPro), 'resolveElementId'))
                 ))
         ;
@@ -68,10 +74,8 @@ class Application_Form_Venda_Itens extends Zend_Form {
 
          */
 
-
-
-
-        $this->addElement($qtde = new Zend_Form_Element_Text('qtde', array('label' => 'qtde',
+        $this->addElement($qtde = new Zend_Form_Element_Text('qtde', array('label' => 'Quantidade',
+            'required' => true,
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $qtde
@@ -87,29 +91,34 @@ class Application_Form_Venda_Itens extends Zend_Form {
                 ))
         ;
 
-        $this->addElement($valor = new Zend_Form_Element_Text('valor', array('label' => 'valor',
+        $this->addElement($valor = new Zend_Form_Element_Text('vendaPreco', array('label' => 'Preço',
+            'required' => true,
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $valor
+                ->addValidators(array($float))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-2 columns',
+                    'class' => 'small-12 large-3 columns',
                     'id' => array('callback' => array(get_class($valor), 'resolveElementId'))
                 ))
         ;
-        $this->addElement($total = new Zend_Form_Element_Text('total', array('label' => 'total',
+        $this->addElement($total = new Zend_Form_Element_Text('total', array('label' => 'Total',
+            'required' => true,
             'disableLoadDefaultDecorators' => TRUE,
         )));
+
         $total
+                ->addValidators(array($float))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-2 columns',
+                    'class' => 'small-12 large-3 columns',
                     'id' => array('callback' => array(get_class($total), 'resolveElementId'))
                 ))
         ;
@@ -125,7 +134,7 @@ class Application_Form_Venda_Itens extends Zend_Form {
                 ->addDecorator('Errors')
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-3 columns',
+                    'class' => 'small-12 large-12 columns',
                     'id' => array('callback' => array(get_class($button), 'resolveElementId'))
                 ))
         ;

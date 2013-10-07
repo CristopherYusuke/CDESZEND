@@ -47,7 +47,7 @@ class Application_Form_Usuario_Login extends Zend_Form {
         $this->addElement($submit = new Zend_Form_Element_Submit('submit', array(
             'label' => 'Entrar',
             'disableLoadDefaultDecorators' => TRUE,
-            'class' => 'button small success expand'
+            'class' => 'button small  expand'
         )));
         $submit
                 ->addDecorator('ViewHelper')

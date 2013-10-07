@@ -22,7 +22,7 @@
     </div>
 </div>
 
-    <div class="small-10 small-centered columns">
+    <div class="small-12 small-centered columns">
         <div class="scroll">
             <table width="100%">
                 <thead>
@@ -61,10 +61,10 @@
                         <?php endif; ?> 
                         <td>
                             <a href="/cliente/update/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>"
-                               class="small button secondary">EDITAR</a>
+                               class="tiny button secondary">EDITAR</a>
                         </td>
                         <td>
-                                <?php $classBotãoVenda = ($this->clientes[$key]['status'])? 'small button' :  'small button disabled'; ?> 
+                                <?php $classBotãoVenda = ($this->clientes[$key]['status'])? 'tiny button' :  'tiny button disabled'; ?> 
                             <a href="/venda/addvenda/idCliente/<?php echo $this->clientes[$key]['idCliente']; ?>" class="<?php echo $classBotãoVenda ?>">EFETUAR VENDA</a>
                         </td>
                             

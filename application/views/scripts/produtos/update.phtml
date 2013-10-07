@@ -28,12 +28,15 @@
             </div>
 
             <div class="row">
-                <?php echo $this->form->descricao; ?>
+                <?php
+                echo $this->form->descricao;
+                echo $this->form->estoque;
+                ?>
             </div>
             <div class="row">
                 <?php
                 echo $this->form->precoCusto;
-                echo $this->form->estoque;
+                echo $this->form->precoVenda;
                 ?>
             </div>
 

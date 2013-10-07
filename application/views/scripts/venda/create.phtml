@@ -26,58 +26,88 @@
                 </div>
             <?php endif ?>
         <?php endif ?>
-
-        <div class="row">
-
-            <?php
-            echo $this->form;
-            ?>
-
-        </div>
         <div class="row">
             <?php
-            echo $this->formIten;
+            echo $this->form->cliente;
+            echo $this->form->dataVenda;
+            echo $this->form->situacao;
             ?>
-
         </div>
+
+        <form  method="<?php echo $this->formIten->getMethod() ?>" action="<?php echo $this->formIten->getAction() ?>" class="custom">
+            <div class="row">
+                <?php
+                echo $this->formIten->idItemVenda ;
+                echo $this->formIten->idVenda ;
+                echo $this->formIten->idProduto;
+                echo $this->formIten->qtde;
+                echo $this->formIten->vendaPreco;
+                echo $this->formIten->total;
+                ?>
+            </div>
+            <div class="row">
+                <?php
+                echo $this->formIten->addIten;
+                ?>
+            </div>
+        </form>
+
+
         <div class="row">
-            <div class="small-12 small-centered      columns">
+            <div class="small-12 small-centered  columns">
                 <div class="scroll">
                     <table width="100%">
                         <thead>
                             <tr>
                                 <th>Nome Produto</th>
-                                <th>qtde</th>
-                                <th>valor</th>
+                                <th>Preco de Vendas</th>
+                                <th>Quantidade</th>
                                 <th>total</th>
                                 <th>Editar</th>
                                 <th>Excluir</th>
                             </tr>
                         </thead>
                         <tbody> 
-                            <?php $total = 0 ?>
-                            <?php foreach ($this->itens as $key => $value) {
+                            <?php
+                            $total = 0;
+                            $itens = $this->itens;
+                            ?>
+                            <?php foreach ($itens as $key => $value) {
                                 ?>
                                 <tr>
-                                    <td><?php echo $this->itens[$key]['idProduto']; ?></td>
-                                    <td><?php echo $this->itens[$key]['valor']; ?></td>
-                                    <td><?php echo $this->itens[$key]['qtde']; ?></td>
-                                    <td><?php echo $this->itens[$key]['total']; ?></td>
-                                    <td width="50px"><a href="update/idItemVenda/<?php echo $this->itens[$key]['idItemVenda']; ?>" class="small button secondary">Editar</a></td>
-                                    <td width="50px"><a href="delete/idItemVenda/<?php echo $this->itens[$key]['idItemVenda']; ?>" onclick="return confirm('Confirma a exclução do login : <?php echo $this->usuarios[$key]['login']; ?> ?');" class="small button alert" id="btn_usuario_excluir" >Excluir</a></td>
+                                    <td><?php echo $itens[$key]['idProduto']; ?></td>
+                                    
+                                    
+                                    
+                                    <td ><?php echo "R$ ".  str_replace('.', ',',  $itens[$key]['vendaPreco']); ?></td>
+                                    <td ><?php echo $itens[$key]['qtde']; ?></td>
+                                    <td ><?php echo "R$ ".  str_replace('.', ',',  $itens[$key]['total']); ?></td>
+                                    <td width="50px"><a href="/venda/create/idVenda/<?php echo $itens[$key]['idVenda']; ?>/update/<?php echo $itens[$key]['idItemVenda']; ?>" class="tiny button secondary">Editar</a></td>
+                                    <td width="50px"><a href="/venda/create/idVenda/<?php echo $itens[$key]['idVenda']; ?>/delete/<?php echo $itens[$key]['idItemVenda']; ?>" onclick="return confirm('Confirma a exclução do Iten ?');" class="tiny button alert" id="btn_usuario_excluir" >Excluir</a></td>
                                 </tr>
-                                <?php $total = $total + $this->itens[$key]['total']; ?>
-                            <?php } ?>
+                                <?php $total = $total + $itens[$key]['total']; ?>
+                            <?php }
+                            ?>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="5" > Total  </td>
-                                <td> <?php echo $total; ?>  </td>
+                                <td colspan="3" > Total  </td>
+                                <td> <?php echo  "R$ ".  str_replace('.', ',',$total);   ?>  </td>
+                                <td>   </td>
+                                <td>   </td>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <?php
+            echo $this->form->Encerrar;
+            ?>
+            <?php
+            echo $this->form->button;
+            ?>
         </div>
 
     </div>

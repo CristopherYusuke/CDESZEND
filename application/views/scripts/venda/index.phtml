@@ -1,12 +1,19 @@
 <?php
 
-function databr($datasql) {
-    if (!empty($datasql)) {
-        $p_dt = explode('-', $datasql);
-        $data_br = $p_dt[2] . '/' . $p_dt[1] . '/' . $p_dt[0];
-        return print $data_br;
+ function converteData($data) {
+        if (strstr($data, "/")) {//verifica se tem a barra /
+            $d = explode("/", $data); //tira a barra
+            $rstData = "$d[2]-$d[1]-$d[0]"; //separa as datas $d[2] = ano $d[1] = mes etc...
+            return $rstData;
+        } else if (strstr($data, "-")) {
+            $data = substr($data, 0, 10);
+            $d = explode("-", $data);
+            $rstData = "$d[2]/$d[1]/$d[0]";
+            return $rstData;
+        } else {
+            return '';
+        }
     }
-}
 ?>
 
 <div class="row ">
@@ -16,7 +23,7 @@ function databr($datasql) {
             <div class="row">
                 <?php
                 echo $this->form->nome;
-                echo $this->form->status;
+                echo $this->form->situacao;
                 ?>
             </div>
             <div class="row">
@@ -46,7 +53,7 @@ function databr($datasql) {
                     <tr>
                         <td><?php echo $this->venda[$key]['idVenda']; ?> </td>
                         <td><?php echo $this->venda[$key]['idCliente']; ?></td>
-                        <td><?php echo databr($this->venda[$key]['dataVenda']); ?></td>
+                        <td><?php echo converteData($this->venda[$key]['dataVenda']); ?></td>
                         <td><?php echo $this->venda[$key]['total']; ?></td>
                         <td><?php echo $this->venda[$key]['formasPagamento']; ?></td>
                         <td><?php
@@ -70,9 +77,9 @@ function databr($datasql) {
                                     echo false;
                                     break;
                             };
-                            ?></td>
-                        <td>
-                            <?php $classBotãoVenda = ($this->venda[$key]['situacao'] == 0 ) ? 'small button secondary' : 'small button secondary disabled'; ?> 
+                            ?></td >
+                        <td class="text-center">
+                            <?php $classBotãoVenda = ($this->venda[$key]['situacao'] == 0 ) ? 'tiny button secondary' : 'tiny button secondary disabled'; ?> 
                             <a href="/venda/create/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
                                class="<?php echo $classBotãoVenda ?>">EDITAR</a>
                         </td>

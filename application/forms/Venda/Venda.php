@@ -91,14 +91,14 @@ class Application_Form_Venda_Venda extends Zend_Form {
         $this->addElement($Encerrar = new Zend_Form_Element_Button('Encerrar', array(
             'label' => 'Encerrar Venda',
             'disableLoadDefaultDecorators' => TRUE,
-            'class' => 'button'
+            
         )));
         $Encerrar
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-4 columns',
+                    'class' => 'small-6 large-6 columns',
                     'id' => array('callback' => array(get_class($Encerrar), 'resolveElementId'))
                 ))
 
@@ -116,7 +116,7 @@ class Application_Form_Venda_Venda extends Zend_Form {
                 ->addDecorator('Errors')
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-4 columns',
+                    'class' => 'small-6 large-6 columns',
                     'id' => array('callback' => array(get_class($button), 'resolveElementId'))
                 ))
         ;

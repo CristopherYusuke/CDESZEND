@@ -6,13 +6,13 @@
             <controller>usuario</controller>
             <action>index</action>
             <pages>
-                 <usuarioCreate>
-                    <label>Cadastrar Usuário</label>
+                <usuarioCreate>
+                    <label>Cadastrar </label>
                     <controller>usuario</controller>
                     <action>create</action>
                 </usuarioCreate>
-                 <usuarioUpdate>
-                    <label>Atualizar Usuário</label>
+                <usuarioUpdate>
+                    <label>Alterar </label>
                     <controller>usuario</controller>
                     <action>update</action>
                 </usuarioUpdate>
@@ -24,12 +24,12 @@
             <action>index</action>
             <pages>
                 <clienteCreate>
-                    <label>Cadastrar Cliente</label>
+                    <label>Cadastrar </label>
                     <controller>cliente</controller>
                     <action>create</action>
                 </clienteCreate>
                 <clienteUpdate>
-                    <label>Atualizar Cliente</label>
+                    <label>Alterar </label>
                     <controller>cliente</controller>
                     <action>update</action>
                 </clienteUpdate>
@@ -40,30 +40,30 @@
             <controller>produtos</controller>
             <action>index</action>
             <pages>
-                 <produtoCreate>
-                    <label>Cadastrar Produto</label>
+                <produtoCreate>
+                    <label>Cadastrar </label>
                     <controller>produtos</controller>
                     <action>create</action>
                 </produtoCreate>
-                 <produtoUpdate>
-                    <label>Atualizar Produto</label>
+                <produtoUpdate>
+                    <label>Alterar </label>
                     <controller>produtos</controller>
                     <action>update</action>
                 </produtoUpdate>
             </pages>
         </produto>
-         <fornecedor>
+        <fornecedor>
             <label>Fornecedor</label>
             <controller>fornecedor</controller>
             <action>index</action>
             <pages>
-                 <fornecedorCreate>
-                    <label>Cadastrar Fornecedor</label>
+                <fornecedorCreate>
+                    <label>Cadastrar</label>
                     <controller>fornecedor</controller>
                     <action>create</action>
                 </fornecedorCreate>
-                 <fornecedorUpdate>
-                    <label>Atualizar Fornecedor</label>
+                <fornecedorUpdate>
+                    <label>Alterar </label>
                     <controller>fornecedor</controller>
                     <action>update</action>
                 </fornecedorUpdate>
@@ -74,16 +74,16 @@
             <controller>venda</controller>
             <action>index</action>
             <pages>
-                 <fornecedorCreate>
+                <vendaCreate>
                     <label>Efetuar Venda</label>
                     <controller>venda</controller>
                     <action>create</action>
-                </fornecedorCreate>
-                 <fornecedorUpdate>
+                </vendaCreate>
+                <vendaUpdate>
                     <label>Alterar Venda</label>
                     <controller>venda</controller>
                     <action>update</action>
-                </fornecedorUpdate>
+                </vendaUpdate>
             </pages>
         </venda>
     </nav>

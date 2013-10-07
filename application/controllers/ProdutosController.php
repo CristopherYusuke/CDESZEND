@@ -13,7 +13,6 @@ class ProdutosController extends Zend_Controller_Action {
         $form = new Application_Form_Produto_Busca();
         $model = new Application_Model_DbTable_Produto();
         $where = array('status = 1');
-        $this->view->form = $form;
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
@@ -28,6 +27,7 @@ class ProdutosController extends Zend_Controller_Action {
             $this->view->produtos = $model->fetchAll($where)->toArray();
             $this->view->form = $form;
         }
+        $this->view->form = $form;
     }
 
     public function createAction() {
@@ -38,13 +38,19 @@ class ProdutosController extends Zend_Controller_Action {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
                 $values = $form->getValues();
+                $values['precoCusto'] = str_replace(',', '.', $values['precoCusto']);
+                $values['precoVenda'] = str_replace(',', '.', $values['precoVenda']);
                 if ($values['precoCusto'] > 0) {
-                    $model = new Application_Model_DbTable_Produto();
-                    $values['precoCusto'] = str_replace(',', '.', $values['precoCusto']);
-                    $id = $model->insert($values);
-                    $mensagens = "Produto $id criado com sucesso.";
-                    $erro = false;
-                }else{
+                    if ($values['precoCusto'] < $values['precoVenda']) {
+                        $model = new Application_Model_DbTable_Produto();
+                        $id = $model->insert($values);
+                        $mensagens = "Produto $id  criado com sucesso.";
+                        $erro = false;
+                    } else {
+                        $mensagens = "Preço de custo não pode ser maior que o preço da venda.";
+                        $erro = true;
+                    }
+                } else {
                     $mensagens = "Preço não pode ser negativo ";
                     $erro = true;
                 }
@@ -65,15 +71,26 @@ class ProdutosController extends Zend_Controller_Action {
         $form = new Application_Form_Produto_Produto();
         $form->setAction('/produtos/update');
         $form->submit->setLabel('Alterar');
-        $this->view->form = $form;
         $Produto = new Application_Model_DbTable_Produto();
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
                 $values = $form->getValues();
-                $Produto->update($values, 'idProduto = ' . $values['idProduto']);
-                $mensagens = "Produto alterado com sucesso.";
-                $erro = false;
+                $values['precoCusto'] = str_replace(',', '.', $values['precoCusto']);
+                $values['precoVenda'] = str_replace(',', '.', $values['precoVenda']);
+                if ($values['precoCusto'] > 0) {
+                    if ($values['precoCusto'] < $values['precoVenda']) {
+                        $Produto->update($values, 'idProduto = ' . $values['idProduto']);
+                        $mensagens = "Produto alterado com sucesso.";
+                        $erro = false;
+                    } else {
+                        $mensagens = "Preço de custo não pode ser maior que o preço da venda.";
+                        $erro = true;
+                    }
+                } else {
+                    $mensagens = "Preço não pode ser negativo ";
+                    $erro = true;
+                }
             } else {
                 $form->populate($form->getValues());
                 $mensagens = "Não foi possível alterado produto.";
@@ -86,9 +103,22 @@ class ProdutosController extends Zend_Controller_Action {
             $id = $this->_getParam('idProduto');
             $usu = $Produto->fetchRow("idProduto =" . $id)->toArray();
             $usu['precoCusto'] = str_replace('.', ',', $usu['precoCusto']);
+            $usu['precoVenda'] = str_replace('.', ',', $usu['precoVenda']);
             $form->populate($usu);
         }
+        $this->view->form = $form;
     }
+    
+    public function getnomeprodutoAction() {
+        $Model = new Application_Model_DbTable_Produto();
+        $id = $this->_getParam('idProduto');
+        $produto = $Model->fetchRow(" idProduto = $id ")->toArray();
+        echo $produto['precoVenda'];
+        exit();
+    }
+
+    
+    
 
 }
 

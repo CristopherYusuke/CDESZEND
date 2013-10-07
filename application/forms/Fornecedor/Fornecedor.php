@@ -30,7 +30,7 @@ class Application_Form_Fornecedor_Fornecedor extends Zend_Form {
                     'class' => 'small-6 columns text-right '))
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => ' small-6 columns panel ',
+                    'class' => ' small-6 columns  ',
                     'id' => array('callback' => array(get_class($radioTipo), 'resolveElementId'))
                 ))
                 ->setValue("F");
@@ -45,10 +45,11 @@ class Application_Form_Fornecedor_Fornecedor extends Zend_Form {
         $Status
                 ->addDecorator('Label', array(
                     'tag' => 'div',
-                    'class' => ' small-10 columns text-right '))
+                    'placement' => Zend_Form_Decorator_Abstract::APPEND,
+                    'class' => ' small-1 columns text-right '))
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-2 columns panel',
+                    'class' => 'small-1 columns ',
                     'id' => array('callback' => array(get_class($Status), 'resolveElementId'))
                 ))
 

@@ -12,7 +12,22 @@ class VendaController extends Zend_Controller_Action {
     public function indexAction() {
         $form = new Application_Form_Venda_Busca();
         $model = new Application_Model_DbTable_Venda();
-        $this->view->venda = $model->fetchAll()->toArray();
+        $where = array('situacao = 0');
+        if ($this->_request->isPost()) {
+            $data = $this->_request->getPost();
+            if ($form->isValid($data)) {
+                
+                $where[0] = "situacao = " . $data['situacao'];
+                $this->view->venda = $model->fetchAll($where)->toArray();
+            } else {
+                $form->populate($data);
+                $this->view->form = $form;
+            }
+        } else {
+            $this->view->produtos = $model->fetchAll($where)->toArray();
+            $this->view->form = $form;
+        }
+        $this->view->venda = $model->fetchAll($where)->toArray();
         $this->view->form = $form;
     }
 
@@ -20,36 +35,67 @@ class VendaController extends Zend_Controller_Action {
         $form = new Application_Form_Venda_Venda();
         $formIten = new Application_Form_Venda_Itens();
         $itens = new Application_Model_DbTable_Itemvenda();
-        $idvenda = $this->_getParam('idVenda');
-        if ($idvenda != null) {
+        $idvenda = (int) $this->_getParam('idVenda');
+        $delete = (int) $this->_getParam('delete');
+        $update = (int) $this->_getParam('update');
+        if ($idvenda > 0) {
             $vendaTabela = new Application_Model_DbTable_Venda();
             $clienteTabela = new Application_Model_DbTable_Cliente();
             $venda = $vendaTabela->fetchRow("idVenda = " . $idvenda)->toArray();
             $cliente = $clienteTabela->fetchRow('idCliente = ' . $venda['idCliente'])->toArray();
             $form->cliente->setValue($cliente['nome']);
+            $formIten->idVenda->setValue($venda['idVenda']);
             $form->dataVenda->setValue($this->converteData($venda['dataVenda']));
             switch ($venda['situacao']) {
-                case 0:
-                    $situacao = 'Aberta';
+                case 0: $situacao = 'Aberta';
                     break;
-                case 1:
-                    $situacao = 'Cancelada';
+                case 1: $situacao = 'Cancelada';
                     break;
-                case 2:
-                    $situacao = 'Faturada';
+                case 2: $situacao = 'Faturada';
                     break;
-                case 3:
-                    $situacao = 'Finalizada';
+                case 3: $situacao = 'Finalizada';
                     break;
-                case 4:
-                    $situacao = 'Extornada';
+                case 4: $situacao = 'Extornada';
                     break;
-                default:
-                    $situacao = false;
+                default: $situacao = "outro";
                     break;
             };
 
             $form->situacao->setValue($situacao);
+        }
+        if ($delete > 0) {
+            $idvendaValue = $formIten->idVenda->getValue();
+            $itens->delete("idItemVenda = $delete");
+            $this->_redirect("/venda/create/idVenda/$idvendaValue");
+        }
+        if ($update > 0) {
+            $formIten->getElement('addIten')->setLabel('Atualizar Item');
+            $itemAtualizar = $itens->fetchRow("idItemVenda = $update")->toArray();
+            $itemAtualizar['total'] = str_replace('.', ',', $itemAtualizar['total']);
+            $itemAtualizar['vendaPreco'] = str_replace('.', ',', $itemAtualizar['vendaPreco']);
+            $formIten->populate($itemAtualizar);
+        }
+
+        if ($this->_request->isPost()) {
+            $data = $this->_request->getPost();
+            if ($formIten->isValid($data)) {
+                $valor = $formIten->getValues();
+                if ($valor['vendaPreco'] < 0 || $valor['total'] < 0) {
+                    echo "não pode conter valores negativos";
+                } else {
+                    $valor['total'] = str_replace(',', '.', $valor['total']);
+                    $valor['vendaPreco'] = str_replace(',', '.', $valor['vendaPreco']);
+                    if ($update == null) {
+                        $itens->insert($valor);
+                    } else {
+                        $itens->update($valor, 'idItemVenda = ' . $valor['idItemVenda']);
+                        $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
+                    }
+                }
+            } else {
+                $formIten->populate($data);
+                $this->view->form = $form;
+            }
         }
         $this->view->itens = $itens->fetchAll("idVenda = $idvenda");
         $this->view->form = $form;
@@ -60,20 +106,19 @@ class VendaController extends Zend_Controller_Action {
         if ($this->_getParam('idCliente') != null) {
             $id = (int) $this->_getParam('idCliente');
             $model = new Application_Model_DbTable_Venda();
+            $vendaExiste = $model->fetchRow("idCliente = $id and situacao = 0 ");
+            if (!isset($vendaExiste)) {
+                $idVenda = $model->insert(array('idCliente' => $id,
+                    'situacao' => 0,
+                    'dataVenda' => date('Y/m/d')
+                ));
+            } else {
+                $arrayVenda = $vendaExiste->toArray();
+                $idVenda = $arrayVenda['idVenda'];
+            }
 
-            $idVenda = $model->insert(array('idCliente' => $id,
-                'situacao' => 0,
-                'dataVenda' => date('Y/m/d')
-            ));
             $this->_redirect("/venda/create/idVenda/$idVenda");
         }
-        if ($this->_request->isPost()) {
-            
-        }
-    }
-
-    public function updateAction() {
-        
     }
 
     function converteData($data) {

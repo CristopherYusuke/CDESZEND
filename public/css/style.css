@@ -8,9 +8,9 @@
 
 
 table tbody td .button{
-    width: 100%;
+
     margin: 0;
-    font-size: 1em!important ;
+ 
 }
 table tr th, table tr td {
     padding: 0 0.625em;
@@ -22,7 +22,7 @@ table tr th, table tr td {
 
 }
 .scroll{
-    height: 350px;
+    height: 300px;
     overflow-y:auto;       
 }
 select{
@@ -44,7 +44,7 @@ select{
     transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
 }
 
-.panel{
+.panel.mypanel{
     border-width:initial;
     margin-bottom: 0;
     padding: 0;

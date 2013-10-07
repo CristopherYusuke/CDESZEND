@@ -3,6 +3,11 @@
 class Application_Form_Produto_Produto extends Zend_Form {
 
     public function init() {
+        
+        $Alnum = new Zend_Validate_Alnum(array('allowWhiteSpace' => true));
+        $float = new Zend_Validate_Float();
+        $float->setMessage(
+                "'%value%' nao é um número decimal válido.", Zend_Validate_Float::NOT_FLOAT);
 
         $this->setAction("/produtos/create");
         $this->setMethod("POST");
@@ -21,7 +26,7 @@ class Application_Form_Produto_Produto extends Zend_Form {
                     'class' => ' small-10 columns text-right '))
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-2 columns panel',
+                    'class' => 'small-2 columns ',
                     'id' => array('callback' => array(get_class($Status), 'resolveElementId'))
                 ))
 
@@ -32,7 +37,7 @@ class Application_Form_Produto_Produto extends Zend_Form {
             'placeholder' => 'digite a Descrição',
             'disableLoadDefaultDecorators' => TRUE,
         )));
-        $Alnum = new Zend_Validate_Alnum(array('allowWhiteSpace' => true));
+
         $inputDesc
                 ->addValidators(array($Alnum))
                 ->addFilters(array('StripTags', 'StringTrim'))
@@ -41,7 +46,7 @@ class Application_Form_Produto_Produto extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 columns',
+                    'class' => 'small-12 large-6 columns',
                     'id' => array('callback' => array(get_class($inputDesc), 'resolveElementId'))
                 ))
         ;
@@ -52,15 +57,7 @@ class Application_Form_Produto_Produto extends Zend_Form {
             'placeholder' => 'digite o seu Preco de Custo',
             'disableLoadDefaultDecorators' => TRUE,
         )));
-        
-        $float = new Zend_Validate_Float();
-        
-        $float->setMessage(
-                    "'%value%' nao é um número decimal válido.",
-                    Zend_Validate_Float::NOT_FLOAT);
-        
         $inputPC
-              
                 ->addValidators(array($float))
                 ->addFilters(array('StripTags', 'StringTrim'))
                 ->addDecorator('ViewHelper')
@@ -72,6 +69,27 @@ class Application_Form_Produto_Produto extends Zend_Form {
                     'id' => array('callback' => array(get_class($inputPC), 'resolveElementId'))
                 ))
         ;
+        $this->addElement($inputPV = new Zend_Form_Element_Text('precoVenda', array('label' => 'Preco de Venda',
+            'required' => true,
+            'maxLength' => 49,
+            'placeholder' => 'digite o seu Preco de Venda',
+            'disableLoadDefaultDecorators' => TRUE,
+        )));
+        $inputPV
+                ->addValidators(array($float))
+                ->addFilters(array('StripTags', 'StringTrim'))
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('Label', array())
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-12 large-6 columns',
+                    'id' => array('callback' => array(get_class($inputPV), 'resolveElementId'))
+                ))
+        ;
+        
+        
+        
         $this->addElement($inputEstoque = new Zend_Form_Element_Text('estoque', array('label' => 'Quantidade',
             'required' => true,
             'maxLength' => 49,

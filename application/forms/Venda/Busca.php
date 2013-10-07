@@ -56,7 +56,7 @@ class Application_Form_Venda_Busca extends Zend_Form {
          */
         
 
-        $this->addElement($selectStatus = new Zend_Form_Element_Select('status', array(
+        $this->addElement($selectStatus = new Zend_Form_Element_Select('situacao', array(
             'label' => 'situação da venda   ',           
             'disableLoadDefaultDecorators' => TRUE,
             
