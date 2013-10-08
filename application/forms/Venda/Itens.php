@@ -18,10 +18,10 @@ class Application_Form_Venda_Itens extends Zend_Form {
 
         $this->addElement($id = new Zend_Form_Element_Hidden('idItemVenda'));
         $this->addElement($idVenda = new Zend_Form_Element_Hidden('idVenda'));
-        
+
         $id->removeDecorator('label');
         $idVenda->removeDecorator('label');
-        
+
         $this->addElement($selectPro = new Zend_Form_Element_Select('idProduto', array(
             'required' => true,
             'label' => 'Produto',
@@ -102,14 +102,34 @@ class Application_Form_Venda_Itens extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-3 columns',
+                    'class' => 'small-12 large-2 columns',
                     'id' => array('callback' => array(get_class($valor), 'resolveElementId'))
                 ))
         ;
+
+
+        $this->addElement($pc = new Zend_Form_Element_Text('precoCusto', array('label' => 'Preço de custo',
+            'readonly' => true,
+            'disableLoadDefaultDecorators' => TRUE,
+            'class' => 'disabled'
+        )));
+        $pc
+                ->addValidators(array($float))
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('Label', array())
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-12 large-2 columns',
+                    'id' => array('callback' => array(get_class($pc), 'resolveElementId'))
+                ))
+        ;
+
         $this->addElement($total = new Zend_Form_Element_Text('total', array('label' => 'Total',
             'required' => true,
             'disableLoadDefaultDecorators' => TRUE,
         )));
+
 
         $total
                 ->addValidators(array($float))
@@ -118,7 +138,7 @@ class Application_Form_Venda_Itens extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-3 columns',
+                    'class' => 'small-12 large-2 columns',
                     'id' => array('callback' => array(get_class($total), 'resolveElementId'))
                 ))
         ;

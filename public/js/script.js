@@ -60,8 +60,12 @@ $(document).ready(function() {// on Load
             url: '/produtos/getnomeproduto/idProduto/' + id,
             dataType: 'json',
             success: function(data) {
-
-                $("#vendaPreco").val(data.toFixed(2).replace('.', ','));
+                var pc = 0;
+                var pv = 0;
+                pc = parseFloat(data.precoCusto);
+                pv = parseFloat(data.precoVenda);
+                $("#precoCusto").val(pc.toFixed(2).replace('.', ','));
+                $("#vendaPreco").val(pv.toFixed(2).replace('.', ','));
             }
 
         });
@@ -81,16 +85,16 @@ $(document).ready(function() {// on Load
     });
     $('#vendaPreco').blur(function() {
         somaIntensProduto();
+ 
     });
-
-   
-
-
-
+    $('#addIten').click(function() {
+        $('#qtde').blur();
+    });
 
 });
 
 function somaIntensProduto() {
+
     var qtde = $('#qtde').val();
     var valor = parseFloat($('#vendaPreco').val().replace(',', '.'));
     var total = qtde * valor;

@@ -51,7 +51,7 @@ class ProdutosController extends Zend_Controller_Action {
                         $erro = true;
                     }
                 } else {
-                    $mensagens = "Preço não pode ser negativo ";
+                    $mensagens = "Preço de custo não pode ser negativo ";
                     $erro = true;
                 }
             } else {
@@ -108,17 +108,14 @@ class ProdutosController extends Zend_Controller_Action {
         }
         $this->view->form = $form;
     }
-    
+
     public function getnomeprodutoAction() {
         $Model = new Application_Model_DbTable_Produto();
         $id = $this->_getParam('idProduto');
-        $produto = $Model->fetchRow(" idProduto = $id ")->toArray();
-        echo $produto['precoVenda'];
+        $produto = json_encode($Model->fetchRow(" idProduto = $id ")->toArray());
+        echo $produto;
         exit();
     }
-
-    
-    
 
 }
 

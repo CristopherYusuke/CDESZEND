@@ -46,6 +46,7 @@ class VendaController extends Zend_Controller_Action {
                                 LEFT JOIN produto p   
                                 ON p.idProduto = i.idProduto ");
         $itensTabela = $resultado->fetchAll();
+
         $idvenda = (int) $this->_getParam('idVenda');
         $delete = (int) $this->_getParam('delete');
         $update = (int) $this->_getParam('update');
@@ -93,8 +94,10 @@ class VendaController extends Zend_Controller_Action {
                 $valor = $formIten->getValues();
                 $valor['total'] = (float) str_replace(',', '.', $valor['total']);
                 $valor['vendaPreco'] = (float) str_replace(',', '.', $valor['vendaPreco']);
+                $valor['precoCusto'] = (float) str_replace(',', '.', $valor['precoCusto']);
                 if ($valor['vendaPreco'] > 0 && $valor['total'] > 0) {
-                    if ($itensTabela['precoCusto'] > $valor['vendaPreco']) {
+                    if ($valor['precoCusto'] < $valor['vendaPreco']) {
+                        unset($valor['precoCusto']);
                         if ($update == null) {
                             $itens->insert($valor);
                             $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
