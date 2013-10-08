@@ -40,16 +40,17 @@ class VendaController extends Zend_Controller_Action {
         $form = new Application_Form_Venda_Venda();
         $formIten = new Application_Form_Venda_Itens();
         $itens = new Application_Model_DbTable_Itemvenda();
+        
+        $idvenda = (int) $this->_getParam('idVenda');
+        $delete = (int) $this->_getParam('delete');
+        $update = (int) $this->_getParam('update');
         $db = Zend_Db_Table::getDefaultAdapter();
         $resultado = $db->query("SELECT descricao as nomeProduto,precoCusto ,i.*  
                                 FROM itemvenda i 
                                 LEFT JOIN produto p   
-                                ON p.idProduto = i.idProduto ");
+                                ON p.idProduto = i.idProduto
+                                where idVenda = $idvenda ");
         $itensTabela = $resultado->fetchAll();
-
-        $idvenda = (int) $this->_getParam('idVenda');
-        $delete = (int) $this->_getParam('delete');
-        $update = (int) $this->_getParam('update');
         if ($idvenda > 0) {
             $vendaTabela = new Application_Model_DbTable_Venda();
             $clienteTabela = new Application_Model_DbTable_Cliente();
@@ -83,8 +84,8 @@ class VendaController extends Zend_Controller_Action {
         if ($update > 0) {
             $formIten->getElement('addIten')->setLabel('Atualizar Item');
             $itemAtualizar = $itens->fetchRow("idItemVenda = $update")->toArray();
-            $itemAtualizar['total'] = str_replace('.', ',', $itemAtualizar['total']);
-            $itemAtualizar['vendaPreco'] = str_replace('.', ',', $itemAtualizar['vendaPreco']);
+            $itemAtualizar['total'] = number_format($itemAtualizar['total'], 2, ',', '');
+            $itemAtualizar['vendaPreco'] = number_format($itemAtualizar['vendaPreco'], 2, ',', '');
             $formIten->populate($itemAtualizar);
         }
 
@@ -92,9 +93,9 @@ class VendaController extends Zend_Controller_Action {
             $data = $this->_request->getPost();
             if ($formIten->isValid($data)) {
                 $valor = $formIten->getValues();
-                $valor['total'] = (float) str_replace(',', '.', $valor['total']);
-                $valor['vendaPreco'] = (float) str_replace(',', '.', $valor['vendaPreco']);
-                $valor['precoCusto'] = (float) str_replace(',', '.', $valor['precoCusto']);
+                $valor['total'] = str_replace(',', '.', $valor['total']);
+                $valor['vendaPreco'] = str_replace(',', '.', $valor['vendaPreco']);
+                $valor['precoCusto'] = str_replace(',', '.', $valor['precoCusto']);
                 if ($valor['vendaPreco'] > 0 && $valor['total'] > 0) {
                     if ($valor['precoCusto'] < $valor['vendaPreco']) {
                         unset($valor['precoCusto']);
@@ -113,8 +114,9 @@ class VendaController extends Zend_Controller_Action {
                     $mensagem = "não pode conter preços negativos";
                     $erro = TRUE;
                 }
-                $valor['total'] = (float) str_replace('.', ',', $valor['total']);
-                $valor['vendaPreco'] = (float) str_replace('.', ',', $valor['vendaPreco']);
+
+                $valor['total'] = number_format($valor['total'], 2, ',', '');
+                $valor['vendaPreco'] = number_format($valor['vendaPreco'], 2, ',', '');
                 $formIten->populate($valor);
                 $this->view->form = $form;
             } else {

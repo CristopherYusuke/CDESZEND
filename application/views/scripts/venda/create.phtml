@@ -93,9 +93,9 @@
                                 ?>
                                 <tr>
                                     <td><?php echo $itens[$key]['nomeProduto']; ?></td>
-                                    <td ><?php echo "R$ " . str_replace('.', ',', $itens[$key]['vendaPreco']); ?></td>
+                                    <td ><?php echo "R$ " . number_format($itens[$key]['vendaPreco'], 2 ,',',''); ?></td>
                                     <td ><?php echo $itens[$key]['qtde']; ?></td>
-                                    <td ><?php echo "R$ " . str_replace('.', ',', $itens[$key]['total']); ?></td>
+                                    <td ><?php echo "R$ " . number_format($itens[$key]['total'], 2 ,',',''); ?></td>
                                     <td width="50px"><a href="/venda/create/idVenda/<?php echo $itens[$key]['idVenda']; ?>/update/<?php echo $itens[$key]['idItemVenda']; ?>" class="tiny button secondary">Editar</a></td>
                                     <td width="50px"><a href="/venda/create/idVenda/<?php echo $itens[$key]['idVenda']; ?>/delete/<?php echo $itens[$key]['idItemVenda']; ?>" onclick="return confirm('Confirma a exclução do Iten ?');" class="tiny button alert" id="btn_usuario_excluir" >Excluir</a></td>
                                 </tr>
@@ -106,7 +106,8 @@
                         <tfoot>
                             <tr>
                                 <td colspan="3" > Total  </td>
-                                <td> <?php echo "R$ " . str_replace('.', ',', $total); ?>  </td>
+                                
+                                <td> <?php echo "R$ " . number_format($total, 2 ,',',''); ?>  </td>
                                 <td>   </td>
                                 <td>   </td>
                             </tr>
@@ -117,7 +118,7 @@
         </div>
         <div class="row">
             <?php
-            echo $this->form->Encerrar;
+            echo $this->form->Faturar;
             ?>
             <?php
             echo $this->form->button;

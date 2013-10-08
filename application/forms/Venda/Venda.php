@@ -6,36 +6,14 @@
 
 class Application_Form_Venda_Venda extends Zend_Form {
 
-    public function init() {
+    public function __construct($options = null) {
+        parent::__construct($options);
 
 //        $this->setAction("");
 
         /*
          * 
-          $this->addElement($selectFP = new Zend_Form_Element_Select('formasPagamento', array(
-          'label' => 'Formas de Pagamento',
-          'maxLength' => 50,
-          'disableLoadDefaultDecorators' => TRUE,
-          'class' => 'styled-select'
-          )));
-
-          $selectFP
-          ->addMultiOption('0','A vista')
-          ->addMultiOption('30','pagamento para 30 dias')
-          ->addMultiOption('60','pagamento para 30-60 dias ')
-          ->addMultiOption('90','pagamento para 30-60-90 dias')
-          ->addMultiOption('120','pagamento para 30-60-90-120 dias')
-          ->addDecorator('ViewHelper')
-          ->addDecorator('Errors')
-          ->addDecorator('Label', array())
-          ->setRegisterInArrayValidator(false)
-          ->addDecorator('HtmlTag', array(
-          'tag' => 'div',
-          'class' => 'small-12 large-4     columns',
-          'id' => array('callback' => array(get_class($selectFP), 'resolveElementId'))
-          ))
-
-          ;
+         
 
          */
         $this->addElement($cliente = new Zend_Form_Element_Text('cliente', array('label' => 'cliente',
@@ -88,10 +66,9 @@ class Application_Form_Venda_Venda extends Zend_Form {
         ;
 
 
-        $this->addElement($Encerrar = new Zend_Form_Element_Button('Encerrar', array(
-            'label' => 'Encerrar Venda',
+        $this->addElement($Encerrar = new Zend_Form_Element_Button('Faturar', array(
+            'label' => 'Faturar Venda',
             'disableLoadDefaultDecorators' => TRUE,
-            
         )));
         $Encerrar
                 ->addDecorator('ViewHelper')
