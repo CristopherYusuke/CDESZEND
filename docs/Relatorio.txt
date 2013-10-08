@@ -33,3 +33,4 @@ Alteração nos update do cadastrar , usuario, fornecedor , cliente, concluido 1
 sistema de login e senha validando e funcionando 03:09 03/10/2013
 fazendo a tela de movimentação de venda 18:38 04/10/2013
 Crud Venda completo 21:09 06/10/2013
+left joins para trazer as nomes das tabelas relacionadas,e alert box para mensagens de erro  02:26 08/10/2013

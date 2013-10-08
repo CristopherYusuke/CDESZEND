@@ -11,30 +11,41 @@ class VendaController extends Zend_Controller_Action {
 
     public function indexAction() {
         $form = new Application_Form_Venda_Busca();
-        $model = new Application_Model_DbTable_Venda();
-        $where = array('situacao = 0');
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $where = ' where situacao = 0';
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
-                
-                $where[0] = "situacao = " . $data['situacao'];
-                $this->view->venda = $model->fetchAll($where)->toArray();
+                $where = "where situacao = " . $data['situacao'] . " and nome like('%" . $data['nome'] . "%')";
             } else {
                 $form->populate($data);
-                $this->view->form = $form;
             }
-        } else {
-            $this->view->produtos = $model->fetchAll($where)->toArray();
-            $this->view->form = $form;
         }
-        $this->view->venda = $model->fetchAll($where)->toArray();
+        $query = "SELECT nome, v.*,sum(i.total) as totalVenda 
+                  from venda v 
+                  left join cliente c 
+                  on c.idCliente = v.idCliente 
+                  left join itemvenda i 
+                  on i.idVenda = v.idVenda 
+                  $where 
+                  group by idVenda";
+        $model = $db->query($query);
+        $this->view->venda = $model->fetchAll();
         $this->view->form = $form;
     }
 
     public function createAction() {
+        $erro = false;
+        $mensagem = null;
         $form = new Application_Form_Venda_Venda();
         $formIten = new Application_Form_Venda_Itens();
         $itens = new Application_Model_DbTable_Itemvenda();
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $resultado = $db->query("SELECT descricao as nomeProduto,precoCusto ,i.*  
+                                FROM itemvenda i 
+                                LEFT JOIN produto p   
+                                ON p.idProduto = i.idProduto ");
+        $itensTabela = $resultado->fetchAll();
         $idvenda = (int) $this->_getParam('idVenda');
         $delete = (int) $this->_getParam('delete');
         $update = (int) $this->_getParam('update');
@@ -80,24 +91,37 @@ class VendaController extends Zend_Controller_Action {
             $data = $this->_request->getPost();
             if ($formIten->isValid($data)) {
                 $valor = $formIten->getValues();
-                if ($valor['vendaPreco'] < 0 || $valor['total'] < 0) {
-                    echo "não pode conter valores negativos";
-                } else {
-                    $valor['total'] = str_replace(',', '.', $valor['total']);
-                    $valor['vendaPreco'] = str_replace(',', '.', $valor['vendaPreco']);
-                    if ($update == null) {
-                        $itens->insert($valor);
+                $valor['total'] = (float) str_replace(',', '.', $valor['total']);
+                $valor['vendaPreco'] = (float) str_replace(',', '.', $valor['vendaPreco']);
+                if ($valor['vendaPreco'] > 0 && $valor['total'] > 0) {
+                    if ($itensTabela['precoCusto'] > $valor['vendaPreco']) {
+                        if ($update == null) {
+                            $itens->insert($valor);
+                            $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
+                        } else {
+                            $itens->update($valor, 'idItemVenda = ' . $valor['idItemVenda']);
+                            $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
+                        }
                     } else {
-                        $itens->update($valor, 'idItemVenda = ' . $valor['idItemVenda']);
-                        $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
+                        $mensagem = "O preço de venda não pode ser menor que o preço de custo ";
+                        $erro = TRUE;
                     }
+                } else {
+                    $mensagem = "não pode conter preços negativos";
+                    $erro = TRUE;
                 }
+                $valor['total'] = (float) str_replace('.', ',', $valor['total']);
+                $valor['vendaPreco'] = (float) str_replace('.', ',', $valor['vendaPreco']);
+                $formIten->populate($valor);
+                $this->view->form = $form;
             } else {
                 $formIten->populate($data);
                 $this->view->form = $form;
             }
         }
-        $this->view->itens = $itens->fetchAll("idVenda = $idvenda");
+        $this->view->mensagem = $mensagem;
+        $this->view->erro = $erro;
+        $this->view->itens = $itensTabela;
         $this->view->form = $form;
         $this->view->formIten = $formIten;
     }

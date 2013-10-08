@@ -52,9 +52,9 @@
                 <?php foreach ($this->venda as $key => $value) : ?>
                     <tr>
                         <td><?php echo $this->venda[$key]['idVenda']; ?> </td>
-                        <td><?php echo $this->venda[$key]['idCliente']; ?></td>
+                        <td><?php echo $this->venda[$key]['nome']; ?></td>
                         <td><?php echo converteData($this->venda[$key]['dataVenda']); ?></td>
-                        <td><?php echo $this->venda[$key]['total']; ?></td>
+                        <td><?php echo "R$ ".  str_replace('.', ',',  $this->venda[$key]['totalVenda']); ?></td>
                         <td><?php echo $this->venda[$key]['formasPagamento']; ?></td>
                         <td><?php
                             switch ($this->venda[$key]['situacao']) {

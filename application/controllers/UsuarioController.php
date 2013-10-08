@@ -2,9 +2,9 @@
 
 class UsuarioController extends Zend_Controller_Action {
 
-   public function init() {
+    public function init() {
         parent::init();
-        if(!Zend_auth::getInstance()->hasIdentity()){
+        if (!Zend_auth::getInstance()->hasIdentity()) {
             $this->_redirect('/login');
         }
     }
@@ -17,7 +17,6 @@ class UsuarioController extends Zend_Controller_Action {
     public function createAction() {
         $erro = true;
         $form = new Application_Form_Usuario_Usuario();
-        $this->view->form = $form;
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
@@ -40,9 +39,8 @@ class UsuarioController extends Zend_Controller_Action {
             }
             $this->view->erro = $erro;
             $this->view->mensagens = $mensagens;
-        } else {
-            $this->view->form = $form;
-        }
+        } 
+        $this->view->form = $form;
     }
 
     public function updateAction() {
@@ -61,8 +59,8 @@ class UsuarioController extends Zend_Controller_Action {
                     $usuario->update($values, 'idUsuario = ' . $values['idUsuario']);
                     $mensagens = "Usuário alterado com sucesso.";
                     $erro = false;
-                }else{
-                     $mensagens = "O Login : ".$values['login'] ." já existe";
+                } else {
+                    $mensagens = "O Login : " . $values['login'] . " já existe";
                     $erro = true;
                 }
             } else {

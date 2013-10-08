@@ -134,7 +134,7 @@ class Application_Form_Venda_Itens extends Zend_Form {
                 ->addDecorator('Errors')
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-12 columns',
+                    'class' => 'small-12 large-2 columns',
                     'id' => array('callback' => array(get_class($button), 'resolveElementId'))
                 ))
         ;

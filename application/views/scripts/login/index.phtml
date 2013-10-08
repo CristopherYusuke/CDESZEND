@@ -26,5 +26,12 @@
                 ?>
             </div>
         </form>
+
+        <?php if (isset($this->mensagem)) : ?>
+                <div data-alert class="alert-box alert ">
+                    <?php echo $this->mensagem; ?>
+                    <a href="#" class="close">&times;</a>
+                </div>
+        <?php endif; ?>
     </div>
 </div>
