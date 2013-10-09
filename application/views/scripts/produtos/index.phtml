@@ -19,7 +19,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="small-12 small-centered large-8 columns">
+    <div class="small-12 small-centered  columns">
         <div class="scroll">
             <table width="100%">
                 <thead>
@@ -41,20 +41,20 @@
                         <td><?php echo "R$" . number_format($this->produtos[$key]['precoCusto'], 2, ',', ''); ?></td>
                         <td><?php echo "R$" . number_format($this->produtos[$key]['precoVenda'], 2, ',', ''); ?></td>
                         <td><?php echo $this->produtos[$key]['estoque']; ?></td>
-                            <?php if ($this->produtos[$key]['status']) : ?>
+                        <?php if ($this->produtos[$key]['status']) : ?>
                             <td><span class="success label">Ativo</span> </td>   
                         <?php else: ?>
                             <td><span class="alert label">Inativo</span> </td> 
                         <?php endif; ?> 
                         <td width="50px"><a href="/produtos/update/idProduto/<?php echo $this->produtos[$key]['idProduto']; ?>" class="tiny button secondary">Editar</a></td>
                     </tr>
-<?php } ?>
+                <?php } ?>
             </table>
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="small-12 small-centered large-8 columns">
+    <div class="small-12  columns">
         <a id="btn_Cadastrar_usuario" href="/produtos/create" class="button">Novo</a>
     </div>
 </div>

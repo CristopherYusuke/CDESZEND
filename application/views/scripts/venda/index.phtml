@@ -49,27 +49,35 @@ function converteData($data) {
                         <th>Operações</th>
                     </tr>
                 </thead>
+
                 <?php foreach ($this->venda as $key => $value) : ?>
+
                     <tr>
                         <td><?php echo $this->venda[$key]['idVenda']; ?> </td>
                         <td><?php echo $this->venda[$key]['nome']; ?></td>
                         <td><?php echo converteData($this->venda[$key]['dataVenda']); ?></td>
                         <td><?php echo "R$ " . number_format($this->venda[$key]['totalVenda'], 2, ',', '') ?></td>
                         <td><?php
-                            switch ($this->venda[$key]['formasPagamento']) {
-                                case 0: echo 'A vista';
-                                    break;
-                                case 1: echo 'Pagamento para 30 dias';
-                                    break;
-                                case 2: echo 'Pagamento para 30-60 dias';
-                                    break;
-                                case 3: echo 'Pagamento para 30-60-90 dias';
-                                    break;
-                                case 4: echo 'Pagamento para 30-60-90-120 dias';
-                                    break;
-                                default:echo false;
-                                    break;
-                            };
+                            if ($this->venda[$key]['formasPagamento'] != null) {
+                                switch ($this->venda[$key]['formasPagamento']) {
+                                    case 0: echo 'A vista';
+                                        break;
+                                    case 1: echo 'Pagamento para 30 dias';
+                                        break;
+                                    case 2: echo 'Pagamento para 30-60 dias';
+                                        break;
+                                    case 3: echo 'Pagamento para 30-60-90 dias';
+                                        break;
+                                    case 4: echo 'Pagamento para 30-60-90-120 dias';
+                                        break;
+                                    case '': echo '';
+                                        break;
+                                    default:echo null;
+                                        break;
+                                };
+                            } else {
+                                echo 'A definir ';
+                            }
                             ?></td>
                         <td><?php
                             switch ($this->venda[$key]['situacao']) {
@@ -101,7 +109,7 @@ function converteData($data) {
                                <?php if ($this->venda[$key]['situacao'] == 2): ?> 
                                 <a href="/venda/extornar/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
                                    class="tiny button secondary">Extornar</a>
-                                   <a href="/ContasReceber/index/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
+                                <a href="/ContasReceber/index/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
                                    class="tiny button secondary">Visualizar Contas a receber</a>
                                <?php endif; ?>
                         </td> 

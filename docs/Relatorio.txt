@@ -35,3 +35,4 @@ fazendo a tela de movimentação de venda 18:38 04/10/2013
 Crud Venda completo 21:09 06/10/2013
 left joins para trazer as nomes das tabelas relacionadas,e alert box para mensagens de erro  02:26 08/10/2013
 fazendo a tela de contas a receber 18:30 08/10/2013
+Fazendo a tela de pagamento da contas a receber 18:33 09/10/2013

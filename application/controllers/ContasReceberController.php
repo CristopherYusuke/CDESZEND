@@ -10,7 +10,36 @@ class ContasReceberController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-        
+        $form = new Application_Form_CR_Busca();
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $where = '';
+        $idVenda = $this->_getParam('idVenda');
+        if ($this->_request->isPost()) {
+            $data = $this->_request->getPost();
+            if ($form->isValid($data)) {
+                $where = "where situacao = " . $data['situacao'] . " and nome like('%" . $data['nome'] . "%')";
+                if ($data['idVenda']) {
+                    $where += "and c.idVenda = " . $data['idVenda'];
+                }
+            } else {
+                $form->populate($data);
+            }
+        } else {
+            if ($this->_getParam('idVenda')) {
+                $where = "where c.idVenda = $idVenda";
+            }
+        }
+        $query = "SELECT  c.*, cl.nome
+                    FROM
+                    contasreceber c
+                        left join
+                    venda v ON v.idVenda = c.idVenda
+                        left join
+                    cliente cl ON v.idCliente = cl.idCliente
+                    $where";
+        $model = $db->query($query);
+        $this->view->CR = $model->fetchAll();
+        $this->view->form = $form;
     }
 
     public function createAction() {
@@ -24,8 +53,36 @@ class ContasReceberController extends Zend_Controller_Action {
                 'formasPagamento' => $data['formasPagamento'])
                     , "idVenda =  $idvenda");
             $modelCR = new Application_Model_DbTable_Contasreceber();
-            //fazer as contas a receber , verificar como vai ser a soma de data , e verificar a os lops que irão acontesser tal
-            
+            $numParcelas = $data['formasPagamento'];
+            $totalVenda = $data['totalVenda'];
+            $date = new DateTime(date("Y-m-d"));
+            $CR = array();
+            if ($numParcelas == 0) {
+                $CR = array(
+                    'idVenda' => $idvenda,
+                    'valor' => $data['totalVenda'],
+                    'numParcela' => 1,
+                    'vencimento' => $date->format('Y-m-d'),
+                    'situacao' => 0
+                );
+                $modelCR->insert($CR);
+            } else {
+                $Parcela = number_format(($totalVenda / $numParcelas), 2, '.', '');
+                '<br>';
+                $diferenca = number_format(($totalVenda - ($Parcela * $numParcelas)), 2, '.', '');
+                '<br>';
+                $UltimaParcela = $diferenca + $Parcela;
+                for ($i = 0; $i < $numParcelas; $i++) {
+                    $date = $date->modify('+1 month');
+                    $CR['idVenda'] = $idvenda;
+                    $CR['valor'] = ($i == $numParcelas - 1) ? $UltimaParcela : $Parcela;
+                    $CR['numParcela'] = $i + 1;
+                    $CR['vencimento'] = $date->format('Y-m-d');
+                    $CR['situacao'] = 0;
+                    $modelCR->insert($CR);
+                }
+            }
+            $this->_redirect("/ContasReceber/index/idVenda/$idvenda");
         }
         $resultado = $db->query("SELECT nome, v.*,sum(i.total) as totalVenda 
                   from venda v 
@@ -36,8 +93,8 @@ class ContasReceberController extends Zend_Controller_Action {
                   where v.idVenda = $idvenda 
                   group by idVenda");
         $itensTabela = $resultado->fetch();
-        $itensTabela['totalVenda'] = (float) number_format( $itensTabela['totalVenda'],2,'.','');
-        
+        $itensTabela['totalVenda'] = (float) number_format($itensTabela['totalVenda'], 2, '.', '');
+
         if ($itensTabela['situacao'] != 0 || $itensTabela['totalVenda'] <= 0) {
             $this->_redirect('/venda');
         }
@@ -62,6 +119,12 @@ class ContasReceberController extends Zend_Controller_Action {
         };
         $this->view->form = $form;
     }
+    
+    public function pagamentoAction() {
+        $form = new Application_Form_CR_Pagamento();
+        $this->view->form = $form;
+    }
+            
 
     function converteData($data) {
         if (strstr($data, "/")) {//verifica se tem a barra /

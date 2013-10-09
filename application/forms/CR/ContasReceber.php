@@ -56,7 +56,7 @@ class Application_Form_CR_ContasReceber extends Application_Form_Venda_Venda {
                 ->setRegisterInArrayValidator(false)
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 small-centered large-4 columns',
+                    'class' => 'small-12 small-centered large-6 columns',
                     'id' => array('callback' => array(get_class($selectFP), 'resolveElementId'))
                 ))
 
@@ -65,19 +65,21 @@ class Application_Form_CR_ContasReceber extends Application_Form_Venda_Venda {
         $this->addElement($Encerrar = new Zend_Form_Element_Submit('Faturar', array(
             'label' => 'Faturar Venda',
             'disableLoadDefaultDecorators' => TRUE,
-            'class'=>'button expand'
+            'class'=>'button '
         )));
         $Encerrar
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 small-centered large-4 columns',
+                    'class' => 'small-12 large-3 columns',
                     'id' => array('callback' => array(get_class($Encerrar), 'resolveElementId'))
                 ))
 
         ;
-        
+        $this->getElement('button')->addDecorator('HtmlTag', array(
+            'class' => 'small-12 large-3 columns',
+        ));
         
     }
 
