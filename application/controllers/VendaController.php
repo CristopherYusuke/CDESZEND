@@ -38,13 +38,14 @@ class VendaController extends Zend_Controller_Action {
         $erro = false;
         $mensagem = null;
         $form = new Application_Form_Venda_Venda();
+
         $formIten = new Application_Form_Venda_Itens();
         $itens = new Application_Model_DbTable_Itemvenda();
-        
         $idvenda = (int) $this->_getParam('idVenda');
         $delete = (int) $this->_getParam('delete');
         $update = (int) $this->_getParam('update');
         $db = Zend_Db_Table::getDefaultAdapter();
+        $form->Faturar->setAttrib('onClick', "parent.location='/ContasReceber/create/idVenda/$idvenda'");
         $resultado = $db->query("SELECT descricao as nomeProduto,precoCusto ,i.*  
                                 FROM itemvenda i 
                                 LEFT JOIN produto p   
@@ -97,7 +98,7 @@ class VendaController extends Zend_Controller_Action {
                 $valor['vendaPreco'] = str_replace(',', '.', $valor['vendaPreco']);
                 $valor['precoCusto'] = str_replace(',', '.', $valor['precoCusto']);
                 if ($valor['vendaPreco'] > 0 && $valor['total'] > 0) {
-                    if ($valor['precoCusto'] < $valor['vendaPreco']) {
+                    if ($valor['precoCusto'] <= $valor['vendaPreco']) {
                         unset($valor['precoCusto']);
                         if ($update == null) {
                             $itens->insert($valor);
@@ -148,6 +149,13 @@ class VendaController extends Zend_Controller_Action {
 
             $this->_redirect("/venda/create/idVenda/$idVenda");
         }
+    }
+
+    public function cancelAction() {
+        $idVenda = $this->_getParam("idVenda");
+        $model = new Application_Model_DbTable_Venda();
+        $model->update(array('situacao' => 1), "idVenda = $idVenda");
+        $this->_redirect('/venda');
     }
 
     function converteData($data) {

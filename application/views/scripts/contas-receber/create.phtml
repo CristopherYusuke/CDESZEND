@@ -4,7 +4,7 @@
     </div>
 </div>
 
-<form  method="<?php echo $this->form->getMethod()?>" action="<?php echo $this->form->getAction()?>" class="custom">
+<form  method="<?php echo $this->form->getMethod() ?>" action="<?php echo $this->form->getAction() ?>" class="custom">
     <div class="row">
         <div class="small-12 small-centered large-6 columns">
             <div class="row">
@@ -29,9 +29,14 @@
     <div class="row">
         <?php
         echo $this->form->formasPagamento;
+        ?>  
+    </div>
+
+
+    <div class="row">
+        <?php
         echo $this->form->Faturar;
         ?>  
-
     </div>
 
 

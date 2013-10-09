@@ -8,8 +8,6 @@ class Application_Form_Venda_Busca extends Zend_Form {
 
     public function init() {
 
-        
-        
         $this->setAction("/venda");
         $this->setMethod("POST");
         

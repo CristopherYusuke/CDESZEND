@@ -46,10 +46,10 @@ class Application_Form_CR_ContasReceber extends Application_Form_Venda_Venda {
 
         $selectFP
                 ->addMultiOption('0', 'A vista')
-                ->addMultiOption('1', 'pagamento para 30 dias')
-                ->addMultiOption('2', 'pagamento para 30-60 dias ')
-                ->addMultiOption('3', 'pagamento para 30-60-90 dias')
-                ->addMultiOption('4', 'pagamento para 30-60-90-120 dias')
+                ->addMultiOption('1', 'Pagamento para 30 dias')
+                ->addMultiOption('2', 'Pagamento para 30-60 dias ')
+                ->addMultiOption('3', 'Pagamento para 30-60-90 dias')
+                ->addMultiOption('4', 'Pagamento para 30-60-90-120 dias')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())

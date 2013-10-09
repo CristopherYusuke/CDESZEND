@@ -114,7 +114,6 @@ class Application_Form_Venda_Itens extends Zend_Form {
             'class' => 'disabled'
         )));
         $pc
-                ->addValidators(array($float))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
@@ -127,7 +126,9 @@ class Application_Form_Venda_Itens extends Zend_Form {
 
         $this->addElement($total = new Zend_Form_Element_Text('total', array('label' => 'Total',
             'required' => true,
+            'readonly' => true,
             'disableLoadDefaultDecorators' => TRUE,
+            'class' => 'disabled'            
         )));
 
 

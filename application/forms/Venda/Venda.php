@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 /*
  * 'placement' => Zend_Form_Decorator_Abstract::APPEND
@@ -69,6 +69,7 @@ class Application_Form_Venda_Venda extends Zend_Form {
         $this->addElement($Encerrar = new Zend_Form_Element_Button('Faturar', array(
             'label' => 'Faturar Venda',
             'disableLoadDefaultDecorators' => TRUE,
+            'onClick' =>'parent.location=/ContasReceber/create/idVenda/'
         )));
         $Encerrar
                 ->addDecorator('ViewHelper')
