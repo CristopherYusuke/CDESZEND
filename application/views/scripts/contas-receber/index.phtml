@@ -44,7 +44,7 @@
                         <td><?php echo $this->CR[$key]['idVenda']; ?></td>
                         <td><?php echo $this->CR[$key]['nome']; ?></td>
                         <td><?php echo "R$" . number_format($this->CR[$key]['valor'], 2, ',', ''); ?></td>
-                        <!--<td><?php // echo $this->CR[$key]['valorPago'];   ?></td>--> 
+                        <!--<td><?php // echo $this->CR[$key]['valorPago'];     ?></td>--> 
                         <td><?php echo converteData($this->CR[$key]['vencimento']); ?></td>
                         <td><?php echo converteData($this->CR[$key]['pagamento']); ?></td>
                         <td><?php echo $this->CR[$key]['numParcela']; ?></td>
@@ -57,10 +57,13 @@
                                 case 2: echo 'Extornada';
                                     break;
                             };
-                            ?></td> 
-                        <?php if ($this->CR[$key]['situacao'] == 0): ?> 
-                            <td><a href="/ContasReceber/pagamento/idContasReceber/<?php echo $this->CR[$key]['idContasR']; ?>" class="tiny button ">Pagar</a></td>
-                        <?php endif; ?>
+                            ?>
+                        </td> 
+                        <td>
+                            <?php if ($this->CR[$key]['situacao'] == 0): ?> 
+                                <a href="/ContasReceber/pagamento/idContasReceber/<?php echo $this->CR[$key]['idContasR']; ?>" class="tiny button ">Pagar</a>
+                            <?php endif; ?>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>

@@ -8,14 +8,6 @@ class Application_Form_Venda_Venda extends Zend_Form {
 
     public function __construct($options = null) {
         parent::__construct($options);
-
-//        $this->setAction("");
-
-        /*
-         * 
-         
-
-         */
         $this->addElement($cliente = new Zend_Form_Element_Text('cliente', array('label' => 'cliente',
             'readonly' => true,
             'disableLoadDefaultDecorators' => TRUE,

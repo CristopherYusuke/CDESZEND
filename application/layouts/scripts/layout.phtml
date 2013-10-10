@@ -24,7 +24,7 @@
             <section class="top-bar-section">
                 <!-- Left Nav Section -->
                 <ul class="left">
-                     
+
                     <li class="has-dropdown">
                         <a >Cadastro</a>
                         <ul class="dropdown">
@@ -38,30 +38,30 @@
                         <a >Movimentação</a>
                         <ul class="dropdown">
                             <li><a href="/venda">Venda</a></li>
-                            <li><a href="/ContasReceber">Compra</a></li>
+                            <li><a href="">Compra</a></li>
                         </ul>
                     </li>
-                     
+
                     <li class="has-dropdown">
                         <a >Contas</a>
                         <ul class="dropdown">
-                             
+
                             <li><a >Pagar</a></li>
-                             
+
                             <li><a href="/ContasReceber" >Receber</a></li>
-                             
+
 
                         </ul>
                     </li>
-                     
+
                     <li><a >Relatorios</a></li>
-                     
+
                     <li>
                         <div id="nav">
                             Você está em: <a href="/" title="Home">Home</a> 
                             <?php
                             $breadCrumbs = $this->navigation()->breadcrumbs()->setLinkLast(true)->setMinDepth(0)->render();
-                            echo ($breadCrumbs != "")? "> ".$breadCrumbs:"";
+                            echo ($breadCrumbs != "") ? "> " . $breadCrumbs : "";
                             ?>
                         </div>
                     </li>

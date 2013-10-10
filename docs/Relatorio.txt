@@ -37,3 +37,4 @@ left joins para trazer as nomes das tabelas relacionadas,e alert box para mensag
 fazendo a tela de contas a receber 18:30 08/10/2013
 Fazendo a tela de pagamento da contas a receber 18:33 09/10/2013
 Pagamento total da parcela concluido , pagamento parcial adiado , 02:31 10/10/2013
+Trigger no banco ok , validação de produtos para não ter 0 no estoque ok  12:33 10/10/2013

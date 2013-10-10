@@ -81,11 +81,18 @@ class VendaController extends Zend_Controller_Action {
             $itens->delete("idItemVenda = $delete");
             $this->_redirect("/venda/create/idVenda/$idvendaValue");
         }
+        $qtdeOld = '';
         if ($update > 0) {
             $formIten->getElement('addIten')->setLabel('Atualizar Item');
-            $itemAtualizar = $itens->fetchRow("idItemVenda = $update")->toArray();
+            $select = $db->select()
+                    ->from(array('p' => 'produto'))
+                    ->join(array('i' => 'itemvenda'), 'p.idProduto = i.idProduto')
+                    ->where("idItemVenda = $update");
+            $stmt = $db->query($select);
+            $itemAtualizar = $stmt->fetch();
             $itemAtualizar['total'] = number_format($itemAtualizar['total'], 2, ',', '');
             $itemAtualizar['vendaPreco'] = number_format($itemAtualizar['vendaPreco'], 2, ',', '');
+            $qtdeOld = $itemAtualizar['qtde'];
             $formIten->populate($itemAtualizar);
         }
 
@@ -97,20 +104,27 @@ class VendaController extends Zend_Controller_Action {
                 $valor['vendaPreco'] = str_replace(',', '.', $valor['vendaPreco']);
                 $valor['precoCusto'] = str_replace(',', '.', $valor['precoCusto']);
                 if ($valor['vendaPreco'] > 0 && $valor['total'] > 0) {
-                    if ($valor['precoCusto'] <= $valor['vendaPreco']) {     
-                        if ($valor['qtde'] <= $valor['estoque']) {
-                            unset($valor['precoCusto']);
-                            unset($valor['estoque']);
-                            if ($update == null) {
+                    if ($valor['precoCusto'] <= $valor['vendaPreco']) {
+                        unset($valor['precoCusto']);
+                        if ($update == null) {
+                            if ($valor['qtde'] <= $valor['estoque']) {
+                                unset($valor['estoque']);
                                 $itens->insert($valor);
                                 $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
                             } else {
-                                $itens->update($valor, 'idItemVenda = ' . $valor['idItemVenda']);
-                                $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
+                                $mensagem = "A quantidade de produto e superior a oque tem no estoque ";
+                                $erro = TRUE;
                             }
                         } else {
-                            $mensagem = "A quantidade de produto e superior a oque tem no estoque ";
-                            $erro = TRUE;
+                            $diferença = $valor['qtde'] - $qtdeOld;
+                            if ($diferença <= $valor['estoque']) {
+                                unset($valor['estoque']);
+                                $itens->update($valor, 'idItemVenda = ' . $valor['idItemVenda']);
+                                $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
+                            } else {
+                                $mensagem = "A quantidade de produto e superior a oque tem no estoque ";
+                                $erro = TRUE;
+                            }
                         }
                     } else {
                         $mensagem = "O preço de venda não pode ser menor que o preço de custo ";
@@ -159,7 +173,21 @@ class VendaController extends Zend_Controller_Action {
     public function cancelAction() {
         $idVenda = $this->_getParam("idVenda");
         $model = new Application_Model_DbTable_Venda();
+        $itemVenda = new Application_Model_DbTable_Itemvenda();
         $model->update(array('situacao' => 1), "idVenda = $idVenda");
+        $itemVenda->delete($idVenda);
+        $this->_redirect('/venda');
+    }
+
+    public function extornarAction() {
+        $idVenda = $this->_getParam("idVenda");
+        $Venda = new Application_Model_DbTable_Venda();
+        $itemVenda = new Application_Model_DbTable_Itemvenda();
+        $CR = new Application_Model_DbTable_Contasreceber();
+        $where = "idVenda = $idVenda";
+        $itemVenda->delete($idVenda);
+        $Venda->update(array('situacao' => 4), $where);
+        $CR->update(array('situacao' => 2), $where);
         $this->_redirect('/venda');
     }
 

@@ -53,12 +53,13 @@ class ContasReceberController extends Zend_Controller_Action {
         $idvenda = $this->_getParam('idVenda');
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
-            $model->update(array('situacao' => 2,
-                'formasPagamento' => $data['formasPagamento'])
-                    , "idVenda =  $idvenda");
-            $modelCR = new Application_Model_DbTable_Contasreceber();
-            $numParcelas = $data['formasPagamento'];
             $totalVenda = $data['totalVenda'];
+            $numParcelas = $data['formasPagamento'];
+            $model->update(array(
+                'situacao' => 2,
+                'formasPagamento' => $data['formasPagamento'],
+                'total' => $totalVenda), "idVenda =  $idvenda");
+            $modelCR = new Application_Model_DbTable_Contasreceber();
             $date = new DateTime(date("Y-m-d"));
             $CR = array();
             if ($numParcelas == 0) {
@@ -72,9 +73,7 @@ class ContasReceberController extends Zend_Controller_Action {
                 $modelCR->insert($CR);
             } else {
                 $Parcela = number_format(($totalVenda / $numParcelas), 2, '.', '');
-                '<br>';
                 $diferenca = number_format(($totalVenda - ($Parcela * $numParcelas)), 2, '.', '');
-                '<br>';
                 $UltimaParcela = $diferenca + $Parcela;
                 for ($i = 0; $i < $numParcelas; $i++) {
                     $date = $date->modify('+1 month');
@@ -135,8 +134,8 @@ class ContasReceberController extends Zend_Controller_Action {
         $CR = $model->fetchRow("idContasR = $idCR")->toArray();
         $model->update(array('situacao' => 1, 'pagamento' => $date->format('Y-m-d')), "idContasR = $idCR");
         $existVenda = $model->fetchAll("idVenda = " . $CR['idVenda'] . " and situacao = 0")->toArray();
-        
-        if (count($existVenda) == 0 ) {
+
+        if (count($existVenda) == 0) {
             $modelVenda = new Application_Model_DbTable_Venda();
             $modelVenda->update(array('situacao' => 3), "idVenda = " . $CR['idVenda']);
         }

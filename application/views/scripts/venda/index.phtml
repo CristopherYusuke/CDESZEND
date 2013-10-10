@@ -56,7 +56,10 @@ function converteData($data) {
                         <td><?php echo $this->venda[$key]['idVenda']; ?> </td>
                         <td><?php echo $this->venda[$key]['nome']; ?></td>
                         <td><?php echo converteData($this->venda[$key]['dataVenda']); ?></td>
-                        <td><?php echo "R$ " . number_format($this->venda[$key]['totalVenda'], 2, ',', '') ?></td>
+                        <td><?php
+                            $total = ($this->venda[$key]['situacao'] != 4 ) ? $this->venda[$key]['totalVenda'] : $this->venda[$key]['total'];
+                            echo "R$ " . number_format($total, 2, ',', '');
+                            ?></td>
                         <td><?php
                             if ($this->venda[$key]['formasPagamento'] != null) {
                                 switch ($this->venda[$key]['formasPagamento']) {
@@ -109,6 +112,10 @@ function converteData($data) {
                                <?php if ($this->venda[$key]['situacao'] == 2): ?> 
                                 <a href="/venda/extornar/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
                                    class="tiny button secondary">Extornar</a>
+                                <a href="/ContasReceber/index/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
+                                   class="tiny button secondary">Visualizar Contas a receber</a>
+                               <?php endif; ?>
+                            <?php if ($this->venda[$key]['situacao'] == 3): ?> 
                                 <a href="/ContasReceber/index/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
                                    class="tiny button secondary">Visualizar Contas a receber</a>
                                <?php endif; ?>
