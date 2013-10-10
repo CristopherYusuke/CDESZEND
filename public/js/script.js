@@ -62,10 +62,19 @@ $(document).ready(function() {// on Load
             success: function(data) {
                 var pc = 0;
                 var pv = 0;
-                pc = parseFloat(data.precoCusto);
-                pv = parseFloat(data.precoVenda);
-                $("#precoCusto").val(pc.toFixed(2).replace('.', ','));
-                $("#vendaPreco").val(pv.toFixed(2).replace('.', ','));
+                var es = 0;
+                es = data.estoque;
+                alert(es);
+                $('#estoque').val(es);
+                if (es != 0 ){
+                    pc = parseFloat(data.precoCusto);
+                    pv = parseFloat(data.precoVenda);
+                    $('#estoque').val(es);
+                    $("#precoCusto").val(pc.toFixed(2).replace('.', ','));
+                    $("#vendaPreco").val(pv.toFixed(2).replace('.', ','));
+                }else{
+                    $("#DivMensagem").append('<div data-alert class="alert-box alert "> este produto não contem mais no estoque <a href="#" class="close">&times;</a></div>');
+                }
             }
 
         });
@@ -85,7 +94,7 @@ $(document).ready(function() {// on Load
     });
     $('#vendaPreco').blur(function() {
         somaIntensProduto();
- 
+
     });
     $('#addIten').click(function() {
         $('#qtde').blur();

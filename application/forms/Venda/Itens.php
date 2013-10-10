@@ -18,9 +18,11 @@ class Application_Form_Venda_Itens extends Zend_Form {
 
         $this->addElement($id = new Zend_Form_Element_Hidden('idItemVenda'));
         $this->addElement($idVenda = new Zend_Form_Element_Hidden('idVenda'));
+        $this->addElement($estoque = new Zend_Form_Element_Hidden('estoque'));
 
         $id->removeDecorator('label');
         $idVenda->removeDecorator('label');
+        $estoque->removeDecorator('label');
 
         $this->addElement($selectPro = new Zend_Form_Element_Select('idProduto', array(
             'required' => true,

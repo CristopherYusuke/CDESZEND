@@ -37,6 +37,7 @@
         <form  method="<?php echo $this->formIten->getMethod() ?>" action="<?php echo $this->formIten->getAction() ?>" class="custom">
             <div class="row">
                 <?php
+                echo $this->formIten->estoque;
                 echo $this->formIten->idItemVenda;
                 echo $this->formIten->idVenda;
                 echo $this->formIten->idProduto;
@@ -47,7 +48,7 @@
                 ?>
             </div>
             <div class="row">
-                <div class="small-12 large-10 columns">
+                <div id="DivMensagem" class="small-12 large-10 columns">
                     <?php if (isset($this->mensagem)) { ?>
                         <?php if ($this->erro) { ?>
                             <div data-alert class="alert-box alert ">

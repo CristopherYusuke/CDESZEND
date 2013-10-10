@@ -38,7 +38,6 @@ class VendaController extends Zend_Controller_Action {
         $erro = false;
         $mensagem = null;
         $form = new Application_Form_Venda_Venda();
-
         $formIten = new Application_Form_Venda_Itens();
         $itens = new Application_Model_DbTable_Itemvenda();
         $idvenda = (int) $this->_getParam('idVenda');
@@ -46,7 +45,7 @@ class VendaController extends Zend_Controller_Action {
         $update = (int) $this->_getParam('update');
         $db = Zend_Db_Table::getDefaultAdapter();
         $form->Faturar->setAttrib('onClick', "parent.location='/ContasReceber/create/idVenda/$idvenda'");
-        $resultado = $db->query("SELECT descricao as nomeProduto,precoCusto ,i.*  
+        $resultado = $db->query("SELECT descricao as nomeProduto,precoCusto,estoque,  i.*  
                                 FROM itemvenda i 
                                 LEFT JOIN produto p   
                                 ON p.idProduto = i.idProduto
@@ -98,14 +97,20 @@ class VendaController extends Zend_Controller_Action {
                 $valor['vendaPreco'] = str_replace(',', '.', $valor['vendaPreco']);
                 $valor['precoCusto'] = str_replace(',', '.', $valor['precoCusto']);
                 if ($valor['vendaPreco'] > 0 && $valor['total'] > 0) {
-                    if ($valor['precoCusto'] <= $valor['vendaPreco']) {
-                        unset($valor['precoCusto']);
-                        if ($update == null) {
-                            $itens->insert($valor);
-                            $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
+                    if ($valor['precoCusto'] <= $valor['vendaPreco']) {     
+                        if ($valor['qtde'] <= $valor['estoque']) {
+                            unset($valor['precoCusto']);
+                            unset($valor['estoque']);
+                            if ($update == null) {
+                                $itens->insert($valor);
+                                $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
+                            } else {
+                                $itens->update($valor, 'idItemVenda = ' . $valor['idItemVenda']);
+                                $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
+                            }
                         } else {
-                            $itens->update($valor, 'idItemVenda = ' . $valor['idItemVenda']);
-                            $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
+                            $mensagem = "A quantidade de produto e superior a oque tem no estoque ";
+                            $erro = TRUE;
                         }
                     } else {
                         $mensagem = "O preço de venda não pode ser menor que o preço de custo ";
