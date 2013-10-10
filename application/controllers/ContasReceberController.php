@@ -12,14 +12,15 @@ class ContasReceberController extends Zend_Controller_Action {
     public function indexAction() {
         $form = new Application_Form_CR_Busca();
         $db = Zend_Db_Table::getDefaultAdapter();
-        $where = '';
+        $where = "where c.situacao = 0";
         $idVenda = $this->_getParam('idVenda');
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
-                $where = "where situacao = " . $data['situacao'] . " and nome like('%" . $data['nome'] . "%')";
+
+                $where = "where c.situacao = " . $data['situacao'] . " and nome like('%" . $data['nome'] . "%') ";
                 if ($data['idVenda']) {
-                    $where += "and c.idVenda = " . $data['idVenda'];
+                    $where .= "and c.idVenda = " . $data['idVenda'];
                 }
             } else {
                 $form->populate($data);
@@ -27,8 +28,10 @@ class ContasReceberController extends Zend_Controller_Action {
         } else {
             if ($this->_getParam('idVenda')) {
                 $where = "where c.idVenda = $idVenda";
+                $form->idVenda->setValue($idVenda);
             }
         }
+
         $query = "SELECT  c.*, cl.nome
                     FROM
                     contasreceber c
@@ -37,6 +40,7 @@ class ContasReceberController extends Zend_Controller_Action {
                         left join
                     cliente cl ON v.idCliente = cl.idCliente
                     $where";
+
         $model = $db->query($query);
         $this->view->CR = $model->fetchAll();
         $this->view->form = $form;
@@ -119,12 +123,25 @@ class ContasReceberController extends Zend_Controller_Action {
         };
         $this->view->form = $form;
     }
-    
+
     public function pagamentoAction() {
-        $form = new Application_Form_CR_Pagamento();
-        $this->view->form = $form;
+        /*
+          $form = new Application_Form_CR_Pagamento();
+          $this->view->form = $form;
+         */
+        $date = new DateTime(date("Y-m-d"));
+        $idCR = $this->_getParam("idContasReceber");
+        $model = new Application_Model_DbTable_Contasreceber();
+        $CR = $model->fetchRow("idContasR = $idCR")->toArray();
+        $model->update(array('situacao' => 1, 'pagamento' => $date->format('Y-m-d')), "idContasR = $idCR");
+        $existVenda = $model->fetchAll("idVenda = " . $CR['idVenda'] . " and situacao = 0")->toArray();
+        
+        if (count($existVenda) == 0 ) {
+            $modelVenda = new Application_Model_DbTable_Venda();
+            $modelVenda->update(array('situacao' => 3), "idVenda = " . $CR['idVenda']);
+        }
+        $this->_redirect("/ContasReceber/index/idVenda/" . $CR['idVenda']);
     }
-            
 
     function converteData($data) {
         if (strstr($data, "/")) {//verifica se tem a barra /

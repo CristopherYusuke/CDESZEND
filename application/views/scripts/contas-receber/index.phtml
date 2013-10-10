@@ -30,7 +30,6 @@
                         <th>idVenda</th>
                         <th>Nome Cliente </th>
                         <th>Valor</th>
-                        <th>Valor Pagamento</th>
                         <th>Data de Vencimento</th>
                         <th>Data de Pagamento</th>
                         <th>Numero da Parcela</th>
@@ -45,12 +44,23 @@
                         <td><?php echo $this->CR[$key]['idVenda']; ?></td>
                         <td><?php echo $this->CR[$key]['nome']; ?></td>
                         <td><?php echo "R$" . number_format($this->CR[$key]['valor'], 2, ',', ''); ?></td>
-                        <td><?php echo $this->CR[$key]['valorPago']; ?></td> 
+                        <!--<td><?php // echo $this->CR[$key]['valorPago'];   ?></td>--> 
                         <td><?php echo converteData($this->CR[$key]['vencimento']); ?></td>
-                        <td><?php echo $this->CR[$key]['pagamento']; ?></td>
+                        <td><?php echo converteData($this->CR[$key]['pagamento']); ?></td>
                         <td><?php echo $this->CR[$key]['numParcela']; ?></td>
-                        <td><?php echo $this->CR[$key]['situacao']; ?></td>  
-                        <td><a href="/ContasReceber/pagamento/idContasReceber/<?php echo $this->CR[$key]['idContasR']; ?>" class="tiny button ">Pagar</a></td>
+                        <td><?php
+                            switch ($this->CR[$key]['situacao']) {
+                                case 0: echo 'Aberta';
+                                    break;
+                                case 1: echo 'Faturada';
+                                    break;
+                                case 2: echo 'Extornada';
+                                    break;
+                            };
+                            ?></td> 
+                        <?php if ($this->CR[$key]['situacao'] == 0): ?> 
+                            <td><a href="/ContasReceber/pagamento/idContasReceber/<?php echo $this->CR[$key]['idContasR']; ?>" class="tiny button ">Pagar</a></td>
+                        <?php endif; ?>
                     </tr>
                 <?php } ?>
             </table>

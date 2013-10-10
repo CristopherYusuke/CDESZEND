@@ -71,6 +71,8 @@ class ProdutosController extends Zend_Controller_Action {
         $form = new Application_Form_Produto_Produto();
         $form->setAction('/produtos/update');
         $form->submit->setLabel('Alterar');
+        $form->getElement('estoque')->setAttribs(array('readonly' => true,
+        'class' => 'disabled'));
         $Produto = new Application_Model_DbTable_Produto();
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
