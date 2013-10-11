@@ -79,13 +79,44 @@
                     <controller>venda</controller>
                     <action>create</action>
                 </vendaCreate>
-                <vendaUpdate>
-                    <label>Alterar Venda</label>
-                    <controller>venda</controller>
-                    <action>update</action>
-                </vendaUpdate>
             </pages>
         </venda>
+        <compra>
+            <label>Compra</label>
+            <controller>compra</controller>
+            <action>index</action>
+            <pages>
+                <vendaCreate>
+                    <label>Efetuar Compra</label>
+                    <controller>compra</controller>
+                    <action>create</action>
+                </vendaCreate>
+            </pages>
+        </compra>
+         <ContasReceber>
+            <label>Contas Receber</label>
+            <controller>ContasReceber</controller>
+            <action>index</action>
+             <pages>
+                <ContasReceber>
+                    <label>Faturar Venda</label>
+                    <controller>ContasReceber</controller>
+                    <action>create</action>
+                </ContasReceber>
+            </pages>
+        </ContasReceber>
+        <ContasPagar>
+            <label>Contas Pagar</label>
+            <controller>ContasPagar</controller>
+            <action>index</action>
+             <ContasReceber>
+                    <label>Faturar Compra</label>
+                    <controller>ContasPagar</controller>
+                    <action>create</action>
+                </ContasReceber>
+        </ContasPagar>
+        
+        
     </nav>
 </config>
     

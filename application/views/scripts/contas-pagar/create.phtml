@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="small-12 columns ">
+        <h2 class="text-center"> Faturar Venda  </h2>
+    </div>
+</div>
+
+<form  method="<?php echo $this->form->getMethod() ?>" action="<?php echo $this->form->getAction() ?>" class="custom">
+    <div class="row">
+        <div class="small-12 small-centered large-6 columns">
+            <div class="row">
+                <?php
+                echo $this->form->cliente;
+                echo $this->form->dataVenda;
+                ?>
+            </div>
+            <div class="row">
+                <?php
+                echo $this->form->situacao;
+                echo $this->form->totalVenda;
+                ?>
+            </div>
+        </div>   
+    </div> 
+    <div class="row">
+        <div class="small-12 columns ">
+            <h4 class="text-center"> Qual a melhor forma de pagamento ?  </h4>
+        </div>
+    </div>
+    <div class="row">
+        <?php
+        echo $this->form->formasPagamento;
+        ?>  
+    </div>
+    <div class="row">
+        <div class="small-12 small-centered  large-6 columns">
+            <div class="row">
+                <?php
+                echo $this->form->Faturar;
+                echo $this->form->button;
+                ?>  
+            </div>  
+        </div>
+    </div>
+
+
+</form>
+
+

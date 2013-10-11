@@ -1,6 +1,6 @@
 <div class="row">
     <div class="small-12 columns text-center">
-        <h2 class="text-center"> Efetuar Venda </h2>
+        <h2 class="text-center"> Efetuar Compra </h2>
     </div>
 </div>
 <div  class="row ">
@@ -28,28 +28,26 @@
         <?php endif ?>
         <div class="row">
             <?php
-            echo $this->form->cliente;
-            echo $this->form->dataVenda;
+            echo $this->form->fornecedor;
+            echo $this->form->dataCompra;
             echo $this->form->situacao;
             ?>
         </div>
 
-        <form  method="<?php echo $this->formIten->getMethod() ?>" action="<?php echo $this->formIten->getAction() ?>" class="custom venda">
+        <form  method="<?php echo $this->formIten->getMethod() ?>" action="<?php echo $this->formIten->getAction() ?>" class="custom compra">
             <div class="row">
-                
                 <?php
                 echo $this->formIten->estoque;
-                echo $this->formIten->idItemVenda;
-                echo $this->formIten->idVenda;
+                echo $this->formIten->idItemCompra;
+                echo $this->formIten->idCompra;
                 echo $this->formIten->idProduto;
                 echo $this->formIten->qtde;
-                echo $this->formIten->precoCusto;
-                echo $this->formIten->vendaPreco;
+                echo $this->formIten->compraPreco;
                 echo $this->formIten->total;
                 ?>
             </div>
             <div class="row">
-                <div id="DivMensagem" class="small-12 large-10 columns">
+                <div class="small-12 large-10 columns">
                     <?php if (isset($this->mensagem)) { ?>
                         <?php if ($this->erro) { ?>
                             <div data-alert class="alert-box alert ">
@@ -95,11 +93,11 @@
                                 ?>
                                 <tr>
                                     <td><?php echo $itens[$key]['nomeProduto']; ?></td>
-                                    <td ><?php echo "R$ " . number_format($itens[$key]['vendaPreco'], 2 ,',',''); ?></td>
+                                    <td ><?php echo "R$ " . number_format($itens[$key]['compraPreco'], 2 ,',',''); ?></td>
                                     <td ><?php echo $itens[$key]['qtde']; ?></td>
                                     <td ><?php echo "R$ " . number_format($itens[$key]['total'], 2 ,',',''); ?></td>
-                                    <td width="50px"><a href="/venda/create/idVenda/<?php echo $itens[$key]['idVenda']; ?>/update/<?php echo $itens[$key]['idItemVenda']; ?>" class="tiny button secondary">Editar</a></td>
-                                    <td width="50px"><a href="/venda/create/idVenda/<?php echo $itens[$key]['idVenda']; ?>/delete/<?php echo $itens[$key]['idItemVenda']; ?>" onclick="return confirm('Confirma a exclução do Iten ?');" class="tiny button alert" id="btn_usuario_excluir" >Excluir</a></td>
+                                    <td width="50px"><a href="/compra/create/idCompra/<?php echo $itens[$key]['idCompra']; ?>/update/<?php echo $itens[$key]['idItemCompra']; ?>" class="tiny button secondary">Editar</a></td>
+                                    <td width="50px"><a href="/compra/create/idCompra/<?php echo $itens[$key]['idCompra']; ?>/delete/<?php echo $itens[$key]['idItemCompra']; ?>" onclick="return confirm('Confirma a exclução do Iten ?');" class="tiny button alert" id="btn_usuario_excluir" >Excluir</a></td>
                                 </tr>
                                 <?php $total = $total + $itens[$key]['total']; ?>
                             <?php }

@@ -53,7 +53,40 @@ $(document).ready(function() {// on Load
         });
     });
 
-    $("select#idProduto").change(function() {
+    $("form.compra  select#idProduto").change(function() {
+        var id = $("select#idProduto option:selected").val();
+        $.ajax({
+            type: 'POST',
+            url: '/produtos/getnomeproduto/idProduto/' + id,
+            dataType: 'json',
+            success: function(data) {
+                var pc = 0;
+                pc = parseFloat(data.precoCusto);
+                $("#compraPreco").val(pc.toFixed(2).replace('.', ','));
+            }
+
+        });
+    });
+
+
+    $('form.compra #qtde').blur(function() {
+        somaIntensProdutoCompra();
+    });
+    $('form.compra #compraPreco').blur(function() {
+        somaIntensProdutoCompra();
+
+    });
+
+
+
+
+
+
+
+
+// Venda  comesso --------------------------------
+
+    $("form.venda  select#idProduto").change(function() {
         var id = $("select#idProduto option:selected").val();
         $.ajax({
             type: 'POST',
@@ -64,15 +97,14 @@ $(document).ready(function() {// on Load
                 var pv = 0;
                 var es = 0;
                 es = data.estoque;
-                alert(es);
                 $('#estoque').val(es);
-                if (es != 0 ){
+                if (es != 0) {
                     pc = parseFloat(data.precoCusto);
                     pv = parseFloat(data.precoVenda);
                     $('#estoque').val(es);
                     $("#precoCusto").val(pc.toFixed(2).replace('.', ','));
                     $("#vendaPreco").val(pv.toFixed(2).replace('.', ','));
-                }else{
+                } else {
                     $("#DivMensagem").append('<div data-alert class="alert-box alert "> este produto não contem mais no estoque <a href="#" class="close">&times;</a></div>');
                 }
             }
@@ -81,34 +113,43 @@ $(document).ready(function() {// on Load
     });
 
 
+    $('form.venda #qtde').blur(function() {
+        somaIntensProduto();
+    });
+    $('form.venda #vendaPreco').blur(function() {
+        somaIntensProduto();
+
+    });
+
+
+// Venda Fim --------------------------------
+
+
     verificaTipoCliente();
     $('input:radio[name=tipo]').click(function() {
         verificaTipoCliente();
     });
 
-
-
-
-    $('#qtde').blur(function() {
-        somaIntensProduto();
-    });
-    $('#vendaPreco').blur(function() {
-        somaIntensProduto();
-
-    });
     $('#addIten').click(function() {
         $('#qtde').blur();
     });
-
 });
 
 function somaIntensProduto() {
-
     var qtde = $('#qtde').val();
-    var valor = parseFloat($('#vendaPreco').val().replace(',', '.'));
+    var valor = parseFloat($('form.venda #vendaPreco').val().replace(',', '.'));
     var total = qtde * valor;
-    $('#total').val(total.toFixed(2).replace('.', ','));
+    $('form.venda #total').val(total.toFixed(2).replace('.', ','));
 }
+
+function somaIntensProdutoCompra() {
+    var qtde = $('#qtde').val();
+    var valor = parseFloat($('form.compra #compraPreco').val().replace(',', '.'));
+    var total = qtde * valor;
+    $('form.compra #total').val(total.toFixed(2).replace('.', ','));
+}
+
+
 
 function verificaTipoCliente() {
     var tipo = $('input:radio[name=tipo]:checked').val();

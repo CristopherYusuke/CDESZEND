@@ -6,7 +6,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <title>Controle de Estoque Stillo Tapeçaria</title>
-        <base href="  <?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] ?> " />
+        <base href="  <?php echo 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] ?> " />
         <link href="css/jquery-ui-1.9.2.custom.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/foundation.css" />
         <link rel="stylesheet" href="css/style.css" />
@@ -28,29 +28,26 @@
                     <li class="has-dropdown">
                         <a >Cadastro</a>
                         <ul class="dropdown">
-                            <li><a href="/produtos">Produto</a></li>
                             <li><a href="/cliente">Cliente</a></li>
-                            <li><a href="/usuario">Usuario</a></li>
                             <li><a href="/fornecedor">Fornecedor</a></li>
+                            <li><a href="/produtos">Produto</a></li>
+                            <li><a href="/usuario">Usuario</a></li>
                         </ul>
                     </li>
                     <li class="has-dropdown">
                         <a >Movimentação</a>
                         <ul class="dropdown">
+                            <li><a href="/compra">Compra</a></li>
                             <li><a href="/venda">Venda</a></li>
-                            <li><a href="">Compra</a></li>
+
                         </ul>
                     </li>
 
                     <li class="has-dropdown">
                         <a >Contas</a>
                         <ul class="dropdown">
-
-                            <li><a >Pagar</a></li>
-
+                            <li><a href="/ContasPagar" >Pagar</a></li>
                             <li><a href="/ContasReceber" >Receber</a></li>
-
-
                         </ul>
                     </li>
 
@@ -58,7 +55,7 @@
 
                     <li>
                         <div id="nav">
-                            Você está em: <a href="/" title="Home">Home</a> 
+                            <a href="/" title="Home">Home</a> 
                             <?php
                             $breadCrumbs = $this->navigation()->breadcrumbs()->setLinkLast(true)->setMinDepth(0)->render();
                             echo ($breadCrumbs != "") ? "> " . $breadCrumbs : "";

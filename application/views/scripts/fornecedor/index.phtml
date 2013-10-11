@@ -2,8 +2,8 @@
     <div class="small-12 small-centered large-12 columns">
         <h2 class="text-center" > Listar Fornecedor </h2>
         <?php // echo $this->form;?>
-                
-        <form method="<?php echo $this->form->getMethod();?>" action="<?php echo $this->form->getAction(); ?>" class="custom">
+
+        <form method="<?php echo $this->form->getMethod(); ?>" action="<?php echo $this->form->getAction(); ?>" class="custom">
             <div class="row">
                 <?php
                 echo $this->form->nome;
@@ -19,64 +19,61 @@
     </div>
 </div>
 
-    <div class="small-12  small-centered columns">
-        <div class="scroll">
-            <table width="100%">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Tipo</th>
-                        <th>CPF/CNPJ</th>
-                        <th>Telefone</th>
-                        <th>Endereco</th>
-                        <th>Numero</th>
-                        <th>Bairro</th>
-                        <th>Cidade</th>
-                        <th>UF</th>
-                        <th>status</th>
-                        <th>Editar</th>
-                    </tr>
-                </thead>
-                <?php foreach ($this->fornecedores as $key => $value) : ?>
-                    <tr>
-                        <td><?php echo $this->fornecedores[$key]['idFornecedor']; ?> </td>
-                        <td><?php echo $this->fornecedores[$key]['nome']; ?></td>
-                        <td><?php echo $this->fornecedores[$key]['tipo']; ?></td>
-                        <td><?php echo $this->fornecedores[$key]['CPF_CNPJ']; ?></td>
-                        <td><?php echo $this->fornecedores[$key]['telefone']; ?></td>
-                        <td><?php echo $this->fornecedores[$key]['endereco']; ?></td>
-                        <td><?php echo $this->fornecedores[$key]['numero']; ?></td>
-                        <td><?php echo $this->fornecedores[$key]['bairro']; ?></td>
-                        <td><?php echo $this->fornecedores[$key]['cidade']; ?></td>
-                        <td><?php echo $this->fornecedores[$key]['UF']; ?></td>  
-                        <?php if ($this->fornecedores[$key]['status']) : ?>
-                            <td><span class="success label">Ativo</span> </td>   
-                        <?php else: ?>
-                            <td><span class="alert label">Inativo</span> </td> 
-                        <?php endif; ?> 
-                        <td>
-                            <a href="/fornecedor/update/idFornecedor/<?php echo $this->fornecedores[$key]['idFornecedor']; ?>"
-                               class="tiny button secondary">EDITAR</a>
-                        </td>
-        <!--                    <td> 
-                        <?php //if ($this->fornecedores[$key]['status']) { ?>  
-                                <a href="/cliente/inactive/idCliente/<?php //echo $this->fornecedores[$key]['idCliente'];    ?>"
-                                   class="small button secondary " id="btn_usuario_excluir" >INATIVAR </a>
-                        <?php //} else { ?>
-                                <a href="/cliente/active/idCliente/<?php //echo $this->fornecedores[$key]['idCliente'];    ?>"
-                                   class="small button secondary " id="btn_usuario_excluir" >ATIVAR </a>
+<div class="small-12  small-centered columns">
+    <div class="scroll">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>CPF/CNPJ</th>
+                    <th>Telefone</th>
+                    <th>Endereco</th>
+                    <th>Numero</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>UF</th>
+                    <th>status</th>
+                    <th>Editar</th>
+                    <th>Efetuar Compra</th>
+                </tr>
+            </thead>
+            <?php foreach ($this->fornecedores as $key => $value) : ?>
+                <tr>
+                    <td><?php echo $this->fornecedores[$key]['idFornecedor']; ?> </td>
+                    <td><?php echo $this->fornecedores[$key]['nome']; ?></td>
+                    <td><?php echo $this->fornecedores[$key]['tipo']; ?></td>
+                    <td><?php echo $this->fornecedores[$key]['CPF_CNPJ']; ?></td>
+                    <td><?php echo $this->fornecedores[$key]['telefone']; ?></td>
+                    <td><?php echo $this->fornecedores[$key]['endereco']; ?></td>
+                    <td><?php echo $this->fornecedores[$key]['numero']; ?></td>
+                    <td><?php echo $this->fornecedores[$key]['bairro']; ?></td>
+                    <td><?php echo $this->fornecedores[$key]['cidade']; ?></td>
+                    <td><?php echo $this->fornecedores[$key]['UF']; ?></td>  
+                    <?php if ($this->fornecedores[$key]['status']) : ?>
+                        <td><span class="success label">Ativo</span> </td>   
+                    <?php else: ?>
+                        <td><span class="alert label">Inativo</span> </td> 
+                    <?php endif; ?> 
+                    <td>
+                        <a href="/fornecedor/update/idFornecedor/<?php echo $this->fornecedores[$key]['idFornecedor']; ?>"
+                           class="tiny button secondary">EDITAR</a>
+                    </td>
+                    <td>
+                        <?php if ($this->fornecedores[$key]['status']): ?> 
+                            <a href="/compra/addcompra/idFornecedor/<?php echo $this->fornecedores[$key]['idFornecedor']; ?>" class="tiny button">EFETUAR COMPRA</a>
+                        <?php endif; ?>
+                    </td>
 
-                        <?php // } ?>  End if 
-                        </td>-->
-                    </tr>
-                <?php endforeach; ?> <!-- End foreach -->
-            </table>
-        </div>
+                </tr>
+            <?php endforeach; ?> <!-- End foreach -->
+        </table>
     </div>
+</div>
 
-    <div class="small-10 small-centered columns">
-        <a id="btn_Cadastrar_usuario" href="/fornecedor/create" class="button">Novo</a>
-    </div>
+<div class="small-10 small-centered columns">
+    <a id="btn_Cadastrar_usuario" href="/fornecedor/create" class="button">Novo</a>
+</div>
 
 
