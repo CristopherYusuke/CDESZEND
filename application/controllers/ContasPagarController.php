@@ -1,6 +1,6 @@
 <?php
 
-class ContasReceberController extends Zend_Controller_Action {
+class ContasPagarController extends Zend_Controller_Action {
 
     public function init() {
         parent::init();
@@ -10,101 +10,101 @@ class ContasReceberController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-        $form = new Application_Form_CR_Busca();
+        $form = new Application_Form_CP_Busca();
         $db = Zend_Db_Table::getDefaultAdapter();
         $where = "where c.situacao = 0";
-        $idVenda = $this->_getParam('idVenda');
+        $idCompra = $this->_getParam('idCompra');
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
 
                 $where = "where c.situacao = " . $data['situacao'] . " and nome like('%" . $data['nome'] . "%') ";
-                if ($data['idVenda']) {
-                    $where .= "and c.idVenda = " . $data['idVenda'];
+                if ($data['idCompra']) {
+                    $where .= "and c.idCompra = " . $data['idCompra'];
                 }
             } else {
                 $form->populate($data);
             }
         } else {
-            if ($this->_getParam('idVenda')) {
-                $where = "where c.idVenda = $idVenda";
-                $form->idVenda->setValue($idVenda);
+            if ($this->_getParam('idCompra')) {
+                $where = "where c.idCompra = $idCompra";
+                $form->idCompra->setValue($idCompra);
             }
         }
 
-        $query = "SELECT  c.*, cl.nome
+        $query = "SELECT  cp.*, f.nome
                     FROM
-                    contasreceber c
+                    contaspagar cp
                         left join
-                    venda v ON v.idVenda = c.idVenda
+                    compra c ON c.idCompra = cp.idCompra
                         left join
-                    cliente cl ON v.idCliente = cl.idCliente
+                    fornecedor f ON c.idFornecedor = f.idFornecedor
                     $where";
 
         $model = $db->query($query);
-        $this->view->CR = $model->fetchAll();
+        $this->view->CP = $model->fetchAll();
         $this->view->form = $form;
     }
 
     public function createAction() {
-        $form = new Application_Form_CR_ContasReceber();
-        $model = new Application_Model_DbTable_Venda();
+        $form = new Application_Form_CP_ContasPagar();
+        $model = new Application_Model_DbTable_Compra();
         $db = Zend_Db_Table::getDefaultAdapter();
-        $idvenda = $this->_getParam('idVenda');
+        $idvenda = $this->_getParam('idCompra');
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
-            $totalVenda = $data['totalVenda'];
+            $totalCompra = $data['totalCompra'];
             $numParcelas = $data['formasPagamento'];
             $model->update(array(
                 'situacao' => 2,
                 'formasPagamento' => $data['formasPagamento'],
-                'total' => $totalVenda), "idVenda =  $idvenda");            
-            $modelCR = new Application_Model_DbTable_Contasreceber();
+                'total' => $totalCompra), "idCompra =  $idvenda");            
+            $modelCP = new Application_Model_DbTable_Contaspagar();
             $date = new DateTime(date("Y-m-d"));
-            $CR = array();
+            $CP = array();
             if ($numParcelas == 0) {
-                $CR = array(
-                    'idVenda' => $idvenda,
-                    'valor' => $data['totalVenda'],
+                $CP = array(
+                    'idCompra' => $idvenda,
+                    'valor' => $data['totalCompra'],
                     'numParcela' => 1,
                     'vencimento' => $date->format('Y-m-d'),
                     'situacao' => 0
                 );
-                $modelCR->insert($CR);
+                $modelCP->insert($CP);
             } else {
-                $Parcela = number_format(($totalVenda / $numParcelas), 2, '.', '');
-                $diferenca = number_format(($totalVenda - ($Parcela * $numParcelas)), 2, '.', '');
+                $Parcela = number_format(($totalCompra / $numParcelas), 2, '.', '');
+                $diferenca = number_format(($totalCompra - ($Parcela * $numParcelas)), 2, '.', '');
                 $UltimaParcela = $diferenca + $Parcela;
                 for ($i = 0; $i < $numParcelas; $i++) {
                     $date = $date->modify('+1 month');
-                    $CR['idVenda'] = $idvenda;
-                    $CR['valor'] = ($i == $numParcelas - 1) ? $UltimaParcela : $Parcela;
-                    $CR['numParcela'] = $i + 1;
-                    $CR['vencimento'] = $date->format('Y-m-d');
-                    $CR['situacao'] = 0;
-                    $modelCR->insert($CR);
+                    $CP['idCompra'] = $idvenda;
+                    $CP['valor'] = ($i == $numParcelas - 1) ? $UltimaParcela : $Parcela;
+                    $CP['numParcela'] = $i + 1;
+                    $CP['vencimento'] = $date->format('Y-m-d');
+                    $CP['situacao'] = 0;
+                    $modelCP->insert($CP);
                 }
             }
-            $this->_redirect("/ContasReceber/index/idVenda/$idvenda");
+            $this->_redirect("/ContasPagar/index/idCompra/$idvenda");
         }
-        $resultado = $db->query("SELECT nome, v.*,sum(i.total) as totalVenda 
-                  from venda v 
-                  left join cliente c 
-                  on c.idCliente = v.idCliente 
-                  left join itemvenda i 
-                  on i.idVenda = v.idVenda 
-                  where v.idVenda = $idvenda 
-                  group by idVenda");
+        $resultado = $db->query("SELECT nome, c.*,sum(i.total) as totalCompra 
+                  from compra c 
+                  left join fornecedor f 
+                  on f.idFornecedor = c.idFornecedor 
+                  left join itemcompra i 
+                  on i.idCompra = c.idCompra 
+                  where c.idCompra = $idvenda 
+                  group by idCompra");
         $itensTabela = $resultado->fetch();
-        $itensTabela['totalVenda'] = (float) number_format($itensTabela['totalVenda'], 2, '.', '');
+        $itensTabela['totalCompra'] = (float) number_format($itensTabela['totalCompra'], 2, '.', '');
 
-        if ($itensTabela['situacao'] != 0 || $itensTabela['totalVenda'] <= 0) {
+        if ($itensTabela['situacao'] != 0 || $itensTabela['totalCompra'] <= 0) {
             $this->_redirect('/venda');
         }
 
-        $form->cliente->setValue($itensTabela['nome']);
-        $form->dataVenda->setValue($this->converteData($itensTabela['dataVenda']));
-        $form->totalVenda->setValue(number_format($itensTabela['totalVenda'], 2, ',', ''));
+        $form->fornecedor->setValue($itensTabela['nome']);
+        $form->dataCompra->setValue($this->converteData($itensTabela['dataCompra']));
+        $form->totalCompra->setValue(number_format($itensTabela['totalCompra'], 2, ',', ''));
         $form->formasPagamento->setValue($itensTabela['formasPagamento']);
         switch ($itensTabela['situacao']) {
             case 0: $form->situacao->setValue('Aberta');
@@ -129,17 +129,17 @@ class ContasReceberController extends Zend_Controller_Action {
           $this->view->form = $form;
          */
         $date = new DateTime(date("Y-m-d"));
-        $idCR = $this->_getParam("idContasReceber");
-        $model = new Application_Model_DbTable_Contasreceber();
-        $CR = $model->fetchRow("idContasR = $idCR")->toArray();
-        $model->update(array('situacao' => 1, 'pagamento' => $date->format('Y-m-d')), "idContasR = $idCR");
-        $existVenda = $model->fetchAll("idVenda = " . $CR['idVenda'] . " and situacao = 0")->toArray();
+        $idCR = $this->_getParam("idContasPagar");
+        $model = new Application_Model_DbTable_Contaspagar();
+        $CP = $model->fetchRow("idContasP = $idCR")->toArray();
+        $model->update(array('situacao' => 1, 'pagamento' => $date->format('Y-m-d')), "idContasP = $idCR");
+        $existVenda = $model->fetchAll("idCompra = " . $CP['idCompra'] . " and situacao = 0")->toArray();
 
         if (count($existVenda) == 0) {
-            $modelVenda = new Application_Model_DbTable_Venda();
-            $modelVenda->update(array('situacao' => 3), "idVenda = " . $CR['idVenda']);
+            $modelVenda = new Application_Model_DbTable_Compra();
+            $modelVenda->update(array('situacao' => 3), "idCompra = " . $CP['idCompra']);
         }
-        $this->_redirect("/ContasReceber/index/idVenda/" . $CR['idVenda']);
+        $this->_redirect("/ContasPagar/index/idCompra/" . $CP['idCompra']);
     }
 
     function converteData($data) {

@@ -4,7 +4,7 @@
  * 'placement' => Zend_Form_Decorator_Abstract::APPEND
  */
 
-class Application_Form_CR_ContasReceber extends Application_Form_Venda_Venda {
+class Application_Form_CP_ContasPagar extends Application_Form_Compra_Compra {
 
     public function __construct($options = null) {
         parent::__construct($options);
@@ -12,15 +12,15 @@ class Application_Form_CR_ContasReceber extends Application_Form_Venda_Venda {
         $this->getElement('situacao')->addDecorator('HtmlTag', array(
             'class' => 'small-12 large-6 columns',
         ));
-        $this->getElement('dataVenda')->addDecorator('HtmlTag', array(
+        $this->getElement('dataCompra')->addDecorator('HtmlTag', array(
             'class' => 'small-12 large-6 columns',
         ));
 
-        $this->getElement('cliente')->addDecorator('HtmlTag', array(
+        $this->getElement('fornecedor')->addDecorator('HtmlTag', array(
             'class' => 'small-12 large-6 columns',
         ));
 
-        $this->addElement($TV = new Zend_Form_Element_Text('totalVenda', array('label' => 'Total da Venda',
+        $this->addElement($TV = new Zend_Form_Element_Text('totalCompra', array('label' => 'Total da Compra',
             'readonly' => true,
             'disableLoadDefaultDecorators' => TRUE,
             'class' => 'disabled'
@@ -63,7 +63,7 @@ class Application_Form_CR_ContasReceber extends Application_Form_Venda_Venda {
         ;
         
         $this->addElement($Encerrar = new Zend_Form_Element_Submit('Faturar', array(
-            'label' => 'Faturar Venda',
+            'label' => 'Faturar Compra',
             'disableLoadDefaultDecorators' => TRUE,
             'class'=>'button '
         )));

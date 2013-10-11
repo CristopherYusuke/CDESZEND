@@ -4,11 +4,11 @@
  * 'placement' => Zend_Form_Decorator_Abstract::APPEND
  */
 
-class Application_Form_CR_Busca extends Zend_Form {
+class Application_Form_CP_Busca extends Zend_Form {
 
     public function init() {
 
-        $this->setAction("/ContasReceber");
+        $this->setAction("/ContasPagar");
         $this->setMethod("POST");
         
         $this->addElement($inputNome = new Zend_Form_Element_Text('nome', array('label' => 'Nome',
@@ -28,12 +28,12 @@ class Application_Form_CR_Busca extends Zend_Form {
                     'id' => array('callback' => array(get_class($inputNome), 'resolveElementId'))
                 ))
         ;
-        $this->addElement($idVenda = new Zend_Form_Element_Text('idVenda', array('label' => 'Identificação da Venda',
+        $this->addElement($idCompra = new Zend_Form_Element_Text('idCompra', array('label' => 'Identificação da Compra',
             'maxLength' => 49,
-            'placeholder' => 'digite o id da venda',
+            'placeholder' => 'digite o id da Compra',
             'disableLoadDefaultDecorators' => TRUE,
         )));
-        $idVenda
+        $idCompra
                 ->addFilter('StripTags')
                 ->addFilter('StringTrim')
                 ->addDecorator('ViewHelper')
@@ -42,7 +42,7 @@ class Application_Form_CR_Busca extends Zend_Form {
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
                     'class' => 'small-12 large-3 columns',
-                    'id' => array('callback' => array(get_class($idVenda), 'resolveElementId'))
+                    'id' => array('callback' => array(get_class($idCompra), 'resolveElementId'))
                 ))
         ;
       
@@ -50,7 +50,7 @@ class Application_Form_CR_Busca extends Zend_Form {
                 
 
         $this->addElement($selectStatus = new Zend_Form_Element_Select('situacao', array(
-            'label' => 'situação da venda   ',           
+            'label' => 'situação da compra   ',           
             'disableLoadDefaultDecorators' => TRUE,
             
         )));

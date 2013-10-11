@@ -1,14 +1,14 @@
 <?php
 
-class Application_Form_CR_Pagamento extends Zend_Form {
+class Application_Form_CP_Pagamento extends Zend_Form {
 
     public function __construct($options = null) {
         parent::__construct($options);
 
-        $this->addElement($id = new Zend_Form_Element_Hidden('idContasR'));
+        $this->addElement($id = new Zend_Form_Element_Hidden('idContasP'));
         $id->removeDecorator('label');
 
-        $this->addElement($idvenda = new Zend_Form_Element_Hidden('idVenda'));
+        $this->addElement($idvenda = new Zend_Form_Element_Hidden('idCompra'));
         $idvenda->removeDecorator('label');
 
         $this->addElement($inputNome = new Zend_Form_Element_Text('nome', array('label' => 'Nome',

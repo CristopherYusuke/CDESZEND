@@ -6,7 +6,9 @@
         Purpose of the stylesheet follows.
 */
 
-
+body {
+  background: #f9f9f9;
+}
 table tbody td .button{
     margin:  0;
  
