@@ -152,7 +152,6 @@ class ContasReceberController extends Zend_Controller_Action {
                 $values['valorPagar'] = str_replace(',', '.', $values['valorPagar']);
                 $values['valorPago'] = $values['valorPago'] + $values['valorPagar'];
                 $date = new DateTime(date("Y-m-d"));
-               
                 if ($values['restante'] <= 0) {
                     $atualizar = array(
                         'valorPago' => $values['valorPago'],
@@ -166,26 +165,19 @@ class ContasReceberController extends Zend_Controller_Action {
                     );
                 }
                 $db->update('contasreceber', $atualizar, 'idContasR = ' . $values['idContasR']);
+                $modelCR = new Application_Model_DbTable_Contasreceber();
+                $CR = $modelCR->fetchRow("idContasR = $idCR")->toArray();
+                $existVenda = $modelCR->fetchAll("idVenda = " . $CR['idVenda'] . " and situacao = 0")->toArray();
+               
+                if (count($existVenda) == 0) {
+                    $modelVenda = new Application_Model_DbTable_Venda();
+                    $modelVenda->update(array('situacao' => 3), "idVenda = " . $CR['idVenda']);
+                }
+
                 $this->_redirect("/ContasReceber/index/idVenda/" . $values['idVenda']);
             }
         }
         $this->view->form = $form;
-
-
-        if (false) {
-            $date = new DateTime(date("Y-m-d"));
-            $idCR = $this->_getParam("idContasReceber");
-            $model = new Application_Model_DbTable_Contasreceber();
-            $CR = $model->fetchRow("idContasR = $idCR")->toArray();
-            $model->update(array('situacao' => 1, 'pagamento' => $date->format('Y-m-d')), "idContasR = $idCR");
-            $existVenda = $model->fetchAll("idVenda = " . $CR['idVenda'] . " and situacao = 0")->toArray();
-
-            if (count($existVenda) == 0) {
-                $modelVenda = new Application_Model_DbTable_Venda();
-                $modelVenda->update(array('situacao' => 3), "idVenda = " . $CR['idVenda']);
-            }
-            $this->_redirect("/ContasReceber/index/idVenda/" . $CR['idVenda']);
-        }
     }
 
     function converteData($data) {
