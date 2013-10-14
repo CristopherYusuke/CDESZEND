@@ -57,7 +57,6 @@ class Application_Form_CP_Busca extends Zend_Form {
         $selectStatus
                 ->addMultiOption(0, 'Aberta')
                 ->addMultiOption(1, 'Faturada')
-                ->addMultiOption(2, 'Extornada')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())

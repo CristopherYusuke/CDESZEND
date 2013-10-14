@@ -11,7 +11,7 @@ class ContasReceberController extends Zend_Controller_Action {
 
     public function indexAction() {
         $form = new Application_Form_CR_Busca();
-        $db = Zend_Db_Table::getDefaultAdapter();
+$db = Zend_Db_Table::getDefaultAdapter();
         $where = "where c.situacao = 0";
         $idVenda = $this->_getParam('idVenda');
         if ($this->_request->isPost()) {
@@ -31,7 +31,7 @@ class ContasReceberController extends Zend_Controller_Action {
                 $form->idVenda->setValue($idVenda);
             }
         }
-
+        
         $query = "SELECT  c.*, cl.nome
                     FROM
                     contasreceber c
@@ -58,7 +58,7 @@ class ContasReceberController extends Zend_Controller_Action {
             $model->update(array(
                 'situacao' => 2,
                 'formasPagamento' => $data['formasPagamento'],
-                'total' => $totalVenda), "idVenda =  $idvenda");            
+                'total' => $totalVenda), "idVenda =  $idvenda");
             $modelCR = new Application_Model_DbTable_Contasreceber();
             $date = new DateTime(date("Y-m-d"));
             $CR = array();
@@ -87,7 +87,7 @@ class ContasReceberController extends Zend_Controller_Action {
             }
             $this->_redirect("/ContasReceber/index/idVenda/$idvenda");
         }
-        $resultado = $db->query("SELECT nome, v.*,sum(i.total) as totalVenda 
+        $resultado = $db->query("SELECT nome, v.*, sum(i.total) as totalVenda 
                   from venda v 
                   left join cliente c 
                   on c.idCliente = v.idCliente 
@@ -124,22 +124,46 @@ class ContasReceberController extends Zend_Controller_Action {
     }
 
     public function pagamentoAction() {
-        /*
-          $form = new Application_Form_CR_Pagamento();
-          $this->view->form = $form;
-         */
-        $date = new DateTime(date("Y-m-d"));
-        $idCR = $this->_getParam("idContasReceber");
-        $model = new Application_Model_DbTable_Contasreceber();
-        $CR = $model->fetchRow("idContasR = $idCR")->toArray();
-        $model->update(array('situacao' => 1, 'pagamento' => $date->format('Y-m-d')), "idContasR = $idCR");
-        $existVenda = $model->fetchAll("idVenda = " . $CR['idVenda'] . " and situacao = 0")->toArray();
 
-        if (count($existVenda) == 0) {
-            $modelVenda = new Application_Model_DbTable_Venda();
-            $modelVenda->update(array('situacao' => 3), "idVenda = " . $CR['idVenda']);
+        $form = new Application_Form_CR_Pagamento();
+        $idCR = $this->_getParam("idContasReceber");
+        $db = Zend_Db_Table::getDefaultAdapter();
+        
+        $query = "SELECT  c.*, cl.nome
+                    FROM
+                    contasreceber c
+                        left join
+                    venda v ON v.idVenda = c.idVenda
+                        left join
+                    cliente cl ON v.idCliente = cl.idCliente
+                    where idContasR = $idCR ";
+
+        $model = $db->query($query); 
+        $pagar  = $model->fetch();
+               
+        
+        $pagar['vencimento'] = $this->converteData( $pagar['vencimento']);
+        $pagar['vencimento'] = number_format((float)$pagar['vencimento'],2,',','');
+        $pagar['valor'] = number_format((float)$pagar['valor'],2,',','');   
+        
+        $form->populate($pagar);
+        $this->view->form = $form;
+
+
+        if (false) {
+            $date = new DateTime(date("Y-m-d"));
+            $idCR = $this->_getParam("idContasReceber");
+            $model = new Application_Model_DbTable_Contasreceber();
+            $CR = $model->fetchRow("idContasR = $idCR")->toArray();
+            $model->update(array('situacao' => 1, 'pagamento' => $date->format('Y-m-d')), "idContasR = $idCR");
+            $existVenda = $model->fetchAll("idVenda = " . $CR['idVenda'] . " and situacao = 0")->toArray();
+
+            if (count($existVenda) == 0) {
+                $modelVenda = new Application_Model_DbTable_Venda();
+                $modelVenda->update(array('situacao' => 3), "idVenda = " . $CR['idVenda']);
+            }
+            $this->_redirect("/ContasReceber/index/idVenda/" . $CR['idVenda']);
         }
-        $this->_redirect("/ContasReceber/index/idVenda/" . $CR['idVenda']);
     }
 
     function converteData($data) {

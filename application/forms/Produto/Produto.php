@@ -91,7 +91,6 @@ class Application_Form_Produto_Produto extends Zend_Form {
         
         
         $this->addElement($inputEstoque = new Zend_Form_Element_Text('estoque', array('label' => 'Quantidade',
-            'required' => true,
             'maxLength' => 49,
             'placeholder' => 'digite a quantidade',
             'disableLoadDefaultDecorators' => TRUE,

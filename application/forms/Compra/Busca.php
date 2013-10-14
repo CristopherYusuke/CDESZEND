@@ -64,7 +64,6 @@ class Application_Form_Compra_Busca extends Zend_Form {
                 ->addMultiOption(1, 'Cancelada')
                 ->addMultiOption(2, 'Faturada')
                 ->addMultiOption(3, 'Finalizada')
-                ->addMultiOption(4, 'Extornada')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())

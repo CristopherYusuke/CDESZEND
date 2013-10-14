@@ -12,9 +12,8 @@ class Application_Form_CR_Pagamento extends Zend_Form {
         $idvenda->removeDecorator('label');
 
         $this->addElement($inputNome = new Zend_Form_Element_Text('nome', array('label' => 'Nome',
-            'required' => true,
-            'maxLength' => 49,
-            'placeholder' => 'digite o seu nome',
+            'readonly' => 'true',
+            'class' => 'disabled',
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $inputNome
@@ -24,47 +23,15 @@ class Application_Form_CR_Pagamento extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
+                    'class' => 'small-12 large-4 columns',
                     'id' => array('callback' => array(get_class($inputNome), 'resolveElementId'))
                 ))
         ;
-        $this->addElement($valorPago = new Zend_Form_Element_Text('valorPago', array('label' => 'Valor Pago',
-            'required' => true,
-            'maxLength' => 49,
-            'placeholder' => 'digite o Valor que sera pago',
-            'disableLoadDefaultDecorators' => TRUE,
-        )));
-        $valorPago
-                ->addFilters(array('StripTags', 'StringTrim'))
-                ->addDecorator('ViewHelper')
-                ->addDecorator('Errors')
-                ->addDecorator('Label', array())
-                ->addDecorator('HtmlTag', array(
-                    'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
-                    'id' => array('callback' => array(get_class($valorPago), 'resolveElementId'))
-                ))
-        ;
-        $this->addElement($valor = new Zend_Form_Element_Text('valor', array('label' => 'Valor ',
-            'required' => true,
-            'maxLength' => 49,
-            'disableLoadDefaultDecorators' => TRUE,
-        )));
-        $valor
-                ->addFilters(array('StripTags', 'StringTrim'))
-                ->addDecorator('ViewHelper')
-                ->addDecorator('Errors')
-                ->addDecorator('Label', array())
-                ->addDecorator('HtmlTag', array(
-                    'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
-                    'id' => array('callback' => array(get_class($valor), 'resolveElementId'))
-                ))
-        ;
+        
+        
         $this->addElement($vencimento = new Zend_Form_Element_Text('vencimento', array('label' => 'Data de Vencimento',
-            'required' => true,
-            'maxLength' => 49,
-            'placeholder' => 'digite o seu nome',
+            'readonly' => true,
+            'class' => 'disabled',
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $vencimento
@@ -74,29 +41,14 @@ class Application_Form_CR_Pagamento extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
+                    'class' => 'small-12 large-4 columns',
                     'id' => array('callback' => array(get_class($vencimento), 'resolveElementId'))
                 ))
         ;
-        $this->addElement($pagamento = new Zend_Form_Element_Text('pagamento', array('label' => 'Data de Pagamento',
-            'required' => true,
-            'maxLength' => 49,
-            'disableLoadDefaultDecorators' => TRUE,
-        )));
-        $pagamento
-                ->addFilters(array('StripTags', 'StringTrim'))
-                ->addDecorator('ViewHelper')
-                ->addDecorator('Errors')
-                ->addDecorator('Label', array())
-                ->addDecorator('HtmlTag', array(
-                    'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
-                    'id' => array('callback' => array(get_class($pagamento), 'resolveElementId'))
-                ))
-        ;
+        
         $this->addElement($numParcela = new Zend_Form_Element_Text('numParcela', array('label' => 'Numero da Parcela',
-            'required' => true,
-            'maxLength' => 49,
+            'readonly' => true,
+            'class' => 'disabled',
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $numParcela
@@ -106,35 +58,102 @@ class Application_Form_CR_Pagamento extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
+                    'class' => 'small-12 large-4 columns',
                     'id' => array('callback' => array(get_class($numParcela), 'resolveElementId'))
                 ))
         ;
-        $this->addElement($situacao = new Zend_Form_Element_Text('situacao', array('label' => 'Situação',
-            'required' => true,
-            'maxLength' => 49,
+        
+        $this->addElement($valor = new Zend_Form_Element_Text('valor', array('label' => 'Valor ',
+            'readonly' => true,
+            'class' => 'disabled',
             'disableLoadDefaultDecorators' => TRUE,
         )));
-        $situacao
+        $valor
                 ->addFilters(array('StripTags', 'StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-6 columns',
-                    'id' => array('callback' => array(get_class($situacao), 'resolveElementId'))
+                    'class' => 'small-12   large-6 columns',
+                    'id' => array('callback' => array(get_class($valor), 'resolveElementId'))
                 ))
         ;
+        
+        
+        
+        $this->addElement($valorPago = new Zend_Form_Element_Text('valorPago', array('label' => 'Valor Pago',
+            'readonly' => true,
+            'class' => 'disabled',
+            'disableLoadDefaultDecorators' => TRUE,
+        )));
+        $valorPago
+                ->addFilters(array('StripTags', 'StringTrim'))
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('Label', array())
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-12   large-6 columns',
+                    'id' => array('callback' => array(get_class($valorPago), 'resolveElementId'))
+                ))
+        ;
+        $this->addElement($valorPagar = new Zend_Form_Element_Text('valorPagar', array('label' => 'Valora Pagar',
+            'required' => true,
+            'maxLength' => 49,
+            'placeholder' => 'digite o Valor que sera pago',
+            'disableLoadDefaultDecorators' => TRUE,
+        )));
+        $valorPagar
+                ->addFilters(array('StripTags', 'StringTrim'))
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('Label', array())
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-12   large-6 columns',
+                    'id' => array('callback' => array(get_class($valorPago), 'resolveElementId'))
+                ))
+        ;
+        $this->addElement($restante = new Zend_Form_Element_Text('restante', array('label' => 'Restante',
+            'readonly' => true,
+            'class' => 'disabled',
+            'ignore' => true,
+            'placeholder' => 'Restante',
+            'disableLoadDefaultDecorators' => TRUE,
+        )));
+        $restante
+                ->addFilters(array('StripTags', 'StringTrim'))
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('Label', array())
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-12   large-6 columns',
+                    'id' => array('callback' => array(get_class($restante), 'resolveElementId'))
+                ))
+        ;
+        
 
-        $this->addElement($button = new Zend_Form_Element_Submit('submit', array('label' => 'Pagar Fatura', 'class' => 'button')));
+        $this->addElement($button = new Zend_Form_Element_Submit('submit', array('label' => 'PAGAR', 'class' => 'button')));
         $button
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-12 columns',
+                    'class' => 'small-6 large-6 columns',
                     'id' => array('callback' => array(get_class($button), 'resolveElementId'))
+                ))
+
+        ;
+         $this->addElement($voltar = new Zend_Form_Element_Button('Voltar', array('label' => 'VOLTAR', 'class' => 'button secondary right')));
+        $voltar
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-6 large-6  columns',
+                    'id' => array('callback' => array(get_class($voltar), 'resolveElementId'))
                 ))
 
         ;

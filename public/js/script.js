@@ -1,20 +1,5 @@
 $(document).ready(function() {// on Load
-    /*
-     * 
-     $("#btn_usuario_excluir").click(function(event) {
-     event.preventDefault();
-     if (window.confirm("Deseja excluir este usuario ?")) {
-     $.ajax({
-     type: 'POST',
-     url: '/usuario/delete/idUsuario/' + $("#btn_usuario_excluir").attr("data-id"),
-     dataType: 'text',
-     success: function(data) {
-     location.reload();
-     alert("O usuario foi deletado");
-     }
-     });
-     }
-     });*/
+
 
     $('a.disabled').click(function(event) {
         event.preventDefault();
@@ -52,6 +37,40 @@ $(document).ready(function() {// on Load
 
         });
     });
+
+
+
+    $('#valorPagar').blur(function() {
+        var valor = $('#valor').val();
+        var valorPagar = $('#valorPagar').val();
+        var valorPago = $('#valorPago').val();
+        if (valorPago == '') {
+            valorPago = 0;
+        }
+        valorPago = valorPago.toFixed(2).replace(',', '.');
+        valor = valor.replace(',', '.');
+        valorPagar = valorPagar.replace(',', '.');
+
+
+        console.log(valorPago+"\n"+valor+'\n'+valorPagar );
+
+
+        var restante = (valor - valorPago ) - valorPagar;
+        $('#restante').val(restante);
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     $("form.compra  select#idProduto").change(function() {
         var id = $("select#idProduto option:selected").val();

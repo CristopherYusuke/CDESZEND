@@ -3,4 +3,50 @@
         <h2 class="text-center"> Pagamento da Fatura </h2>
     </div>
 </div>
-<?php //echo $this->form?>
+
+
+<div class="row">
+    <div class="small-12 small-centered large-8 columns ">
+
+        <form method="<?php echo $this->form->getMethod() ?>" action="<?php echo $this->form->getAction() ?>">
+            <div class="row">
+                <?php
+                echo $this->form->idContasR;
+                echo $this->form->idVenda;
+                echo $this->form->nome;
+                echo $this->form->vencimento;
+                echo $this->form->numParcela;
+                ?>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="small-12 small-centered large-8 columns">
+                    <div class="row">
+                        <?php
+                        echo $this->form->valor;
+                        echo $this->form->valorPago;
+                        ?>
+                    </div>
+                    <div class="row">
+                        <?php
+                        echo $this->form->valorPagar;
+                        echo $this->form->restante;
+                        ?>
+                    </div>
+                    <div class="row">
+                        <?php
+                        echo $this->form->submit;
+                        echo $this->form->Voltar;
+                        ?>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+
