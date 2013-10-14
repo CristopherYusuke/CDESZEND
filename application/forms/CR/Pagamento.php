@@ -4,7 +4,7 @@ class Application_Form_CR_Pagamento extends Zend_Form {
 
     public function __construct($options = null) {
         parent::__construct($options);
-
+        $float = new Zend_Validate_Float();
         $this->addElement($id = new Zend_Form_Element_Hidden('idContasR'));
         $id->removeDecorator('label');
 
@@ -27,8 +27,8 @@ class Application_Form_CR_Pagamento extends Zend_Form {
                     'id' => array('callback' => array(get_class($inputNome), 'resolveElementId'))
                 ))
         ;
-        
-        
+
+
         $this->addElement($vencimento = new Zend_Form_Element_Text('vencimento', array('label' => 'Data de Vencimento',
             'readonly' => true,
             'class' => 'disabled',
@@ -45,7 +45,7 @@ class Application_Form_CR_Pagamento extends Zend_Form {
                     'id' => array('callback' => array(get_class($vencimento), 'resolveElementId'))
                 ))
         ;
-        
+
         $this->addElement($numParcela = new Zend_Form_Element_Text('numParcela', array('label' => 'Numero da Parcela',
             'readonly' => true,
             'class' => 'disabled',
@@ -62,7 +62,7 @@ class Application_Form_CR_Pagamento extends Zend_Form {
                     'id' => array('callback' => array(get_class($numParcela), 'resolveElementId'))
                 ))
         ;
-        
+
         $this->addElement($valor = new Zend_Form_Element_Text('valor', array('label' => 'Valor ',
             'readonly' => true,
             'class' => 'disabled',
@@ -79,9 +79,9 @@ class Application_Form_CR_Pagamento extends Zend_Form {
                     'id' => array('callback' => array(get_class($valor), 'resolveElementId'))
                 ))
         ;
-        
-        
-        
+
+
+
         $this->addElement($valorPago = new Zend_Form_Element_Text('valorPago', array('label' => 'Valor Pago',
             'readonly' => true,
             'class' => 'disabled',
@@ -105,6 +105,7 @@ class Application_Form_CR_Pagamento extends Zend_Form {
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $valorPagar
+                ->addValidator($float)
                 ->addFilters(array('StripTags', 'StringTrim'))
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
@@ -115,10 +116,9 @@ class Application_Form_CR_Pagamento extends Zend_Form {
                     'id' => array('callback' => array(get_class($valorPago), 'resolveElementId'))
                 ))
         ;
-        $this->addElement($restante = new Zend_Form_Element_Text('restante', array('label' => 'Restante',
+        $this->addElement($restante = new Zend_Form_Element_Text('restante', array('label' => 'Restante/Troco',
             'readonly' => true,
             'class' => 'disabled',
-            'ignore' => true,
             'placeholder' => 'Restante',
             'disableLoadDefaultDecorators' => TRUE,
         )));
@@ -133,7 +133,7 @@ class Application_Form_CR_Pagamento extends Zend_Form {
                     'id' => array('callback' => array(get_class($restante), 'resolveElementId'))
                 ))
         ;
-        
+
 
         $this->addElement($button = new Zend_Form_Element_Submit('submit', array('label' => 'PAGAR', 'class' => 'button')));
         $button
@@ -146,7 +146,7 @@ class Application_Form_CR_Pagamento extends Zend_Form {
                 ))
 
         ;
-         $this->addElement($voltar = new Zend_Form_Element_Button('Voltar', array('label' => 'VOLTAR', 'class' => 'button secondary right')));
+        $this->addElement($voltar = new Zend_Form_Element_Button('Voltar', array('label' => 'VOLTAR', 'class' => 'button secondary right')));
         $voltar
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')

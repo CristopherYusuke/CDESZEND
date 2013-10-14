@@ -30,6 +30,8 @@
                         <th>idVenda</th>
                         <th>Nome Cliente </th>
                         <th>Valor</th>
+                        <th>Valor Pago </th>
+                        <th>Restante</th>
                         <th>Data de Vencimento</th>
                         <th>Data de Pagamento</th>
                         <th>Numero da Parcela</th>
@@ -37,14 +39,16 @@
                         <th>Operação</th>
                     </tr>
                 </thead>
-                <?php foreach ($this->CR as $key => $value) {
+                <?php
+                foreach ($this->CR as $key => $value) {
                     ?>
                     <tr>
                         <td><?php echo $this->CR[$key]['idContasR']; ?></td>
                         <td><?php echo $this->CR[$key]['idVenda']; ?></td>
                         <td><?php echo $this->CR[$key]['nome']; ?></td>
                         <td><?php echo "R$" . number_format($this->CR[$key]['valor'], 2, ',', ''); ?></td>
-                        <!--<td><?php // echo $this->CR[$key]['valorPago'];     ?></td>--> 
+                        <td><?php echo "R$" . number_format($this->CR[$key]['valorPago'], 2, ',', ''); ?></td>
+                        <td><?php echo "R$" . number_format(($this->CR[$key]['valor'] - $this->CR[$key]['valorPago']), 2, ',', ''); ?></td>
                         <td><?php echo converteData($this->CR[$key]['vencimento']); ?></td>
                         <td><?php echo converteData($this->CR[$key]['pagamento']); ?></td>
                         <td><?php echo $this->CR[$key]['numParcela']; ?></td>

@@ -11,7 +11,7 @@ class ContasReceberController extends Zend_Controller_Action {
 
     public function indexAction() {
         $form = new Application_Form_CR_Busca();
-$db = Zend_Db_Table::getDefaultAdapter();
+        $db = Zend_Db_Table::getDefaultAdapter();
         $where = "where c.situacao = 0";
         $idVenda = $this->_getParam('idVenda');
         if ($this->_request->isPost()) {
@@ -31,7 +31,7 @@ $db = Zend_Db_Table::getDefaultAdapter();
                 $form->idVenda->setValue($idVenda);
             }
         }
-        
+
         $query = "SELECT  c.*, cl.nome
                     FROM
                     contasreceber c
@@ -87,7 +87,7 @@ $db = Zend_Db_Table::getDefaultAdapter();
             }
             $this->_redirect("/ContasReceber/index/idVenda/$idvenda");
         }
-        $resultado = $db->query("SELECT nome, v.*, sum(i.total) as totalVenda 
+        $resultado = $db->query("SELECT nome, v.*, sum(i.total) as totalVenda
                   from venda v 
                   left join cliente c 
                   on c.idCliente = v.idCliente 
@@ -126,9 +126,9 @@ $db = Zend_Db_Table::getDefaultAdapter();
     public function pagamentoAction() {
 
         $form = new Application_Form_CR_Pagamento();
+
         $idCR = $this->_getParam("idContasReceber");
         $db = Zend_Db_Table::getDefaultAdapter();
-        
         $query = "SELECT  c.*, cl.nome
                     FROM
                     contasreceber c
@@ -137,16 +137,38 @@ $db = Zend_Db_Table::getDefaultAdapter();
                         left join
                     cliente cl ON v.idCliente = cl.idCliente
                     where idContasR = $idCR ";
+        $model = $db->query($query);
+        $pagar = $model->fetch();
+        $pagar['vencimento'] = $this->converteData($pagar['vencimento']);
+        $pagar['valor'] = number_format((float) $pagar['valor'], 2, ',', '');
+        $form->Voltar->setAttribs(array('onClick' => "parent.location='/ContasReceber/index/idVenda/" . $pagar['idVenda'] . "'"));
 
-        $model = $db->query($query); 
-        $pagar  = $model->fetch();
-               
-        
-        $pagar['vencimento'] = $this->converteData( $pagar['vencimento']);
-        $pagar['vencimento'] = number_format((float)$pagar['vencimento'],2,',','');
-        $pagar['valor'] = number_format((float)$pagar['valor'],2,',','');   
-        
         $form->populate($pagar);
+
+        if ($this->_request->isPost()) {
+            $data = $this->_request->getPost();
+            if ($form->isValid($data)) {
+                $values = $form->getValues();
+                $values['valorPagar'] = str_replace(',', '.', $values['valorPagar']);
+                $values['valorPago'] = $values['valorPago'] + $values['valorPagar'];
+                $date = new DateTime(date("Y-m-d"));
+               
+                if ($values['restante'] <= 0) {
+                    $atualizar = array(
+                        'valorPago' => $values['valorPago'],
+                        'pagamento' => $date->format('Y-m-d'),
+                        'situacao' => 1
+                    );
+                } else {
+                    $atualizar = array(
+                        'valorPago' => $values['valorPago'],
+                        'pagamento' => $date->format('Y-m-d'),
+                    );
+                }
+                $db->update('contasreceber', $atualizar, 'idContasR = ' . $values['idContasR']);
+                $this->_redirect("/ContasReceber/index/idVenda/" . $values['idVenda']);
+            }
+        }
         $this->view->form = $form;
 
 

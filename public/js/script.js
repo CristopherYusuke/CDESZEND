@@ -47,7 +47,9 @@ $(document).ready(function() {// on Load
         if (valorPago == '') {
             valorPago = 0;
         }
-        valorPago = valorPago.toFixed(2).replace(',', '.');
+        valorPago = parseFloat(valorPago);
+        valorPago = valorPago.toFixed(2);
+        valorPago = valorPago.replace(',', '.');
         valor = valor.replace(',', '.');
         valorPagar = valorPagar.replace(',', '.');
 
