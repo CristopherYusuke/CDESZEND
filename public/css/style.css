@@ -7,11 +7,11 @@
 */
 
 body {
-  background: #f9f9f9;
+    background: #f9f9f9;
 }
 table tbody td .button{
     margin:  0;
- 
+
 }
 table tr th, table tr td {
     padding: 0.5em 0.625em;
@@ -124,4 +124,14 @@ div#nav a {
 }
 button, .button {
     margin: 0;
+}
+
+.ui-widget {
+    font-size: 1em;
+}
+
+@media print{
+    nav{
+        display: hide;
+    }
 }
