@@ -12,15 +12,15 @@ class ContasPagarController extends Zend_Controller_Action {
     public function indexAction() {
         $form = new Application_Form_CP_Busca();
         $db = Zend_Db_Table::getDefaultAdapter();
-        $where = "where c.situacao = 0";
+        $where = "where cp.situacao = 0";
         $idCompra = $this->_getParam('idCompra');
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
 
-                $where = "where c.situacao = " . $data['situacao'] . " and nome like('%" . $data['nome'] . "%') ";
+                $where = "where cp.situacao = " . $data['situacao'] . " and nome like('%" . $data['nome'] . "%') ";
                 if ($data['idCompra']) {
-                    $where .= "and c.idCompra = " . $data['idCompra'];
+                    $where .= "and cp.idCompra = " . $data['idCompra'];
                 }
             } else {
                 $form->populate($data);
@@ -58,7 +58,7 @@ class ContasPagarController extends Zend_Controller_Action {
             $model->update(array(
                 'situacao' => 2,
                 'formasPagamento' => $data['formasPagamento'],
-                'total' => $totalCompra), "idCompra =  $idvenda");            
+                'total' => $totalCompra), "idCompra =  $idvenda");
             $modelCP = new Application_Model_DbTable_Contaspagar();
             $date = new DateTime(date("Y-m-d"));
             $CP = array();

@@ -1,18 +1,20 @@
-<?php 
+<?php
+
 function converteData($data) {
-        if (strstr($data, "/")) {//verifica se tem a barra /
-            $d = explode("/", $data); //tira a barra
-            $rstData = "$d[2]-$d[1]-$d[0]"; //separa as datas $d[2] = ano $d[1] = mes etc...
-            return $rstData;
-        } else if (strstr($data, "-")) {
-            $data = substr($data, 0, 10);
-            $d = explode("-", $data);
-            $rstData = "$d[2]/$d[1]/$d[0]";
-            return $rstData;
-        } else {
-            return '';
-        }
-    }?>
+    if (strstr($data, "/")) {//verifica se tem a barra /
+        $d = explode("/", $data); //tira a barra
+        $rstData = "$d[2]-$d[1]-$d[0]"; //separa as datas $d[2] = ano $d[1] = mes etc...
+        return $rstData;
+    } else if (strstr($data, "-")) {
+        $data = substr($data, 0, 10);
+        $d = explode("-", $data);
+        $rstData = "$d[2]/$d[1]/$d[0]";
+        return $rstData;
+    } else {
+        return '';
+    }
+}
+?>
 
 <div class="row ">
     <div class="small-12 columns">
@@ -20,85 +22,85 @@ function converteData($data) {
     </div>
 </div>
 <div class="row">
-    <?php if (isset($this->mensagens)) { ?>
-        <div data-alert class="alert-box alert ">
+    <div class="small-12 column">
+            <?php if (isset($this->mensagens)) { ?>
+            <div data-alert class="alert-box alert ">
             <?php echo $this->mensagens; ?>
-            <a href="#" class="close">&times;</a>
-        </div>
+                <a href="#" class="close">&times;</a>
+            </div>
     <?php } ?>
-    <?php echo $this->form ?>
+    </div>
+<?php echo $this->form ?>
 </div>
 
-<div class="row">
-    <div class="small-12 small-centered columns">
+<div class="small-12 small-centered columns">
 
-        <table width="100%">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Cliente</th>
-                    <th>Data Venda</th>
-                    <th>total</th>
-                    <th>Formas Pagamento</th>
-                    <th>Situacao</th>
-                </tr>
-            </thead>
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Cliente</th>
+                <th>Data Venda</th>
+                <th>total</th>
+                <th>Formas Pagamento</th>
+                <th>Situacao</th>
+            </tr>
+        </thead>
 
-            <?php foreach ($this->venda as $key => $value) : ?>
+<?php foreach ($this->venda as $key => $value) : ?>
 
-                <tr>
-                    <td><?php echo $this->venda[$key]['idVenda']; ?> </td>
-                    <td><?php echo $this->venda[$key]['nome']; ?></td>
-                    <td><?php echo converteData($this->venda[$key]['dataVenda']); ?></td>
-                    <td><?php
-                        $total = ($this->venda[$key]['situacao'] != 4 ) ?
-                                $this->venda[$key]['totalVenda'] :
-                                $this->venda[$key]['total'];
-                        echo "R$ " . number_format($total, 2, ',', '');
-                        ?></td>
-                    <td><?php
-                        if ($this->venda[$key]['formasPagamento'] != null) {
-                            switch ($this->venda[$key]['formasPagamento']) {
-                                case 0: echo 'A vista';
-                                    break;
-                                case 1: echo 'Pagamento para 30 dias';
-                                    break;
-                                case 2: echo 'Pagamento para 30-60 dias';
-                                    break;
-                                case 3: echo 'Pagamento para 30-60-90 dias';
-                                    break;
-                                case 4: echo 'Pagamento para 30-60-90-120 dias';
-                                    break;
-                                case '': echo '';
-                                    break;
-                                default:echo null;
-                                    break;
-                            };
-                        } else {
-                            echo 'A definir ';
-                        }
-                        ?></td>
-                    <td><?php
-                        switch ($this->venda[$key]['situacao']) {
-                            case 0: echo 'Aberta';
+            <tr>
+                <td><?php echo $this->venda[$key]['idVenda']; ?> </td>
+                <td><?php echo $this->venda[$key]['nome']; ?></td>
+                <td><?php echo converteData($this->venda[$key]['dataVenda']); ?></td>
+                <td><?php
+                    $total = ($this->venda[$key]['situacao'] != 4 ) ?
+                            $this->venda[$key]['totalVenda'] :
+                            $this->venda[$key]['total'];
+                    echo "R$ " . number_format($total, 2, ',', '');
+                    ?></td>
+                <td><?php
+                    if ($this->venda[$key]['formasPagamento'] != null) {
+                        switch ($this->venda[$key]['formasPagamento']) {
+                            case 0: echo 'A vista';
                                 break;
-                            case 1: echo 'Cancelada';
+                            case 1: echo 'Pagamento para 30 dias';
                                 break;
-                            case 2: echo 'Faturada';
+                            case 2: echo 'Pagamento para 30-60 dias';
                                 break;
-                            case 3: echo 'Finalizada';
+                            case 3: echo 'Pagamento para 30-60-90 dias';
                                 break;
-                            case 4: echo 'Extornada';
+                            case 4: echo 'Pagamento para 30-60-90-120 dias';
                                 break;
-                            default:echo false;
+                            case '': echo '';
+                                break;
+                            default:echo null;
                                 break;
                         };
-                        ?></td >
+                    } else {
+                        echo 'A definir ';
+                    }
+                    ?></td>
+                <td><?php
+                    switch ($this->venda[$key]['situacao']) {
+                        case 0: echo 'Aberta';
+                            break;
+                        case 1: echo 'Cancelada';
+                            break;
+                        case 2: echo 'Faturada';
+                            break;
+                        case 3: echo 'Finalizada';
+                            break;
+                        case 4: echo 'Extornada';
+                            break;
+                        default:echo false;
+                            break;
+                    };
+                    ?></td >
 
 
-                </tr>
-            <?php endforeach; ?> <!-- End foreach -->
-        </table>
+            </tr>
+<?php endforeach; ?> <!-- End foreach -->
+    </table>
 
-    </div>
 </div>

@@ -9,7 +9,7 @@ class Application_Form_Relatorio_VendaPorData extends Zend_Form {
     public function __construct($options = null) {
         parent::__construct($options);
         
-        
+        $this->setAttrib('class', 'custom');
 
 
 

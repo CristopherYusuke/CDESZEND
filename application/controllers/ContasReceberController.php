@@ -168,7 +168,7 @@ class ContasReceberController extends Zend_Controller_Action {
                 $modelCR = new Application_Model_DbTable_Contasreceber();
                 $CR = $modelCR->fetchRow("idContasR = $idCR")->toArray();
                 $existVenda = $modelCR->fetchAll("idVenda = " . $CR['idVenda'] . " and situacao = 0")->toArray();
-               
+
                 if (count($existVenda) == 0) {
                     $modelVenda = new Application_Model_DbTable_Venda();
                     $modelVenda->update(array('situacao' => 3), "idVenda = " . $CR['idVenda']);

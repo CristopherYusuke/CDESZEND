@@ -11,7 +11,9 @@ class UsuarioController extends Zend_Controller_Action {
 
     public function indexAction() {
         $usuarioModel = new Application_Model_DbTable_Usuario();
-        $this->view->usuarios = $usuarioModel->fetchAll()->toArray();
+        $usuarios = $usuarioModel->fetchAll()->toArray();
+        $this->view->usuarios = $usuarios;
+        $this->view->qtdeLinhas = count($usuarios);
     }
 
     public function createAction() {

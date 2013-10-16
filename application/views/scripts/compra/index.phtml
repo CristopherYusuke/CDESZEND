@@ -34,95 +34,93 @@ function converteData($data) {
         </form>
     </div>
 </div>
-<div class="row">
-    <div class="small-12 small-centered columns">
-        <div class="scroll">
-            <table width="100%">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Fornecedor</th>
-                        <th>Data Compra</th>
-                        <th>total</th>
-                        <th>Formas Pagamento</th>
-                        <th>Situacao</th>
-                        <th>Operações</th>
-                    </tr>
-                </thead>
+<div class="small-12 small-centered columns">
+    <div class="scroll">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Fornecedor</th>
+                    <th>Data Compra</th>
+                    <th>total</th>
+                    <th>Formas Pagamento</th>
+                    <th>Situacao</th>
+                    <th>Operações</th>
+                </tr>
+            </thead>
 
-                <?php foreach ($this->compra as $key => $value) : ?>
+            <?php foreach ($this->compra as $key => $value) : ?>
 
-                    <tr>
-                        <td><?php echo $this->compra[$key]['idCompra']; ?> </td>
-                        <td><?php echo $this->compra[$key]['nome']; ?></td>
-                        <td><?php echo converteData($this->compra[$key]['dataCompra']); ?></td>
-                        <td><?php
-                            $total = ($this->compra[$key]['situacao'] != 4 ) ? $this->compra[$key]['totalCompra'] : $this->compra[$key]['total'];
-                            echo "R$ " . number_format($total, 2, ',', '');
-                            ?></td>
-                        <td><?php
-                            if ($this->compra[$key]['formasPagamento'] != null) {
-                                switch ($this->compra[$key]['formasPagamento']) {
-                                    case 0: echo 'A vista';
-                                        break;
-                                    case 1: echo 'Pagamento para 30 dias';
-                                        break;
-                                    case 2: echo 'Pagamento para 30-60 dias';
-                                        break;
-                                    case 3: echo 'Pagamento para 30-60-90 dias';
-                                        break;
-                                    case 4: echo 'Pagamento para 30-60-90-120 dias';
-                                        break;
-                                    case '': echo '';
-                                        break;
-                                    default:echo null;
-                                        break;
-                                };
-                            } else {
-                                echo 'A definir ';
-                            }
-                            ?></td>
-                        <td><?php
-                            switch ($this->compra[$key]['situacao']) {
-                                case 0: echo 'Aberta';
+                <tr>
+                    <td><?php echo $this->compra[$key]['idCompra']; ?> </td>
+                    <td><?php echo $this->compra[$key]['nome']; ?></td>
+                    <td><?php echo converteData($this->compra[$key]['dataCompra']); ?></td>
+                    <td><?php
+                        $total = ($this->compra[$key]['situacao'] != 4 ) ? $this->compra[$key]['totalCompra'] : $this->compra[$key]['total'];
+                        echo "R$ " . number_format($total, 2, ',', '');
+                        ?></td>
+                    <td><?php
+                        if ($this->compra[$key]['formasPagamento'] != null) {
+                            switch ($this->compra[$key]['formasPagamento']) {
+                                case 0: echo 'A vista';
                                     break;
-                                case 1: echo 'Cancelada';
+                                case 1: echo 'Pagamento para 30 dias';
                                     break;
-                                case 2: echo 'Faturada';
+                                case 2: echo 'Pagamento para 30-60 dias';
                                     break;
-                                case 3: echo 'Finalizada';
+                                case 3: echo 'Pagamento para 30-60-90 dias';
                                     break;
-                                case 4: echo 'Extornada';
+                                case 4: echo 'Pagamento para 30-60-90-120 dias';
                                     break;
-                                default:echo false;
+                                case '': echo '';
+                                    break;
+                                default:echo null;
                                     break;
                             };
-                            ?></td >
-                        <td class="text-center">
-                            <?php if ($this->compra[$key]['situacao'] == 0) : ?> 
-                                <a href="/compra/create/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
-                                   class="tiny button secondary">EDITAR</a>
-                                <a href="/compra/cancel/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
-                                   class="tiny button secondary">CANCELAR</a>
-                               <?php endif; ?> 
-                               <?php if ($this->compra[$key]['totalCompra'] > 0 && $this->compra[$key]['situacao'] == 0): ?> 
-                                <a href="/ContasPagar/create/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
-                                   class="tiny button secondary">FATURAR</a>
-                               <?php endif; ?>
-                               <?php if ($this->compra[$key]['situacao'] == 2): ?> 
-                                <a href="/ContasPagar/index/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
-                                   class="tiny button secondary">VISUALIZAR CONTAS A RECEBER</a>
-                               <?php endif; ?>
-                            <?php if ($this->compra[$key]['situacao'] == 3): ?> 
-                                <a href="/ContasPagar/index/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
-                                   class="tiny button secondary">Visualizar Contas a receber</a>
-                               <?php endif; ?>
-                        </td> 
+                        } else {
+                            echo 'A definir ';
+                        }
+                        ?></td>
+                    <td><?php
+                        switch ($this->compra[$key]['situacao']) {
+                            case 0: echo 'Aberta';
+                                break;
+                            case 1: echo 'Cancelada';
+                                break;
+                            case 2: echo 'Faturada';
+                                break;
+                            case 3: echo 'Finalizada';
+                                break;
+                            case 4: echo 'Extornada';
+                                break;
+                            default:echo false;
+                                break;
+                        };
+                        ?></td >
+                    <td class="text-center">
+                        <?php if ($this->compra[$key]['situacao'] == 0) : ?> 
+                            <a href="/compra/create/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
+                               class="tiny button secondary">EDITAR</a>
+                            <a href="/compra/cancel/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
+                               class="tiny button secondary">CANCELAR</a>
+                           <?php endif; ?> 
+                           <?php if ($this->compra[$key]['totalCompra'] > 0 && $this->compra[$key]['situacao'] == 0): ?> 
+                            <a href="/ContasPagar/create/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
+                               class="tiny button secondary">FATURAR</a>
+                           <?php endif; ?>
+                           <?php if ($this->compra[$key]['situacao'] == 2): ?> 
+                            <a href="/ContasPagar/index/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
+                               class="tiny button secondary">VISUALIZAR CONTAS A RECEBER</a>
+                           <?php endif; ?>
+                           <?php if ($this->compra[$key]['situacao'] == 3): ?> 
+                            <a href="/ContasPagar/index/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
+                               class="tiny button secondary">Visualizar Contas a receber</a>
+                           <?php endif; ?>
+                    </td> 
 
-                    </tr>
-                <?php endforeach; ?> <!-- End foreach -->
-            </table>
-        </div>
+                </tr>
+            <?php endforeach; ?> <!-- End foreach -->
+        </table>
     </div>
 </div>
 <div class="row">

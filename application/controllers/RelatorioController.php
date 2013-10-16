@@ -26,7 +26,7 @@ class RelatorioController extends Zend_Controller_Action {
                 $values['dataFinal'] = $this->converteData($values['dataFinal']);
                if($values['dataInicio'] < $values['dataFinal']){
                     $where = "where  nome like('%" . $values['nome'] . "%') and dataVenda BETWEEN   '". $values['dataInicio'] ."' AND  '" . $values['dataFinal'] . "'";
-                    if(!$values['situacao']==''){
+                    if(!$values['situacao'] == '' ){
                         $where .= " and situacao = '". $values['situacao']   ."'"; 
                     }
                }else{
