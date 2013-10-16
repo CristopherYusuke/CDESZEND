@@ -93,11 +93,11 @@
                 </vendaCreate>
             </pages>
         </compra>
-         <ContasReceber>
+        <ContasReceber>
             <label>Contas Receber</label>
             <controller>ContasReceber</controller>
             <action>index</action>
-             <pages>
+            <pages>
                 <ContasReceber>
                     <label>Faturar Venda</label>
                     <controller>ContasReceber</controller>
@@ -109,14 +109,26 @@
             <label>Contas Pagar</label>
             <controller>ContasPagar</controller>
             <action>index</action>
-             <ContasReceber>
+            <pages>
+                <ContasPagar>
                     <label>Faturar Compra</label>
                     <controller>ContasPagar</controller>
                     <action>create</action>
-                </ContasReceber>
+                </ContasPagar>
+            </pages>
         </ContasPagar>
-        
-        
+        <relatorio>
+            <label>Relatorio</label>
+            <controller>relatorio</controller>
+            <action>index</action>
+            <pages>
+                <relatorio>
+                    <label>Venda Por Data</label>
+                    <controller>relatorio</controller>
+                    <action>vendapordata</action>
+                </relatorio>
+            </pages>
+        </relatorio>
     </nav>
 </config>
     

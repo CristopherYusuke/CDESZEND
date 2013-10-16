@@ -4,7 +4,7 @@
  * 'placement' => Zend_Form_Decorator_Abstract::APPEND
  */
 
-class Application_Form_Relatorio_VendaPorData extends Zend_Form {
+class Application_Form_Relatorio_crpordata extends Zend_Form {
 
     public function __construct($options = null) {
         parent::__construct($options);
@@ -34,16 +34,14 @@ class Application_Form_Relatorio_VendaPorData extends Zend_Form {
 
 
         $this->addElement($selectStatus = new Zend_Form_Element_Select('situacao', array(
-            'label' => 'situação da venda   ',
+            'label' => 'situação da contas a receber   ',
             'disableLoadDefaultDecorators' => TRUE,
         )));
         $selectStatus
                 ->addMultiOption('', 'Selecione')
                 ->addMultiOption(0, 'Aberta')
-                ->addMultiOption(1, 'Cancelada')
-                ->addMultiOption(2, 'Faturada')
-                ->addMultiOption(3, 'Finalizada')
-                ->addMultiOption(4, 'Extornada')
+                ->addMultiOption(1, 'Faturada')
+                ->addMultiOption(2, 'Extornada')
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')
                 ->addDecorator('Label', array())

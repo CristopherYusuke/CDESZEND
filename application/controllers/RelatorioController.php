@@ -6,6 +6,11 @@ class RelatorioController extends Zend_Controller_Action {
         parent::init();
         if (!Zend_auth::getInstance()->hasIdentity()) {
             $this->_redirect('/login');
+        }else{
+            $usuarioLogado = $_SESSION['Zend_Auth']['storage'];
+            if($usuarioLogado->tp_acesso == 'V'){
+                  $this->_redirect('/');
+            }
         }
     }
 
@@ -26,7 +31,7 @@ class RelatorioController extends Zend_Controller_Action {
                 $values['dataFinal'] = $this->converteData($values['dataFinal']);
                if($values['dataInicio'] < $values['dataFinal']){
                     $where = "where  nome like('%" . $values['nome'] . "%') and dataVenda BETWEEN   '". $values['dataInicio'] ."' AND  '" . $values['dataFinal'] . "'";
-                    if(!$values['situacao'] == '' ){
+                    if($values['situacao'] != '' ){
                         $where .= " and situacao = '". $values['situacao']   ."'"; 
                     }
                }else{
@@ -49,7 +54,35 @@ class RelatorioController extends Zend_Controller_Action {
         $this->view->mensagens = $mensagem; 
     }
 
-    public function vendapordataprintAction() {
+    public function crpordataAction() {
+        
+        $form = new Application_Form_CR_Busca();
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $where = "";
+        if ($this->_request->isPost()) {
+            $data = $this->_request->getPost();
+            if ($form->isValid($data)) {
+                $where = "where nome like('%" . $data['nome'] . "%') ";
+                if ($data['idVenda']) {
+                    $where .= "and c.idVenda = " . $data['idVenda'];
+                }
+            } else {
+                $form->populate($data);
+            }
+        }
+
+        $query = "SELECT  c.*, cl.nome
+                    FROM
+                    contasreceber c
+                        left join
+                    venda v ON v.idVenda = c.idVenda
+                        left join
+                    cliente cl ON v.idCliente = cl.idCliente
+                    $where";
+
+        $model = $db->query($query);
+        $this->view->CR = $model->fetchAll();
+        $this->view->form = $form;
         
     }
     
