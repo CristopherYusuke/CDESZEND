@@ -1,0 +1,392 @@
+[33mcommit af80d2baaa6b465cf749f10a3f98c5d8bc2d8230[m
+Author: CristopherYusuke <yusuke_868@hotmail.com>
+Date:   Wed Oct 16 18:25:56 2013 -0300
+
+    Usuario validando na tela de relatorio
+
+[33mcommit d7a55524e0fcd844c681ce40ac180c7303eda46f[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Wed Oct 16 02:09:02 2013 -0300
+
+    ajustes de bugs e tela de relatorio comcluido
+
+[33mcommit aebf8a1f46216cfaa801d82bb39ce46941354c75[m
+Author: CristopherYusuke <yusuke_868@hotmail.com>
+Date:   Tue Oct 15 18:22:04 2013 -0300
+
+    tela de relatorio de venda quase completo
+
+[33mcommit 536687dedffcad0b484780b1f569901ea25d034c[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Tue Oct 15 01:41:38 2013 -0300
+
+    tela de relatorios
+
+[33mcommit fb4b2e566ceeed320e86eb42e43f8307875de1d9[m
+Author: CristopherYusuke <yusuke_868@hotmail.com>
+Date:   Mon Oct 14 18:28:52 2013 -0300
+
+    Baixa parcial concluida
+
+[33mcommit f0843efd1dc8c65af033ff340513855422ccb127[m
+Author: CristopherYusuke <yusuke_868@hotmail.com>
+Date:   Mon Oct 14 12:32:56 2013 -0300
+
+    baixa parcial migue feito ,verificar o update da venda para finalizada
+
+[33mcommit 44d9ebe6b5ad9de08cc0cfe540b7bd89f40ead90[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Mon Oct 14 00:47:19 2013 -0300
+
+    Tela de Baixa parcial Fazendo
+
+[33mcommit fb06714b3f2ecc6e3a94d9c9504c406fc9056b1e[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Fri Oct 11 17:21:01 2013 -0300
+
+    Compra e Contas a Pagar  "funcionando "  fazer testes
+
+[33mcommit 6072d498a3b48ef3126a5a7246cd075ed269513d[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Fri Oct 11 02:43:02 2013 -0300
+
+    fazendo a tela de compra
+
+[33mcommit 40c63eab6917eafc37943d9cfaf279aef98efc2a[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Thu Oct 10 18:23:02 2013 -0300
+
+    Alterações pendentes , extornar venda OK
+
+[33mcommit a2629521635b6a833eec0a9fd77b493d4622e70b[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Thu Oct 10 12:36:37 2013 -0300
+
+    Trigger no banco ok , validação de produtos para não ter 0 no estoque ok
+
+[33mcommit 311b5435042bdae0c30892d3badcccf9ff09fffe[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Thu Oct 10 02:32:14 2013 -0300
+
+    Pagamento total da parcela concluido , pagamento parcial adiado
+
+[33mcommit 10e184f17827f791c96a1db2a69e6685dfe492df[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Wed Oct 9 18:34:27 2013 -0300
+
+    Fazendo a tela de pagamento da contas a receber
+
+[33mcommit 0f3a7d7327d824fa82e588533529abff11f816df[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Wed Oct 9 02:08:42 2013 -0300
+
+    modificação do layout  e validções
+
+[33mcommit bdbd3184135b04b8b4f2cba4d3f8bd4fee411ad0[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Tue Oct 8 18:31:07 2013 -0300
+
+    fazendo a tela de contas a receber
+
+[33mcommit c1ebb2dc4b646008682e5f214e35982113b68465[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Tue Oct 8 11:58:56 2013 -0300
+
+    correção do bug na validação da venda
+
+[33mcommit a7771052899e8eaa12250ecae08436f880a46d2e[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Tue Oct 8 02:26:57 2013 -0300
+
+    left joins para trazer as nomes das tabelas relacionadas,e alert box para mensagens de erro
+
+[33mcommit 4ea41b40e2c3b35ac04485c797c75c848a05e4d2[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Sun Oct 6 21:11:55 2013 -0300
+
+    crud venda finalizando
+
+[33mcommit 03d9d336449d2b2b02742edd72602a6ac1646e1c[m
+Author: CristopherYusuke <yusuke_868@hotmail.com>
+Date:   Fri Oct 4 18:38:51 2013 -0300
+
+    fazendo a tela de movimentao de venda
+
+[33mcommit 62205b9a92cea5b1c60feffb92af40ad956d9ed0[m
+Author: CristopherYusuke <yusuke_868@hotmail.com>
+Date:   Thu Oct 3 17:35:41 2013 -0300
+
+     comiti
+
+[33mcommit 1ed079b531da7ed9ef12c56663972d2c045ea2a8[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Thu Oct 3 03:24:59 2013 -0300
+
+    sistema de login e senha validando e funcionando
+
+[33mcommit ceb286ca6ccb1fad088b7c221bf5d5e9eac3de9f[m
+Author: CristopherYusuke <yusuke_868@hotmail.com>
+Date:   Wed Oct 2 18:29:56 2013 -0300
+
+    tela de view e cadastro de venda cluindo
+
+[33mcommit 4865e93b820ae93340cceb3607f6d630dd82c196[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Wed Oct 2 13:17:19 2013 -0300
+
+    Alteração nos update do cadastrar , usuario, fornecedor , cliente, concluido
+
+[33mcommit 5532df0689f5b670c338fdb0db75f35d8e66426e[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Tue Oct 1 03:37:05 2013 -0300
+
+    Alteração na validação de usuario,"crud" de venda comessando
+
+[33mcommit b9b7bc2c076e174b41f4d2e59f116d3343445998[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Mon Sep 30 02:11:05 2013 -0300
+
+    fornecedor crud conclido
+
+[33mcommit 0bceae30dd7cbc8271315efc8f63e0414e9e3ed5[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Sun Sep 29 19:32:37 2013 -0300
+
+    produto crud concluido
+
+[33mcommit 6aabfd7fe35ee7f69b3aff34af270d90da9ec127[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Thu Sep 26 18:17:27 2013 -0300
+
+    form busca produto conclido , validação form produto em andamento
+
+[33mcommit 080ab9bd1329eeec5878fcc88a47f732a0410647[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Thu Sep 26 12:05:41 2013 -0300
+
+    Busca cliente concluido , crud produtos em andamento
+
+[33mcommit 2208e6e1677d57d19d2b3cb57ed6cb15c40237b2[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Thu Sep 26 01:18:50 2013 -0300
+
+    Mudanças em algumas nomenclaturas, e novo controller ProdutosController ,pois devido alguma falha não está mais querendo adicionar o produto Controller
+
+[33mcommit 0883ca3e23c3d05b4815bb15bdc9891dd89ff1b4[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Thu Sep 26 01:05:32 2013 -0300
+
+    Commit para o produtoController não fica zicado
+
+[33mcommit e1a098d93f1ca249ac8aab5556475b13093778ca[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Thu Sep 26 00:59:09 2013 -0300
+
+    problema com a busca de cliente
+
+[33mcommit 00c5a34afdc13924e63a11a6b83ecaa51683085a[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Wed Sep 25 18:22:45 2013 -0300
+
+    remoção de bugs no cadastro de cliente ,e implementando a busca
+
+[33mcommit bb059bb3cea5a9f5958eef42b8b46347150c64cf[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Wed Sep 25 01:32:02 2013 -0300
+
+    Mudanças no layout
+
+[33mcommit 80815bc2f47c179a747f644b91ba21ce70bbb11f[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Tue Sep 24 17:50:53 2013 -0300
+
+    cadastro de cliente completo , alterções no layout
+
+[33mcommit 27e84fd4a39444e383435c2645527d226eecb410[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Tue Sep 24 01:44:01 2013 -0300
+
+[33mcommit ffd860c5fd628caa59b98fdb0bb89a3065e1a408[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Tue Sep 24 01:42:59 2013 -0300
+
+[33mcommit 024e6f0dab4718afa4b36d65388792a90847f525[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Tue Sep 24 01:28:48 2013 -0300
+
+    Erro do
+
+[33mcommit 29692e9c3586f5db09c216194b37e54b11d5c6d8[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Mon Sep 16 18:15:53 2013 -0300
+
+    validando Cliente , verificar disabled
+
+[33mcommit 92344b4f37982d80fe9d25d05296774f56f10d27[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Mon Sep 16 13:04:34 2013 -0300
+
+    Alterações no layout  de listagem dos clientes
+
+[33mcommit 6d92fef823291ee3e9529c1ef89ff8a9ea82347f[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Mon Sep 16 12:12:26 2013 -0300
+
+    create de cliente com o campo cpf validando com NoRecordExists
+
+[33mcommit fa80847110733b478e4c9546efe89d2d389308e3[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Mon Sep 16 11:55:41 2013 -0300
+
+    Cadastro cliente validação quase completa, criando validadores de CPF e CNPJ ,falta testar
+
+[33mcommit b0abf255746fb7e03ceb11c4b0b64ec3653f8832[m
+Author: Administrador <Administrador@192.168.1.19>
+Date:   Fri Sep 13 17:41:56 2013 -0300
+
+    https e http contigurado para rodar em varias maquinas
+
+[33mcommit 9bae1f313dbedbd24b8e0fa7c08f9c3dd815265f[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Wed Sep 11 01:16:48 2013 -0300
+
+    model criado corretamente
+
+[33mcommit bcf1577b347a7e7b9850cefeeccc1ab7d61cec7f[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Sat Aug 31 10:35:23 2013 -0300
+
+    Atualizando projeto, criando breadCrumbs, tela de produto parcial , mudanças no style
+
+[33mcommit 1789a63a0b7b404918b8350dad16b4ad118425b2[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Fri Aug 23 00:18:56 2013 -0300
+
+    um pequeno erro na hora do commit, reeviando o relatorio.txt
+
+[33mcommit eb68f0ca94c4848830d4197f2d21d097162ef404[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Thu Aug 22 00:56:18 2013 -0300
+
+    Criando o Relatorio.TXT e cadastro cliente completo exceto validao
+
+[33mcommit 18f661af8d1bce3ed6859b0868d030b6a503051c[m
+Author: cristopherYusuke <cristopher.yusuke@gmail.com>
+Date:   Wed Aug 21 00:42:39 2013 -0300
+
+    CreateModels e Filtros de telefone
+
+[33mcommit 2cf5242d5040a322dba39941a15c07a619ca6fc3[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Fri Aug 16 00:35:54 2013 -0300
+
+    update Cliente e alguns ajustes
+
+[33mcommit 0c6cba518b5141cf6fc5e195506557e3615593c8[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Wed Aug 14 01:16:35 2013 -0300
+
+    Commit para arrumar o o bug injetado no banco
+
+[33mcommit cabf51455076365c048cc312fb8b47d82a326b8d[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Tue Aug 13 23:43:12 2013 -0300
+
+    Commit para arrumar o o bug injetado no banco
+
+[33mcommit 3786bacbe77c64444757a783e8c86a350aab931a[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Fri Aug 9 00:56:32 2013 -0300
+
+    AJAX , comcluido , json , o barato e loco , ajuda do professor Chiquitto , tudo muita pirofagia
+
+[33mcommit d3e474ae3000d91f4ca7dbe9e565e16f3cd8cf14[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Thu Aug 8 01:15:40 2013 -0300
+
+    form cliente quase concluido , Delete do usuario alterado , verificar AJAX , json bug
+
+[33mcommit 888ff652066bc5d66672c6e9fa5fbd11d83ee9a6[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Wed Aug 7 00:41:47 2013 -0300
+
+    Criando o Form do cliente
+
+[33mcommit 5aae05771832a55aa89ed7be2099e14da9982158[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Tue Aug 6 19:22:05 2013 -0300
+
+    Revert "teste"
+    
+    This reverts commit c0e7bd83574272dd5cdd2731404453622649a444.
+
+[33mcommit c0e7bd83574272dd5cdd2731404453622649a444[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Tue Aug 6 19:21:41 2013 -0300
+
+    teste
+    
+    teste
+
+[33mcommit 45cfd7681963e48709d3cb33005cde6a0201e993[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Tue Aug 6 17:59:00 2013 -0300
+
+    crud usuario completo
+    script.js criado
+    teste $.ajax comcluido
+
+[33mcommit 6c10b1d7a11f549f1ed131e91f7e2ee0a617f8ee[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Sat Aug 3 02:36:38 2013 -0300
+
+    Algumas alterações no style
+
+[33mcommit 4fb0bc207157f093a7f8d5656f97af5e88f3903b[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Fri Aug 2 23:46:03 2013 -0300
+
+    Update não esta populando no formulario
+
+[33mcommit 301500974bedfd2e96b26f7bfc1c3d0773e96690[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Wed Jul 31 01:49:21 2013 -0300
+
+    Update não esta populando no formulario
+
+[33mcommit 31d0cb6deadcb5d7889959257ab47633c8f845ca[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Wed Jul 31 00:44:06 2013 -0300
+
+    Insert , e menssagens do cadastro feito
+
+[33mcommit 46442f7e49490d2a5b3c931d8ec2bf2df5b9549e[m
+Merge: 9b97862 ea9c18d
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Thu Jul 25 00:10:20 2013 -0300
+
+    Merge branch 'master' of https://github.com/CristopherYusuke/CDESZEND
+
+[33mcommit 9b97862d5401cf713f8a6680bf90d261347d0915[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Wed Jul 24 23:58:02 2013 -0300
+
+    Insert , e menssagens do cadastro feito
+
+[33mcommit 40d9c1e77f28f3de6131f397f3065dbc04c7b973[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Wed Jul 24 21:29:15 2013 -0300
+
+    Comit para add SSL do Xamp
+
+[33mcommit ea9c18db8b07d72840d4099e6dc293d2b6c9f526[m
+Author: Cristopher <cristopher.yusuke@gmail.com>
+Date:   Wed Jul 24 00:14:32 2013 -0300
+
+    Create a READ ME
+
+[33mcommit 09768c75ff6b6135ceb2d08d565447217ebd5584[m
+Author: Cristopher Yusuke <cristopher.yusuke@gmail.com>
+Date:   Tue Jul 23 23:52:00 2013 -0300
+
+    comiti projeto CDES com ZendFramework

@@ -6,10 +6,10 @@ class RelatorioController extends Zend_Controller_Action {
         parent::init();
         if (!Zend_auth::getInstance()->hasIdentity()) {
             $this->_redirect('/login');
-        }else{
+        } else {
             $usuarioLogado = $_SESSION['Zend_Auth']['storage'];
-            if($usuarioLogado->tp_acesso == 'V'){
-                  $this->_redirect('/');
+            if ($usuarioLogado->tp_acesso == 'V') {
+                $this->_redirect('/');
             }
         }
     }
@@ -29,15 +29,14 @@ class RelatorioController extends Zend_Controller_Action {
                 $values = $form->getValues();
                 $values['dataInicio'] = $this->converteData($values['dataInicio']);
                 $values['dataFinal'] = $this->converteData($values['dataFinal']);
-               if($values['dataInicio'] < $values['dataFinal']){
-                    $where = "where  nome like('%" . $values['nome'] . "%') and dataVenda BETWEEN   '". $values['dataInicio'] ."' AND  '" . $values['dataFinal'] . "'";
-                    if($values['situacao'] != '' ){
-                        $where .= " and situacao = '". $values['situacao']   ."'"; 
+                if ($values['dataInicio'] <= $values['dataFinal']) {
+                    $where = "where  nome like('%" . $values['nome'] . "%') and dataVenda BETWEEN   '" . $values['dataInicio'] . "' AND  '" . $values['dataFinal'] . "'";
+                    if ($values['situacao'] != '') {
+                        $where .= " and situacao = '" . $values['situacao'] . "'";
                     }
-               }else{
-                   $mensagem = "data inicio não pode ser menor que a data final ";
-               }
-                
+                } else {
+                    $mensagem = "data inicio não pode ser menor que a data final ";
+                }
             }
         }
         $query = "SELECT nome, v.*,sum(i.total) as totalVenda 
@@ -48,29 +47,34 @@ class RelatorioController extends Zend_Controller_Action {
                   on i.idVenda = v.idVenda 
                   $where 
                   group by idVenda";
+
         $model = $db->query($query);
         $this->view->venda = $model->fetchAll();
-        $this->view->form = $form; 
-        $this->view->mensagens = $mensagem; 
+        $this->view->form = $form;
+        $this->view->mensagens = $mensagem;
     }
 
     public function crpordataAction() {
-        
-        $form = new Application_Form_CR_Busca();
+        $form = new Application_Form_Relatorio_crpordata();
         $db = Zend_Db_Table::getDefaultAdapter();
         $where = "";
+        $mensagem = null;
         if ($this->_request->isPost()) {
             $data = $this->_request->getPost();
             if ($form->isValid($data)) {
-                $where = "where nome like('%" . $data['nome'] . "%') ";
-                if ($data['idVenda']) {
-                    $where .= "and c.idVenda = " . $data['idVenda'];
+                $values = $form->getValues();
+                $values['dataInicio'] = $this->converteData($values['dataInicio']);
+                $values['dataFinal'] = $this->converteData($values['dataFinal']);
+                if ($values['dataInicio'] <= $values['dataFinal']) {
+                    $where = "where  nome like('%" . $values['nome'] . "%') and vencimento BETWEEN   '" . $values['dataInicio'] . "' AND  '" . $values['dataFinal'] . "'";
+                    if ($values['situacao'] != '') {
+                        $where .= " and c.situacao = '" . $values['situacao'] . "'";
+                    }
+                } else {
+                    $mensagem = "data inicio não pode ser menor que a data final ";
                 }
-            } else {
-                $form->populate($data);
             }
         }
-
         $query = "SELECT  c.*, cl.nome
                     FROM
                     contasreceber c
@@ -81,11 +85,12 @@ class RelatorioController extends Zend_Controller_Action {
                     $where";
 
         $model = $db->query($query);
+
         $this->view->CR = $model->fetchAll();
         $this->view->form = $form;
-        
+        $this->view->mensagens = $mensagem;
     }
-    
+
     function converteData($data) {
         if (strstr($data, "/")) {//verifica se tem a barra /
             $d = explode("/", $data); //tira a barra

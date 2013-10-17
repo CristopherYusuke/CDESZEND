@@ -122,11 +122,16 @@
             <controller>relatorio</controller>
             <action>index</action>
             <pages>
-                <relatorio>
+                <relatorioVenda>
                     <label>Venda Por Data</label>
                     <controller>relatorio</controller>
                     <action>vendapordata</action>
-                </relatorio>
+                </relatorioVenda>
+                <relatorioCR>
+                    <label>Contas a receber por data </label>
+                    <controller>relatorio</controller>
+                    <action>crpordata</action>
+                </relatorioCR>
             </pages>
         </relatorio>
     </nav>

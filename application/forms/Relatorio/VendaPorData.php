@@ -54,7 +54,7 @@ class Application_Form_Relatorio_VendaPorData extends Zend_Form {
                 ))
         ;
 
-
+        $date = $date->modify('-1 month');
         $this->addElement($dataInicio = new Zend_Form_Element_Text('dataInicio', array('label' => 'Data inicio',
             'value' => $date->format('d/m/Y'),
             'required' => true,
@@ -73,16 +73,16 @@ class Application_Form_Relatorio_VendaPorData extends Zend_Form {
                     'id' => array('callback' => array(get_class($dataInicio), 'resolveElementId'))
                 ))
         ;
-         $data = $date->modify('+1 month');
+         $date = $date->modify('+1 month');
         $this->addElement($dataFinal = new Zend_Form_Element_Text('dataFinal', array('label' => 'Data Final ',
-            'value' => $data->format('d/m/Y'),
+            'value' => $date->format('d/m/Y'),
             'required' => true,
             'disableLoadDefaultDecorators' => TRUE,
             'class' => 'datepicker'
         )));
-        
-       
-        
+
+
+
         $dataFinal
                 ->addFilters(array('StripTags', 'StringTrim'))
                 ->setValidators(array(new Zend_Validate_Date(array('format' => 'dd/MM/yyyy'))))

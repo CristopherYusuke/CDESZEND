@@ -130,7 +130,7 @@ button, .button {
     font-size: 1em;
 }
 table thead, table tfoot ,table tr.even, table tr.alt, table tr:nth-of-type(even) {
-background: #f2f2f2;
+    background: #f2f2f2;
 }
 
 @media print {
@@ -147,4 +147,10 @@ background: #f2f2f2;
         border-bottom: 1px solid;
         border-top: 1px solid;
     }
+    .scroll{
+        height:auto;
+        overflow:visible ;       
+    }
+
+
 }
