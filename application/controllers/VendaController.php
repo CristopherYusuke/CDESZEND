@@ -185,11 +185,52 @@ class VendaController extends Zend_Controller_Action {
         $itemVenda = new Application_Model_DbTable_Itemvenda();
         $CR = new Application_Model_DbTable_Contasreceber();
         $where = "idVenda = $idVenda";
-        $itemVenda->delete($idVenda);
+        $itemVenda->delete($where);
         $Venda->update(array('situacao' => 4), $where);
         $CR->update(array('situacao' => 2), $where);
         $this->_redirect('/venda');
     }
+    
+    public function consultarAction() {
+        $form = new Application_Form_Venda_Venda();
+        
+        $idvenda = (int) $this->_getParam('idVenda');
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $resultado = $db->query("SELECT descricao as nomeProduto,precoCusto,estoque,  i.*  
+                                FROM itemvenda i 
+                                LEFT JOIN produto p   
+                                ON p.idProduto = i.idProduto
+                                where idVenda = $idvenda ");
+        $itensTabela = $resultado->fetchAll();
+        if ($idvenda > 0) {
+            $vendaTabela = new Application_Model_DbTable_Venda();
+            $clienteTabela = new Application_Model_DbTable_Cliente();
+            $venda = $vendaTabela->fetchRow("idVenda = " . $idvenda)->toArray();
+            $cliente = $clienteTabela->fetchRow('idCliente = ' . $venda['idCliente'])->toArray();
+            $form->cliente->setValue($cliente['nome']);
+            $form->dataVenda->setValue($this->converteData($venda['dataVenda']));
+            $form->button->addDecorator('HtmlTag', array('class' => 'small-12 columns')) ;
+            switch ($venda['situacao']) {
+                case 0: $situacao = 'Aberta';
+                    break;
+                case 1: $situacao = 'Cancelada';
+                    break;
+                case 2: $situacao = 'Faturada';
+                    break;
+                case 3: $situacao = 'Finalizada';
+                    break;
+                case 4: $situacao = 'Extornada';
+                    break;
+                default: $situacao = "outro";
+                    break;
+            };
+
+            $form->situacao->setValue($situacao);
+        }
+        $this->view->itens = $itensTabela;
+        $this->view->form = $form;
+    }
+    
 
     function converteData($data) {
         if (strstr($data, "/")) {//verifica se tem a barra /

@@ -34,100 +34,105 @@ function converteData($data) {
         </form>
     </div>
 </div>
-    <div class="small-12 small-centered columns">
-        <div class="scroll">
-            <table width="100%">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Cliente</th>
-                        <th>Data Venda</th>
-                        <th>total</th>
-                        <th>Formas Pagamento</th>
-                        <th>Situacao</th>
-                        <th>Operações</th>
-                    </tr>
-                </thead>
+<div class="small-12 small-centered columns">
+    <div class="scroll">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Cliente</th>
+                    <th>Data Venda</th>
+                    <th>total</th>
+                    <th>Formas Pagamento</th>
+                    <th>Situacao</th>
+                    <th>Operações</th>
+                </tr>
+            </thead>
 
-                <?php 
-           
-                
-                foreach ($this->venda as $key => $value) : ?>
+            <?php foreach ($this->venda as $key => $value) : ?>
 
-                    <tr>
-                        <td><?php echo $this->venda[$key]['idVenda']; ?> </td>
-                        <td><?php echo $this->venda[$key]['nome']; ?></td>
-                        <td><?php echo converteData($this->venda[$key]['dataVenda']); ?></td>
-                        <td><?php
-                            $total = ($this->venda[$key]['situacao'] != 4 ) ? $this->venda[$key]['totalVenda'] : $this->venda[$key]['total'];
-                            echo "R$ " . number_format($total, 2, ',', '');
-                            ?></td>
-                        <td><?php
-                            if ($this->venda[$key]['formasPagamento'] != null) {
-                                switch ($this->venda[$key]['formasPagamento']) {
-                                    case 0: echo 'A vista';
-                                        break;
-                                    case 1: echo 'Pagamento para 30 dias';
-                                        break;
-                                    case 2: echo 'Pagamento para 30-60 dias';
-                                        break;
-                                    case 3: echo 'Pagamento para 30-60-90 dias';
-                                        break;
-                                    case 4: echo 'Pagamento para 30-60-90-120 dias';
-                                        break;
-                                    case '': echo '';
-                                        break;
-                                    default:echo null;
-                                        break;
-                                };
-                            } else {
-                                echo 'A definir ';
-                            }
-                            ?></td>
-                        <td><?php
-                            switch ($this->venda[$key]['situacao']) {
-                                case 0: echo 'Aberta';
+                <tr>
+                    <td><?php echo $this->venda[$key]['idVenda']; ?> </td>
+                    <td><?php echo $this->venda[$key]['nome']; ?></td>
+                    <td><?php echo converteData($this->venda[$key]['dataVenda']); ?></td>
+                    <td><?php
+                        $total = ($this->venda[$key]['situacao'] != 4 ) ? $this->venda[$key]['totalVenda'] : $this->venda[$key]['total'];
+                        echo "R$ " . number_format($total, 2, ',', '');
+                        ?></td>
+                    <td><?php
+                        if ($this->venda[$key]['formasPagamento'] != null) {
+                            switch ($this->venda[$key]['formasPagamento']) {
+                                case 0: echo 'A vista';
                                     break;
-                                case 1: echo 'Cancelada';
+                                case 1: echo 'Pagamento para 30 dias';
                                     break;
-                                case 2: echo 'Faturada';
+                                case 2: echo 'Pagamento para 30-60 dias';
                                     break;
-                                case 3: echo 'Finalizada';
+                                case 3: echo 'Pagamento para 30-60-90 dias';
                                     break;
-                                case 4: echo 'Extornada';
+                                case 4: echo 'Pagamento para 30-60-90-120 dias';
                                     break;
-                                default:echo false;
+                                case '': echo '';
+                                    break;
+                                default:echo null;
                                     break;
                             };
-                            ?></td >
-                        <td class="text-center">
-                            <?php if ($this->venda[$key]['situacao'] == 0) : ?> 
-                                <a href="/venda/create/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
-                                   class="tiny button secondary">EDITAR</a>
-                                <a href="/venda/cancel/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
-                                   class="tiny button secondary">CANCELAR</a>
-                               <?php endif; ?> 
-                               <?php if ($this->venda[$key]['totalVenda'] > 0 && $this->venda[$key]['situacao'] == 0): ?> 
-                                <a href="/ContasReceber/create/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
-                                   class="tiny button secondary">FATURAR</a>
-                               <?php endif; ?>
-                               <?php if ($this->venda[$key]['situacao'] == 2): ?> 
-                                <a href="/venda/extornar/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
-                                   class="tiny button secondary">Extornar</a>
-                                <a href="/ContasReceber/index/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
-                                   class="tiny button secondary">Visualizar Contas a receber</a>
-                               <?php endif; ?>
-                            <?php if ($this->venda[$key]['situacao'] >= 3): ?> 
-                                <a href="/ContasReceber/index/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
-                                   class="tiny button secondary">Visualizar Contas a receber</a>
-                               <?php endif; ?>
-                        </td> 
+                        } else {
+                            echo 'A definir ';
+                        }
+                        ?></td>
+                    <td><?php
+                        switch ($this->venda[$key]['situacao']) {
+                            case 0: echo 'Aberta';
+                                break;
+                            case 1: echo 'Cancelada';
+                                break;
+                            case 2: echo 'Faturada';
+                                break;
+                            case 3: echo 'Finalizada';
+                                break;
+                            case 4: echo 'Extornada';
+                                break;
+                            default:echo false;
+                                break;
+                        };
+                        ?></td >
+                    <td class="text-center">
+                        <?php if ($this->venda[$key]['situacao'] == 0) : ?> 
+                            <a href="/venda/create/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
+                               class="tiny button secondary">EDITAR</a>
+                            <a href="/venda/cancel/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
+                               class="tiny button secondary">CANCELAR</a>
+                           <?php endif; ?> 
+                           <?php if ($this->venda[$key]['totalVenda'] > 0 && $this->venda[$key]['situacao'] == 0): ?> 
+                            <a href="/ContasReceber/create/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
+                               class="tiny button secondary">FATURAR</a>
+                           <?php endif; ?>
+                           <?php if ($this->venda[$key]['situacao'] == 2): ?> 
+                            <a href="/venda/extornar/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
+                               class="tiny button secondary">ESTORNAR</a>
+                            <a href="/venda/consultar/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
+                               class="tiny button secondary">CONSULTAR</a>
+                            <a href="/ContasReceber/index/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
+                               class="tiny button secondary">Visualizar Contas a Receber</a>
+                           <?php endif; ?>
+                           <?php if ($this->venda[$key]['situacao'] == 3): ?> 
+                            <a href="/ContasReceber/index/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
+                               class="tiny button secondary">Visualizar Contas a receber</a>
+                            <a href="/venda/consultar/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
+                               class="tiny button secondary">CONSULTAR</a>
+                           <?php endif; ?>
+                        <?php if ($this->venda[$key]['situacao'] == 4): ?> 
+                            <a href="/ContasReceber/index/idVenda/<?php echo $this->venda[$key]['idVenda']; ?>"
+                               class="tiny button secondary">Visualizar Contas a receber</a>
+                           <?php endif; ?>
+                    </td> 
 
-                    </tr>
-                <?php endforeach; ?> <!-- End foreach -->
-            </table>
-        </div>
+                </tr>
+            <?php endforeach; ?> <!-- End foreach -->
+        </table>
     </div>
+</div>
 <div class="row">
     <div class="small-12 small-centered columns">
         <a id="btn_Cadastrar_usuario" href="/cliente" class="button">Novo</a>
