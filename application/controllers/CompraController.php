@@ -166,6 +166,49 @@ class CompraController extends Zend_Controller_Action {
         $CR->update(array('situacao' => 2), $where);
         $this->_redirect('/compra');
     }
+    
+    public function consultarAction() {
+        $form = new Application_Form_Compra_Compra();
+        $idCompra = (int) $this->_getParam('idCompra');
+        $db = Zend_Db_Table::getDefaultAdapter();
+        
+         $resultado = $db->query("SELECT descricao as nomeProduto,precoCusto,  i.*  
+                                FROM itemcompra i 
+                                LEFT JOIN produto p   
+                                ON p.idProduto = i.idProduto
+                                where idCompra = $idCompra ");
+        $itensTabela = $resultado->fetchAll();
+        if ($idCompra > 0) {
+            $compraTabela = new Application_Model_DbTable_Compra();
+            $fornecedorTabela = new Application_Model_DbTable_Fornecedor();
+            $compra = $compraTabela->fetchRow("idCompra = " . $idCompra)->toArray();
+            $fornecedor = $fornecedorTabela->fetchRow('idFornecedor = ' . $compra['idFornecedor'])->toArray();
+            $form->fornecedor->setValue($fornecedor['nome']);
+            $form->dataCompra->setValue($this->converteData($compra['dataCompra']));
+             $form->button->addDecorator('HtmlTag', array('class' => 'small-12 columns')) ;
+            switch ($compra['situacao']) {
+                case 0: $situacao = 'Aberta';
+                    break;
+                case 1: $situacao = 'Cancelada';
+                    break;
+                case 2: $situacao = 'Faturada';
+                    break;
+                case 3: $situacao = 'Finalizada';
+                    break;
+                case 4: $situacao = 'Extornada';
+                    break;
+                default: $situacao = "outro";
+                    break;
+            };
+
+            $form->situacao->setValue($situacao);
+        }
+        $this->view->itens = $itensTabela;
+        $this->view->form = $form;
+    }
+    
+    
+    
 
     function converteData($data) {
         if (strstr($data, "/")) {//verifica se tem a barra /

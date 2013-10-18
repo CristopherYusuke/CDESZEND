@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="small-12 columns text-center">
+        <h2 class="text-center"> Consultar Compra </h2>
+    </div>
+</div>
+<div  class="row ">
+    <div class="small-12 small-centered  columns">
+        <div class="row">
+            <form  method="<?php echo $this->form->getMethod() ?>" action="<?php echo $this->form->getAction() ?>" class="custom venda">
+                <?php
+                echo $this->form->fornecedor;
+                echo $this->form->dataCompra;
+                echo $this->form->situacao;
+                ?>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="small-12 small-centered  columns">
+                <div class="scroll">
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th>Nome Produto</th>
+                                <th>Preco de Compra</th>
+                                <th>Quantidade</th>
+                                <th>total</th>
+
+                            </tr>
+                        </thead>
+                        <tbody> 
+                            <?php
+                            $total = 0;
+                            $itens = $this->itens;
+                            ?>
+                            <?php foreach ($itens as $key => $value) {
+                                ?>
+                                <tr>
+                                    <td><?php echo $itens[$key]['nomeProduto']; ?></td>
+                                    <td ><?php echo "R$ " . number_format($itens[$key]['compraPreco'], 2, ',', ''); ?></td>
+                                    <td ><?php echo $itens[$key]['qtde']; ?></td>
+                                    <td ><?php echo "R$ " . number_format($itens[$key]['total'], 2, ',', ''); ?></td>
+                                </tr>
+                                <?php $total = $total + $itens[$key]['total']; ?>
+                            <?php }
+                            ?>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" > Total  </td>
+                                <td> <?php echo "R$ " . number_format($total, 2, ',', ''); ?>  </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <?php
+            echo $this->form->button;
+            ?>
+        </div>
+
+    </div>
+</div>

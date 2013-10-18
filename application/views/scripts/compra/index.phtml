@@ -111,10 +111,15 @@ function converteData($data) {
                            <?php if ($this->compra[$key]['situacao'] == 2): ?> 
                             <a href="/ContasPagar/index/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
                                class="tiny button secondary">VISUALIZAR CONTAS A RECEBER</a>
+                               <a href="/compra/consultar/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
+                               class="tiny button secondary">CONSULTAR</a>
+                               
                            <?php endif; ?>
                            <?php if ($this->compra[$key]['situacao'] == 3): ?> 
                             <a href="/ContasPagar/index/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
                                class="tiny button secondary">Visualizar Contas a receber</a>
+                               <a href="/compra/consultar/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
+                               class="tiny button secondary">CONSULTAR</a>
                            <?php endif; ?>
                     </td> 
 
