@@ -64,7 +64,9 @@
                     </td> 
                     <td>
                         <?php if ($this->CR[$key]['situacao'] == 0): ?> 
-                            <a href="/ContasReceber/pagamento/idContasReceber/<?php echo $this->CR[$key]['idContasR']; ?>" class="tiny button ">Pagar</a>
+                            <a href="/ContasReceber/pagamento/idContasReceber/<?php echo $this->CR[$key]['idContasR']; ?>" class="tiny button ">RECEBER</a>
+                        <?php else: ?>
+                            <a href="/ContasReceber/recibo/id/<?php echo $this->CR[$key]['idContasR']; ?>" class="tiny button ">RECIBO</a>
                         <?php endif; ?>
                     </td>
                 </tr>

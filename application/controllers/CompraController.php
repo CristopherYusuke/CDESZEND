@@ -151,7 +151,7 @@ class CompraController extends Zend_Controller_Action {
         $model = new Application_Model_DbTable_Compra();
         $itemVenda = new Application_Model_DbTable_Itemcompra();
         $model->update(array('situacao' => 1), "idCompra = $idCompra");
-        $itemVenda->delete($idCompra);
+        $itemVenda->delete("idCompra = $idCompra ");
         $this->_redirect('/compra');
     }
 

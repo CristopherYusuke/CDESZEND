@@ -175,7 +175,7 @@ class VendaController extends Zend_Controller_Action {
         $model = new Application_Model_DbTable_Venda();
         $itemVenda = new Application_Model_DbTable_Itemvenda();
         $model->update(array('situacao' => 1), "idVenda = $idVenda");
-        $itemVenda->delete($idVenda);
+        $itemVenda->delete("idVenda = $idVenda ");
         $this->_redirect('/venda');
     }
 

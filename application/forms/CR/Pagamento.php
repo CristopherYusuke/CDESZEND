@@ -135,7 +135,7 @@ class Application_Form_CR_Pagamento extends Zend_Form {
         ;
 
 
-        $this->addElement($button = new Zend_Form_Element_Submit('submit', array('label' => 'PAGAR', 'class' => 'button')));
+        $this->addElement($button = new Zend_Form_Element_Submit('submit', array('label' => 'RECEBER', 'class' => 'button')));
         $button
                 ->addDecorator('ViewHelper')
                 ->addDecorator('Errors')

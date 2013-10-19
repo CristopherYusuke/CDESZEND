@@ -1,0 +1,110 @@
+<?php
+
+function converteData($data) {
+    if (strstr($data, "/")) {//verifica se tem a barra /
+        $d = explode("/", $data); //tira a barra
+        $rstData = "$d[2]-$d[1]-$d[0]"; //separa as datas $d[2] = ano $d[1] = mes etc...
+        return $rstData;
+    } else if (strstr($data, "-")) {
+        $data = substr($data, 0, 10);
+        $d = explode("-", $data);
+        $rstData = "$d[2]/$d[1]/$d[0]";
+        return $rstData;
+    } else {
+        return '';
+    }
+}
+?>
+<style>
+    nav{
+        display: none;
+    }
+    body{
+        background: #ffffff;
+    }
+</style>
+
+<fieldset>
+
+    <div class="row ">
+        <div class="small-12  columns">
+            <h2> Estofados Stillo  </h2>        
+            <h4> AV: Góias , Nº 1075 Sala A - Cianorte - PR  </h4>
+            <h4> Telefone : (44) 3637-3456  -  Celular : (44) 9920-8131 </h4>
+        </div>
+    </div>
+    <br>
+    <div class="row ">
+        <div class="small-4  columns">
+            <h5> Recibo referente pagamento de : </h5>        
+        </div>
+        <div class="small-8  columns">
+            <?php foreach ($this->itens as $key => $values): ?> 
+            <h5> <?php echo $this->itens[$key]['qtde'] ." - ". $this->itens[$key]['nomeProduto']  ?>  </h5>        
+            <?php endforeach;
+            ?>      
+        </div>
+
+    </div>
+    <br>
+    <div class="row">
+        <div class="small-4 columns">
+            <h6> Nº da parcela : <?php echo $this->CR['numParcela'] ?> </h6>   
+        </div>
+        <div class="small-4 left columns">
+            <h6> Nº da Fatura : <?php echo $this->CR['idContasR'] ?> </h6>    
+        </div>
+
+    </div>
+
+    <div class="row ">
+        <div class="small-4 columns">
+            <h6> Cliente : <?php echo $this->CR['nome'] ?> </h6>   
+        </div>
+
+
+        <div class="small-4  columns">
+            <h6> Vencimento : <?php echo converteData($this->CR['vencimento']) ?> </h6>    
+        </div>
+        <div class="small-4  columns">
+            <h6> Pagamento : <?php echo converteData($this->CR['pagamento']) ?> </h6>    
+        </div>
+    </div>
+    <div class="row ">
+        <div class="small-4 columns">
+            <h6> valor : <?php echo number_format($this->CR['valor'], 2, ',', ''); ?> </h6>   
+        </div>
+        <div class="small-4  columns">
+            <h6> Valor Pago  : <?php echo number_format($this->CR['valorPago'], 2, ',', ''); ?> </h6>    
+        </div>
+        <div class="small-4  columns">
+            <h6> Troco : <?php echo number_format(( ($this->CR['valor'] - $this->CR['valorPago']) * -1), 2, ',', ''); ?> </h6>    
+        </div>
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <div class="row ">
+
+        <div class="small-4 small-offset-8  columns">
+            <hr  style=" margin: 0;"   >
+            <h6 class="text-center"><small> FERRERA & PARRON LTDA</small></h6>
+        </div>
+
+    </div>
+
+
+
+</fieldset>
+
+<div class="row ">
+    <div class="small-12  columns"> 
+        <button name="Voltar" id="Voltar" type="button" class="button secondary right" onclick="parent.location = '/ContasReceber/index/idVenda/<?php echo $this->CR['idVenda'] ?>'">VOLTAR</button>
+    </div>
+</div>

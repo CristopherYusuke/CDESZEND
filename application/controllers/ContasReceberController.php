@@ -180,6 +180,37 @@ class ContasReceberController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
+    public function reciboAction() {
+        $id = $this->_getParam('id');
+
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $query = "SELECT  c.*, cl.nome
+                    FROM
+                    contasreceber c
+                        left join
+                    venda v ON v.idVenda = c.idVenda
+                        left join
+                    cliente cl ON v.idCliente = cl.idCliente
+                    where  idContasR  =  $id";
+
+
+
+
+        $model = $db->query($query);
+        $CR = $model->fetch();
+
+        $queryItens = "SELECT descricao as nomeProduto,precoCusto,estoque,  i.*  
+                                FROM itemvenda i 
+                                LEFT JOIN produto p   
+                                ON p.idProduto = i.idProduto
+                                where idVenda = " . $CR['idVenda'];
+        $resultado = $db->query($queryItens);
+        $itens = $resultado->fetchAll();
+        
+        $this->view->itens = $itens;
+        $this->view->CR = $CR;
+    }
+
     function converteData($data) {
         if (strstr($data, "/")) {//verifica se tem a barra /
             $d = explode("/", $data); //tira a barra
