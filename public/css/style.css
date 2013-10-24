@@ -140,9 +140,7 @@ table thead, table tfoot ,table tr.even, table tr.alt, table tr:nth-of-type(even
     .button {
         display: none;
     }
-    form{
-        display: none;
-    }
+    
     tr{
         border-bottom: 1px solid;
         border-top: 1px solid;
@@ -151,6 +149,9 @@ table thead, table tfoot ,table tr.even, table tr.alt, table tr:nth-of-type(even
         height:auto;
         overflow:visible ;       
     }
+     
+    
+    
 
     .left {
         float: left !important; }

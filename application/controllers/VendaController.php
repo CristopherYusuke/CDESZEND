@@ -108,14 +108,14 @@ class VendaController extends Zend_Controller_Action {
                         unset($valor['precoCusto']);
                         if ($update == null) {
                             if ($valor['qtde'] <= $valor['estoque']) {
-
-                                $existeProduto = $itens->fetchRow("idVenda = $idvenda");
-
+                                $existeProduto = $itens->fetchRow("idVenda = $idvenda and idProduto = ".$valor['idProduto']);
                                 if (!count($existeProduto) <= 0) {
                                     $produtoOld = $existeProduto->toArray();
                                     $valor['qtde'] = $valor['qtde'] + $produtoOld['qtde'];
                                     $valor['total'] = $valor['vendaPreco'] * $valor['qtde'];
                                     unset($valor['estoque']);
+                                    unset($valor['idItemVenda']);
+                                    
                                     $itens->update($valor, 'idItemVenda = ' . $produtoOld['idItemVenda']);
                                     $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
                                 } else {

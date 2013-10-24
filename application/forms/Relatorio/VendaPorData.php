@@ -59,7 +59,7 @@ class Application_Form_Relatorio_VendaPorData extends Zend_Form {
             'value' => $date->format('d/m/Y'),
             'required' => true,
             'disableLoadDefaultDecorators' => TRUE,
-            'class' => 'datepicker'
+            'class' => 'datepicker visivel'
         )));
         $dataInicio
                 ->addFilters(array('StripTags', 'StringTrim'))
@@ -78,7 +78,7 @@ class Application_Form_Relatorio_VendaPorData extends Zend_Form {
             'value' => $date->format('d/m/Y'),
             'required' => true,
             'disableLoadDefaultDecorators' => TRUE,
-            'class' => 'datepicker'
+            'class' => 'datepicker visivel'
         )));
 
 

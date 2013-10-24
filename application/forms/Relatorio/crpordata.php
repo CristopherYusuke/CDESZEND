@@ -13,7 +13,6 @@ class Application_Form_Relatorio_crpordata extends Zend_Form {
         $date = new DateTime(date("Y-m-d"));
 
 
-
         $this->addElement($inputNome = new Zend_Form_Element_Text('nome', array('label' => 'Nome do Cliente',
             'placeholder' => 'digite o nome para busca',
             'disableLoadDefaultDecorators' => TRUE,
@@ -26,7 +25,7 @@ class Application_Form_Relatorio_crpordata extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-3 columns',
+                    'class' => 'small-6 large-3 columns hide-for-print',
                     'id' => array('callback' => array(get_class($inputNome), 'resolveElementId'))
                 ))
         ;
@@ -47,7 +46,7 @@ class Application_Form_Relatorio_crpordata extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-3  columns',
+                    'class' => 'small-6 large-3  columns hide-for-print',
                     'id' => array('callback' => array(get_class($selectStatus), 'resolveElementId'))
                 ))
         ;
@@ -57,7 +56,7 @@ class Application_Form_Relatorio_crpordata extends Zend_Form {
             'value' => $date->format('d/m/Y'),
             'required' => true,
             'disableLoadDefaultDecorators' => TRUE,
-            'class' => 'datepicker'
+            'class' => 'datepicker visivel'
         )));
         $dataInicio
                 ->addFilters(array('StripTags', 'StringTrim'))
@@ -67,7 +66,7 @@ class Application_Form_Relatorio_crpordata extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-3 columns',
+                    'class' => 'small-6 large-3 columns',
                     'id' => array('callback' => array(get_class($dataInicio), 'resolveElementId'))
                 ))
         ;
@@ -76,7 +75,7 @@ class Application_Form_Relatorio_crpordata extends Zend_Form {
             'value' => $date->format('d/m/Y'),
             'required' => true,
             'disableLoadDefaultDecorators' => TRUE,
-            'class' => 'datepicker'
+            'class' => 'datepicker visivel'
         )));
 
 
@@ -89,7 +88,7 @@ class Application_Form_Relatorio_crpordata extends Zend_Form {
                 ->addDecorator('Label', array())
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-3 columns',
+                    'class' => 'small-6 large-3 columns',
                     'id' => array('callback' => array(get_class($dataFinal), 'resolveElementId'))
                 ))
         ;
