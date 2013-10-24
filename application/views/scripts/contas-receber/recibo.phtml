@@ -54,6 +54,9 @@ function converteData($data) {
         <div class="small-4 left columns">
             <h6> Nº da Fatura : <?php echo $this->CR['idContasR'] ?> </h6>    
         </div>
+        <div class="small-4  columns">
+            <h6> Pagamento : <?php echo converteData($this->CR['pagamento']) ?> </h6>    
+        </div>
 
     </div>
 
@@ -61,14 +64,13 @@ function converteData($data) {
         <div class="small-4 columns">
             <h6> Cliente : <?php echo $this->CR['nome'] ?> </h6>   
         </div>
-
-
         <div class="small-4  columns">
+            <h6> CPF/CNPJ : <?php echo $this->CR['CPF_CNPJ'] ?> </h6>    
+        </div>
+         <div class="small-4  columns">
             <h6> Vencimento : <?php echo converteData($this->CR['vencimento']) ?> </h6>    
         </div>
-        <div class="small-4  columns">
-            <h6> Pagamento : <?php echo converteData($this->CR['pagamento']) ?> </h6>    
-        </div>
+        
     </div>
     <div class="row ">
         <div class="small-4 columns">

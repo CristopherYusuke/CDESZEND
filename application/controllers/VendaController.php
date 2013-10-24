@@ -108,9 +108,21 @@ class VendaController extends Zend_Controller_Action {
                         unset($valor['precoCusto']);
                         if ($update == null) {
                             if ($valor['qtde'] <= $valor['estoque']) {
-                                unset($valor['estoque']);
-                                $itens->insert($valor);
-                                $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
+
+                                $existeProduto = $itens->fetchRow("idVenda = $idvenda");
+
+                                if (!count($existeProduto) <= 0) {
+                                    $produtoOld = $existeProduto->toArray();
+                                    $valor['qtde'] = $valor['qtde'] + $produtoOld['qtde'];
+                                    $valor['total'] = $valor['vendaPreco'] * $valor['qtde'];
+                                    unset($valor['estoque']);
+                                    $itens->update($valor, 'idItemVenda = ' . $produtoOld['idItemVenda']);
+                                    $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
+                                } else {
+                                    unset($valor['estoque']);
+                                    $itens->insert($valor);
+                                    $this->_redirect("/venda/create/idVenda/" . $valor['idVenda']);
+                                }
                             } else {
                                 $mensagem = "A quantidade de produto e superior a oque tem no estoque ";
                                 $erro = TRUE;
@@ -190,10 +202,10 @@ class VendaController extends Zend_Controller_Action {
         $CR->update(array('situacao' => 2), $where);
         $this->_redirect('/venda');
     }
-    
+
     public function consultarAction() {
         $form = new Application_Form_Venda_Venda();
-        
+
         $idvenda = (int) $this->_getParam('idVenda');
         $db = Zend_Db_Table::getDefaultAdapter();
         $resultado = $db->query("SELECT descricao as nomeProduto,precoCusto,estoque,  i.*  
@@ -209,7 +221,7 @@ class VendaController extends Zend_Controller_Action {
             $cliente = $clienteTabela->fetchRow('idCliente = ' . $venda['idCliente'])->toArray();
             $form->cliente->setValue($cliente['nome']);
             $form->dataVenda->setValue($this->converteData($venda['dataVenda']));
-            $form->button->addDecorator('HtmlTag', array('class' => 'small-12 columns')) ;
+            $form->button->addDecorator('HtmlTag', array('class' => 'small-12 columns'));
             switch ($venda['situacao']) {
                 case 0: $situacao = 'Aberta';
                     break;
@@ -230,7 +242,6 @@ class VendaController extends Zend_Controller_Action {
         $this->view->itens = $itensTabela;
         $this->view->form = $form;
     }
-    
 
     function converteData($data) {
         if (strstr($data, "/")) {//verifica se tem a barra /

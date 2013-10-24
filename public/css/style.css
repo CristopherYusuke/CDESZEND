@@ -7,7 +7,7 @@
 */
 
 body {
-    background: #f9f9f9;
+    background: #FDFDFD;
 }
 table tbody td .button{
     margin:  0;
@@ -81,7 +81,7 @@ input[type="tel"].disabled,
 input[type="time"].disabled,
 input[type="url"].disabled,
 textarea.disabled {
-    background-color: transparent;
+    background-color: #F2F2F2 ;
     color: black;
     font-weight: bold;
     border: 1px solid #2ba6cb;

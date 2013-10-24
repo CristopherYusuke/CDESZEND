@@ -184,7 +184,7 @@ class ContasReceberController extends Zend_Controller_Action {
         $id = $this->_getParam('id');
 
         $db = Zend_Db_Table::getDefaultAdapter();
-        $query = "SELECT  c.*, cl.nome
+        $query = "SELECT  c.*, cl.*
                     FROM
                     contasreceber c
                         left join
@@ -192,9 +192,6 @@ class ContasReceberController extends Zend_Controller_Action {
                         left join
                     cliente cl ON v.idCliente = cl.idCliente
                     where  idContasR  =  $id";
-
-
-
 
         $model = $db->query($query);
         $CR = $model->fetch();
@@ -206,7 +203,6 @@ class ContasReceberController extends Zend_Controller_Action {
                                 where idVenda = " . $CR['idVenda'];
         $resultado = $db->query($queryItens);
         $itens = $resultado->fetchAll();
-        
         $this->view->itens = $itens;
         $this->view->CR = $CR;
     }

@@ -52,13 +52,9 @@ $(document).ready(function() {// on Load
         valorPago = valorPago.replace(',', '.');
         valor = valor.replace(',', '.');
         valorPagar = valorPagar.replace(',', '.');
-
-
         console.log(valorPago + "\n" + valor + '\n' + valorPagar);
-
-
-        var restante = (valor - valorPago) - valorPagar;
-        $('#restante').val(restante);
+        var restante = ((valor - valorPago) - valorPagar);
+        $('#restante').val(restante.toFixed(2));
     });
 
 

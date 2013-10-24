@@ -18,11 +18,31 @@ class Application_Form_Venda_Itens extends Zend_Form {
 
         $this->addElement($id = new Zend_Form_Element_Hidden('idItemVenda'));
         $this->addElement($idVenda = new Zend_Form_Element_Hidden('idVenda'));
-        $this->addElement($estoque = new Zend_Form_Element_Hidden('estoque'));
+       // $this->addElement($estoque = new Zend_Form_Element_Hidden('estoque'));
 
         $id->removeDecorator('label');
         $idVenda->removeDecorator('label');
-        $estoque->removeDecorator('label');
+        //$estoque->removeDecorator('label');
+
+
+        $this->addElement($estoque = new Zend_Form_Element_Text('estoque', array('label' => 'Estoque',
+            'readonly' => true,
+            'disableLoadDefaultDecorators' => TRUE,
+            'class' => 'disabled'
+        )));
+        $estoque
+                ->addFilters(array('StripTags', 'StringTrim'))
+                ->addValidators(array('Digits'))
+                ->addDecorator('ViewHelper')
+                ->addDecorator('Errors')
+                ->addDecorator('Label', array())
+                ->addDecorator('HtmlTag', array(
+                    'tag' => 'div',
+                    'class' => 'small-12 large-1 columns',
+                    'id' => array('callback' => array(get_class($estoque), 'resolveElementId'))
+                ))
+        ;
+
 
         $this->addElement($selectPro = new Zend_Form_Element_Select('idProduto', array(
             'required' => true,
@@ -36,7 +56,7 @@ class Application_Form_Venda_Itens extends Zend_Form {
                 ->setRegisterInArrayValidator(false)
                 ->addDecorator('HtmlTag', array(
                     'tag' => 'div',
-                    'class' => 'small-12 large-4 columns',
+                    'class' => 'small-12 large-3 columns',
                     'id' => array('callback' => array(get_class($selectPro), 'resolveElementId'))
                 ))
         ;
@@ -130,7 +150,7 @@ class Application_Form_Venda_Itens extends Zend_Form {
             'required' => true,
             'readonly' => true,
             'disableLoadDefaultDecorators' => TRUE,
-            'class' => 'disabled'            
+            'class' => 'disabled'
         )));
 
 

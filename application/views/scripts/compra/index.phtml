@@ -110,7 +110,7 @@ function converteData($data) {
                            <?php endif; ?>
                            <?php if ($this->compra[$key]['situacao'] == 2): ?> 
                             <a href="/ContasPagar/index/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
-                               class="tiny button secondary">VISUALIZAR CONTAS A RECEBER</a>
+                               class="tiny button secondary">VISUALIZAR CONTAS A PAGAR</a>
                                <a href="/compra/consultar/idCompra/<?php echo $this->compra[$key]['idCompra']; ?>"
                                class="tiny button secondary">CONSULTAR</a>
                                
@@ -122,7 +122,6 @@ function converteData($data) {
                                class="tiny button secondary">CONSULTAR</a>
                            <?php endif; ?>
                     </td> 
-
                 </tr>
             <?php endforeach; ?> <!-- End foreach -->
         </table>

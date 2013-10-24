@@ -51,7 +51,7 @@ class ProdutosController extends Zend_Controller_Action {
                         $erro = true;
                     }
                 } else {
-                    $mensagens = "Preço de custo não pode ser negativo ";
+                    $mensagens = "Preço de custo não pode ser negativo ou igual a 0 ";
                     $erro = true;
                 }
             } else {
