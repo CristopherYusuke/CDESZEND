@@ -45,7 +45,16 @@ select{
     transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
 }
 
-.panel.mypanel{
+button, .button {
+    -webkit-box-shadow:none;
+    box-shadow: none;
+    -webkit-transition: background-color 300ms ease-out;
+    -moz-transition: background-color 300ms ease-out;
+    transition: background-color 300ms ease-out;
+    border: none;
+}
+
+    .panel.mypanel{
     border-width:initial;
     margin-bottom: 0;
     padding: 0;
@@ -140,7 +149,7 @@ table thead, table tfoot ,table tr.even, table tr.alt, table tr:nth-of-type(even
     .button {
         display: none;
     }
-    
+
     tr{
         border-bottom: 1px solid;
         border-top: 1px solid;
@@ -149,9 +158,9 @@ table thead, table tfoot ,table tr.even, table tr.alt, table tr:nth-of-type(even
         height:auto;
         overflow:visible ;       
     }
-     
-    
-    
+
+
+
 
     .left {
         float: left !important; }
